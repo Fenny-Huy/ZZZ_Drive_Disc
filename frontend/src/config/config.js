@@ -21,7 +21,7 @@ const apiConfig = {
             { value: "%DEF", label: "%DEF" },
             { value: "Crit Rate", label: "Crit Rate" },
             { value: "Crit DMG", label: "Crit DMG" },
-            { value: "AP", label: "AP" },
+            { value: "AP", label: "Anomaly Proficiency" },
         ],
         5: [
             { value: "%HP", label: "%HP" },
@@ -38,7 +38,7 @@ const apiConfig = {
             { value: "%HP", label: "%HP" },
             { value: "%ATK", label: "%ATK" },
             { value: "%DEF", label: "%DEF" },
-            { value: "AM", label: "AM" },
+            { value: "AM", label: "Anomaly Mastery" },
             { value: "Impact", label: "Impact" },
             { value: "ER", label: "ER" },
         ],

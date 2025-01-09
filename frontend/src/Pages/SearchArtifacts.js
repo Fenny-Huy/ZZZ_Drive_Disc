@@ -114,7 +114,7 @@ const SearchArtifacts = () => {
             <th>Set</th>
             <th>Type</th>
             <th>Main Stat</th>
-            <th>Number of Substats</th>
+            <th>Subs Numb</th>
             <th>%ATK</th>
             <th>%HP</th>
             <th>%DEF</th>
@@ -122,7 +122,7 @@ const SearchArtifacts = () => {
             <th>HP</th>
             <th>DEF</th>
             <th>PEN</th>
-            <th>AP</th>
+            <th>A.Proficiency </th>
             <th>Crit Rate</th>
             <th>Crit DMG</th>
             <th>Source</th>
