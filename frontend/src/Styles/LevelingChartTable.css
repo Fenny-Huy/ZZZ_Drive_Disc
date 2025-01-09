@@ -1,0 +1,61 @@
+/* src/Components/ChartTable.css */
+.substat-chart-table-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .chart-container {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .chart-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pie-chart, .bar-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pie-chart canvas, .bar-chart canvas {
+    max-width: 55vw; /* Adjust the size as needed */
+    max-height: 55vh; /* Adjust the size as needed */
+  }
+  
+  .table-container {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .table-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .table-container th {
+    background-color: #f2f2f2;
+  }
+  
+  .table-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .table-container tr:hover {
+    background-color: #f1f1f1;
+  }

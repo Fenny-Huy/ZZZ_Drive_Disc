@@ -1,0 +1,20 @@
+CREATE TABLE `Drive Disc` (
+    `ID` INT auto_increment PRIMARY KEY,
+    `Set` VARCHAR(255),
+    `Slot` VARCHAR(50),
+    `Main Stat` VARCHAR(50),
+    `Number of substat` INT,
+    `%ATK` INT DEFAULT 0,
+    `%HP` INT DEFAULT 0,
+    `%DEF` INT DEFAULT 0,
+    `ATK` INT DEFAULT 0,
+    `HP` INT DEFAULT 0,
+    `DEF` INT DEFAULT 0,
+    `PEN` INT DEFAULT 0,
+    `AP` INT DEFAULT 0,
+    `Crit Rate` INT DEFAULT 0,
+    `Crit DMG` INT DEFAULT 0,
+    `Where got it` VARCHAR(50),
+    `Score` VARCHAR(50),
+    `CreateDate` DATE DEFAULT (CURRENT_DATE)
+);

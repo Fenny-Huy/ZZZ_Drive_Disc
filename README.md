@@ -1,1 +1,5 @@
-# ZZZ_Drive_Disc
+# Genshin-ZZZ
+
+
+
+pip install fastapi uvicorn pymysql sqlalchemy crytopgraphy

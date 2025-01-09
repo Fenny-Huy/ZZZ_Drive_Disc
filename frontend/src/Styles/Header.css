@@ -1,0 +1,22 @@
+/* src/Components/Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #282c34;
+    color: white;
+  }
+  
+  .header a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .header-left a {
+    font-weight: bold;
+  }
+  
+  .header-right a:hover {
+    text-decoration: underline;
+  }
