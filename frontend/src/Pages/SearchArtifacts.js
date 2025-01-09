@@ -72,8 +72,8 @@ const SearchArtifacts = () => {
       atk: formData.substats.includes("ATK") ? 1 : null,
       hp: formData.substats.includes("HP") ? 1 : null,
       defense: formData.substats.includes("DEF") ? 1 : null,
-      er: formData.substats.includes("ER") ? 1 : null,
-      em: formData.substats.includes("EM") ? 1 : null,
+      pen: formData.substats.includes("PEN") ? 1 : null,
+      ap: formData.substats.includes("AP") ? 1 : null,
       crit_rate: formData.substats.includes("Crit Rate") ? 1 : null,
       crit_dmg: formData.substats.includes("Crit DMG") ? 1 : null,
       where_got_it: formData.source,
@@ -121,8 +121,8 @@ const SearchArtifacts = () => {
             <th>ATK</th>
             <th>HP</th>
             <th>DEF</th>
-            <th>ER</th>
-            <th>EM</th>
+            <th>PEN</th>
+            <th>AP</th>
             <th>Crit Rate</th>
             <th>Crit DMG</th>
             <th>Source</th>

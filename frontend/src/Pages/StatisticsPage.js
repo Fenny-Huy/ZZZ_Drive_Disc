@@ -771,9 +771,9 @@ const StatisticsPage = () => {
         <>
           <div className="button-container">
             <button className={selectedChart === 'Types' ? 'active' : ''} onClick={() => setSelectedChart('Types')}>Types</button>
-            <button className={selectedChart === 'Sand' ? 'active' : ''} onClick={() => setSelectedChart('Sand')}>Sand</button>
-            <button className={selectedChart === 'Goblet' ? 'active' : ''} onClick={() => setSelectedChart('Goblet')}>Goblet</button>
-            <button className={selectedChart === 'Circlet' ? 'active' : ''} onClick={() => setSelectedChart('Circlet')}>Circlet</button>
+            <button className={selectedChart === '4' ? 'active' : ''} onClick={() => setSelectedChart('4')}>4</button>
+            <button className={selectedChart === '5' ? 'active' : ''} onClick={() => setSelectedChart('5')}>5</button>
+            <button className={selectedChart === '6' ? 'active' : ''} onClick={() => setSelectedChart('6')}>6</button>
           </div>
           <ChartTable
             chartType="pie"

@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_PASSWORD = "Fennik123@"
-DB_NAME = "artifactstest"
+DB_NAME = "zzztest"
 
 # FastAPI app initialization
 app = FastAPI()
@@ -56,8 +56,8 @@ class Artifact(BaseModel):
     atk: int
     hp: int
     defense: int
-    er: int
-    em: int
+    pen: int
+    ap: int
     crit_rate: int
     crit_dmg: int
     where_got_it: str
@@ -72,8 +72,8 @@ class ArtifactLeveling(BaseModel):
     L_HP_per: int = 0
     L_ATK_per: int = 0
     L_DEF_per: int = 0
-    L_EM: int = 0
-    L_ER: int = 0
+    L_AP: int = 0
+    L_PEN: int = 0
     L_CritRate: int = 0
     L_CritDMG: int = 0
     addedSubstat: str = ""
@@ -83,7 +83,7 @@ class ArtifactLeveling(BaseModel):
 @app.get("/genshinartifacts/", response_model=List[Artifact])
 def get_artifacts(db: pymysql.connections.Connection = Depends(get_db_connection)):
     with db.cursor() as cursor:
-        cursor.execute("SELECT * FROM `Artifact itself`")
+        cursor.execute("SELECT * FROM `Drive Disc`")
         rows = cursor.fetchall()
 
         # Convert rows to a list of dicts
@@ -100,8 +100,8 @@ def get_artifacts(db: pymysql.connections.Connection = Depends(get_db_connection
                 "atk": row[8],
                 "hp": row[9],
                 "defense": row[10],
-                "er": row[11],
-                "em": row[12],
+                "pen": row[11],
+                "ap": row[12],
                 "crit_rate": row[13],
                 "crit_dmg": row[14],
                 "where_got_it": row[15],
@@ -116,13 +116,13 @@ def get_artifacts(db: pymysql.connections.Connection = Depends(get_db_connection
 def create_artifact(artifact: Artifact, db: pymysql.connections.Connection = Depends(get_db_connection)):
     # Construct the SQL query dynamically
     query = f"""
-        INSERT INTO `Artifact itself` (
-            `Set`, `Type`, `Main Stat`, `Number of substat`, `%ATK`, `%HP`, `%DEF`,
-            `ATK`, `HP`, `DEF`, `ER`, `EM`, `Crit Rate`, `Crit DMG`, `Where got it`, `Score`
+        INSERT INTO `Drive Disc` (
+            `Set`, `Slot`, `Main Stat`, `Number of substat`, `%ATK`, `%HP`, `%DEF`,
+            `ATK`, `HP`, `DEF`, `PEN`, `AP`, `Crit Rate`, `Crit DMG`, `Where got it`, `Score`
         ) VALUES (
             "{artifact.set}", '{artifact.type}', '{artifact.main_stat}', {artifact.number_of_substats},
             {artifact.atk_percent}, {artifact.hp_percent}, {artifact.def_percent},
-            {artifact.atk}, {artifact.hp}, {artifact.defense}, {artifact.er}, {artifact.em},
+            {artifact.atk}, {artifact.hp}, {artifact.defense}, {artifact.pen}, {artifact.ap},
             {artifact.crit_rate}, {artifact.crit_dmg}, '{artifact.where_got_it}', '{artifact.score}'
         )
     """
@@ -150,19 +150,19 @@ def search_artifacts(
     atk: Optional[int] = Query(None),
     hp: Optional[int] = Query(None),
     defense: Optional[int] = Query(None),
-    er: Optional[int] = Query(None),
-    em: Optional[int] = Query(None),
+    pen: Optional[int] = Query(None),
+    ap: Optional[int] = Query(None),
     crit_rate: Optional[int] = Query(None),
     crit_dmg: Optional[int] = Query(None),
     where_got_it: Optional[str] = Query(None),
     score: Optional[str] = Query(None),
     db: pymysql.connections.Connection = Depends(get_db_connection)
 ):
-    query = "SELECT * FROM `Artifact itself` WHERE 1=1"
+    query = "SELECT * FROM `Drive Disc` WHERE 1=1"
     if set:
         query += f' AND `Set` = "{set}"'
     if type:
-        query += f" AND `Type` = '{type}'"
+        query += f" AND `Slot` = '{type}'"
     if main_stat:
         query += f" AND `Main Stat` = '{main_stat}'"
     if number_of_substats is not None:
@@ -179,10 +179,10 @@ def search_artifacts(
         query += f" AND `HP` = {hp}"
     if defense is not None:
         query += f" AND `DEF` = {defense}"
-    if er is not None:
-        query += f" AND `ER` = {er}"
-    if em is not None:
-        query += f" AND `EM` = {em}"
+    if pen is not None:
+        query += f" AND `PEN` = {pen}"
+    if ap is not None:
+        query += f" AND `AP` = {ap}"
     if crit_rate is not None:
         query += f" AND `Crit Rate` = {crit_rate}"
     if crit_dmg is not None:
@@ -209,8 +209,8 @@ def search_artifacts(
                 "atk": row[8],
                 "hp": row[9],
                 "defense": row[10],
-                "er": row[11],
-                "em": row[12],
+                "pen": row[11],
+                "ap": row[12],
                 "crit_rate": row[13],
                 "crit_dmg": row[14],
                 "where_got_it": row[15],
@@ -228,9 +228,9 @@ def search_artifacts(
 @app.put("/genshinartifacts/{artifact_id}/")
 def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = f"""
-        UPDATE `Artifact itself` SET
+        UPDATE `Drive Disc` SET
             `Set` = "{artifact.set}",
-            `Type` = '{artifact.type}',
+            `Slot` = '{artifact.type}',
             `Main Stat` = '{artifact.main_stat}',
             `Number of substat` = {artifact.number_of_substats},
             `%ATK` = {artifact.atk_percent},
@@ -239,8 +239,8 @@ def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connection
             `ATK` = {artifact.atk},
             `HP` = {artifact.hp},
             `DEF` = {artifact.defense},
-            `ER` = {artifact.er},
-            `EM` = {artifact.em},
+            `PEN` = {artifact.pen},
+            `AP` = {artifact.ap},
             `Crit Rate` = {artifact.crit_rate},
             `Crit DMG` = {artifact.crit_dmg},
             `Where got it` = '{artifact.where_got_it}',
@@ -263,21 +263,21 @@ def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connection
 # API endpoint for insert or update an artifact leveling
 @app.post("/artifactleveling/")
 def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.connections.Connection = Depends(get_db_connection)):
-    query_check = "SELECT * FROM `Artifact leveling` WHERE ID = %s"
+    query_check = "SELECT * FROM `Drive Disc leveling` WHERE ID = %s"
     with db.cursor() as cursor:
         cursor.execute(query_check, (leveling.id,))
         row = cursor.fetchone()
         if row:
             query_update = f"""
-            UPDATE `Artifact leveling` SET
+            UPDATE `Drive Disc leveling` SET
                 `L_HP` = {leveling.L_HP},
                 `L_ATK` = {leveling.L_ATK},
                 `L_DEF` = {leveling.L_DEF},
                 `L_%HP` = {leveling.L_HP_per},
                 `L_%ATK` = {leveling.L_ATK_per},
                 `L_%DEF` = {leveling.L_DEF_per},
-                `L_EM` = {leveling.L_EM},
-                `L_ER` = {leveling.L_ER},
+                `L_AP` = {leveling.L_AP},
+                `L_PEN` = {leveling.L_PEN},
                 `L_Crit Rate` = {leveling.L_CritRate},
                 `L_Crit DMG` = {leveling.L_CritDMG},
                 `Added substat` = '{leveling.addedSubstat}',
@@ -289,8 +289,8 @@ def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.conn
             cursor.execute(query_update)
         else:
             query_insert = f"""
-            INSERT INTO `Artifact leveling` (`ID`, `L_HP`, `L_ATK`, `L_DEF`, `L_%HP`, `L_%ATK`, `L_%DEF`, `L_EM`, `L_ER`, `L_Crit Rate`, `L_Crit DMG`, `Added substat`)
-            VALUES ({leveling.id}, {leveling.L_HP}, {leveling.L_ATK}, {leveling.L_DEF}, {leveling.L_HP_per}, {leveling.L_ATK_per}, {leveling.L_DEF_per}, {leveling.L_EM}, {leveling.L_ER}, {leveling.L_CritRate}, {leveling.L_CritDMG}, '{leveling.addedSubstat}')
+            INSERT INTO `Drive Disc leveling` (`ID`, `L_HP`, `L_ATK`, `L_DEF`, `L_%HP`, `L_%ATK`, `L_%DEF`, `L_AP`, `L_PEN`, `L_Crit Rate`, `L_Crit DMG`, `Added substat`)
+            VALUES ({leveling.id}, {leveling.L_HP}, {leveling.L_ATK}, {leveling.L_DEF}, {leveling.L_HP_per}, {leveling.L_ATK_per}, {leveling.L_DEF_per}, {leveling.L_AP}, {leveling.L_PEN}, {leveling.L_CritRate}, {leveling.L_CritDMG}, '{leveling.addedSubstat}')
             """
             logger.info(f"Executing query: {query_insert}")
             cursor.execute(query_insert)
@@ -298,13 +298,13 @@ def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.conn
         db.commit()
 
 
-    return {"message": "Artifact leveling record added or updated successfully"}
+    return {"message": "Drive Disc leveling record added or updated successfully"}
 
 
 # API endpoint to fetch one artifact leveling
 @app.get("/artifactleveling/{artifact_id}")
 def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection = Depends(get_db_connection)):
-    query = "SELECT * FROM `Artifact leveling` WHERE ID = %s"
+    query = "SELECT * FROM `Drive Disc leveling` WHERE ID = %s"
     with db.cursor() as cursor:
         cursor.execute(query, (artifact_id,))
         row = cursor.fetchone()
@@ -318,8 +318,8 @@ def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection =
             "L_HP_per": row[4],
             "L_ATK_per": row[5],
             "L_DEF_per": row[6],
-            "L_EM": row[7],
-            "L_ER": row[8],
+            "L_AP": row[7],
+            "L_PEN": row[8],
             "L_CritRate": row[9],
             "L_CritDMG": row[10],
             "addedSubstat": row[11],
@@ -331,7 +331,7 @@ def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection =
 # API endpoint to fetch an artifact
 @app.get("/artifact/{artifact_id}")
 def get_artifact(artifact_id: int, db: pymysql.connections.Connection = Depends(get_db_connection)):
-    query = "SELECT * FROM `Artifact itself` WHERE ID = %s"
+    query = "SELECT * FROM `Drive Disc` WHERE ID = %s"
     with db.cursor() as cursor:
         cursor.execute(query, (artifact_id,))
         row = cursor.fetchone()
@@ -350,8 +350,8 @@ def get_artifact(artifact_id: int, db: pymysql.connections.Connection = Depends(
             "atk": row[8],
             "hp": row[9],
             "defense": row[10],
-            "er": row[11],
-            "em": row[12],
+            "pen": row[11],
+            "ap": row[12],
             "crit_rate": row[13],
             "crit_dmg": row[14],
             "where_got_it": row[15],
@@ -365,10 +365,10 @@ def get_artifact(artifact_id: int, db: pymysql.connections.Connection = Depends(
 @app.get("/artifactlevelinglist/")
 def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = """
-    SELECT al.`ID`, al.`L_HP`, al.`L_ATK`, al.`L_DEF`, al.`L_%HP`, al.`L_%ATK`, al.`L_%DEF`, al.`L_EM`, al.`L_ER`, al.`L_Crit Rate`, al.`L_Crit DMG`, al.`Added substat`,
-           ai.`Set`, ai.`Type`, ai.`Main Stat`, ai.`Number of substat`, ai.`%ATK`, ai.`%HP`, ai.`%DEF`, ai.`ATK`, ai.`HP`, ai.`DEF`, ai.`ER`, ai.`EM`, ai.`Crit Rate`, ai.`Crit DMG`, ai.`Where got it`, ai.`Score`
-    FROM `Artifact leveling` al
-    JOIN `Artifact itself` ai ON al.ID = ai.ID
+    SELECT al.`ID`, al.`L_HP`, al.`L_ATK`, al.`L_DEF`, al.`L_%HP`, al.`L_%ATK`, al.`L_%DEF`, al.`L_AP`, al.`L_PEN`, al.`L_Crit Rate`, al.`L_Crit DMG`, al.`Added substat`,
+           ai.`Set`, ai.`Slot`, ai.`Main Stat`, ai.`Number of substat`, ai.`%ATK`, ai.`%HP`, ai.`%DEF`, ai.`ATK`, ai.`HP`, ai.`DEF`, ai.`PEN`, ai.`AP`, ai.`Crit Rate`, ai.`Crit DMG`, ai.`Where got it`, ai.`Score`
+    FROM `Drive Disc leveling` al
+    JOIN `Drive Disc` ai ON al.ID = ai.ID
     """
     with db.cursor() as cursor:
         cursor.execute(query)
@@ -382,8 +382,8 @@ def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_
                 "L_HP_per": row[4],
                 "L_ATK_per": row[5],
                 "L_DEF_per": row[6],
-                "L_EM": row[7],
-                "L_ER": row[8],
+                "L_AP": row[7],
+                "L_PEN": row[8],
                 "L_CritRate": row[9],
                 "L_CritDMG": row[10],
                 "addedSubstat": row[11],
@@ -397,8 +397,8 @@ def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_
                 "atk": row[19],
                 "hp": row[20],
                 "defense": row[21],
-                "er": row[22],
-                "em": row[23],
+                "pen": row[22],
+                "ap": row[23],
                 "crit_rate": row[24],
                 "crit_dmg": row[25],
                 "where_got_it": row[26],
@@ -418,17 +418,17 @@ def get_statistics(db: pymysql.connections.Connection = Depends(get_db_connectio
         with db.cursor() as cursor:
             # Fetch percentages of each type
             cursor.execute("""
-                SELECT `Type`, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM `Artifact itself`) AS percentage, Count(*) as count
-                FROM `Artifact itself`
-                GROUP BY `Type`
+                SELECT `Slot`, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM `Drive Disc`) AS percentage, Count(*) as count
+                FROM `Drive Disc`
+                GROUP BY `Slot`
             """)
             type_percentages = cursor.fetchall()
 
             # Fetch percentages of each main stat grouped by type
             cursor.execute("""
-                SELECT `Type`, `Main Stat`, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM `Artifact itself` WHERE `Type` = t.`Type`) AS percentage, Count(*) as count
-                FROM `Artifact itself` t
-                GROUP BY `Type`, `Main Stat`
+                SELECT `Slot`, `Main Stat`, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM `Drive Disc` WHERE `Slot` = t.`Slot`) AS percentage, Count(*) as count
+                FROM `Drive Disc` t
+                GROUP BY `Slot`, `Main Stat`
             """)
             main_stat_percentages = cursor.fetchall()
 
@@ -446,9 +446,9 @@ def get_statistics(db: pymysql.connections.Connection = Depends(get_db_connectio
 @app.get("/statistics/substats")
 def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = """
-    SELECT `Type`, `Main Stat`, Count(`Type`) AS TypeCount, SUM(`%ATK`) AS `%ATK`, SUM(`%HP`) AS `%HP`, SUM(`%DEF`) AS `%DEF`, SUM(`ATK`) AS `ATK`, SUM(`HP`) AS `HP`, SUM(`DEF`) AS `DEF`, SUM(`ER`) AS `ER`, SUM(`EM`) AS `EM`, SUM(`Crit Rate`) AS `Crit_Rate`, SUM(`Crit DMG`) AS `Crit_DMG`, SUM(`%ATK`+`%HP`+`%DEF`+`ATK`+`HP`+`DEF`+`ER`+`EM`+`Crit Rate`+`Crit DMG`) AS `SubstatCount`
-    FROM `Artifact itself`
-    GROUP BY `Type`, `Main Stat`;
+    SELECT `Slot`, `Main Stat`, Count(`Slot`) AS TypeCount, SUM(`%ATK`) AS `%ATK`, SUM(`%HP`) AS `%HP`, SUM(`%DEF`) AS `%DEF`, SUM(`ATK`) AS `ATK`, SUM(`HP`) AS `HP`, SUM(`DEF`) AS `DEF`, SUM(`PEN`) AS `PEN`, SUM(`AP`) AS `AP`, SUM(`Crit Rate`) AS `Crit_Rate`, SUM(`Crit DMG`) AS `Crit_DMG`, SUM(`%ATK`+`%HP`+`%DEF`+`ATK`+`HP`+`DEF`+`PEN`+`AP`+`Crit Rate`+`Crit DMG`) AS `SubstatCount`
+    FROM `Drive Disc`
+    GROUP BY `Slot`, `Main Stat`;
     """
     with db.cursor() as cursor:
         cursor.execute(query)
@@ -464,8 +464,8 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
                 "sub_ATK": row[6],
                 "sub_HP": row[7],
                 "sub_DEF": row[8],
-                "sub_ER": row[9],
-                "sub_EM": row[10],
+                "sub_PEN": row[9],
+                "sub_AP": row[10],
                 "sub_Crit_Rate": row[11],
                 "sub_Crit_DMG": row[12],
                 "substatCount": row[13],
@@ -483,7 +483,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = """
     SELECT 
-        i.`Type`, 
+        i.`Slot`, 
         i.`Main Stat`, 
         COUNT(*) AS TypeCount, 
         SUM(`%ATK`) AS `%ATK`, 
@@ -492,41 +492,41 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
         SUM(`ATK`) AS `ATK`, 
         SUM(`HP`) AS `HP`, 
         SUM(`DEF`) AS `DEF`, 
-        SUM(`ER`) AS `ER`, 
-        SUM(`EM`) AS `EM`, 
+        SUM(`PEN`) AS `PEN`, 
+        SUM(`AP`) AS `AP`, 
         SUM(`Crit Rate`) AS `Crit_Rate`, 
         SUM(`Crit DMG`) AS `Crit_DMG`, 
-        SUM(`%ATK` + `%HP` + `%DEF` + `ATK` + `HP` + `DEF` + `ER` + `EM` + `Crit Rate` + `Crit DMG`) AS `SubstatCount`, 
+        SUM(`%ATK` + `%HP` + `%DEF` + `ATK` + `HP` + `DEF` + `PEN` + `AP` + `Crit Rate` + `Crit DMG`) AS `SubstatCount`, 
         SUM(`L_HP`) AS `L_HP`, 
         SUM(`L_ATK`) AS `L_ATK`, 
         SUM(`L_DEF`) AS `L_DEF`, 
         SUM(`L_%HP`) AS `L_HP_per`, 
         SUM(`L_%ATK`) AS `L_ATK_per`, 
         SUM(`L_%DEF`) AS `L_DEF_per`, 
-        SUM(`L_EM`) AS `L_EM`, 
-        SUM(`L_ER`) AS `L_ER`, 
+        SUM(`L_AP`) AS `L_AP`, 
+        SUM(`L_PEN`) AS `L_PEN`, 
         SUM(`L_Crit Rate`) AS `L_Crit_Rate`, 
         SUM(`L_Crit DMG`) AS `L_Crit_DMG`,
-        SUM(`L_HP` + `L_ATK` + `L_DEF` + `L_%HP` + `L_%ATK` + `L_%DEF` + `L_EM` + `L_ER` + `L_Crit Rate` + `L_Crit DMG`) AS `TotalRolls`,
+        SUM(`L_HP` + `L_ATK` + `L_DEF` + `L_%HP` + `L_%ATK` + `L_%DEF` + `L_AP` + `L_PEN` + `L_Crit Rate` + `L_Crit DMG`) AS `TotalRolls`,
         SUM(CASE WHEN l.`Added Substat` = 'ATK' THEN 1 ELSE 0 END) AS `AddedSubstat_ATK`,
         SUM(CASE WHEN l.`Added Substat` = 'DEF' THEN 1 ELSE 0 END) AS `AddedSubstat_DEF`,
         SUM(CASE WHEN l.`Added Substat` = 'HP' THEN 1 ELSE 0 END) AS `AddedSubstat_HP`,
         SUM(CASE WHEN l.`Added Substat` = '%ATK' THEN 1 ELSE 0 END) AS `AddedSubstat_%ATK`,
         SUM(CASE WHEN l.`Added Substat` = '%DEF' THEN 1 ELSE 0 END) AS `AddedSubstat_%DEF`,
         SUM(CASE WHEN l.`Added Substat` = '%HP' THEN 1 ELSE 0 END) AS `AddedSubstat_%HP`,
-        SUM(CASE WHEN l.`Added Substat` = 'ER' THEN 1 ELSE 0 END) AS `AddedSubstat_ER`,
-        SUM(CASE WHEN l.`Added Substat` = 'EM' THEN 1 ELSE 0 END) AS `AddedSubstat_EM`,
+        SUM(CASE WHEN l.`Added Substat` = 'PEN' THEN 1 ELSE 0 END) AS `AddedSubstat_PEN`,
+        SUM(CASE WHEN l.`Added Substat` = 'AP' THEN 1 ELSE 0 END) AS `AddedSubstat_AP`,
         SUM(CASE WHEN l.`Added Substat` = 'Crit Rate' THEN 1 ELSE 0 END) AS `AddedSubstat_Crit_Rate`,
         SUM(CASE WHEN l.`Added Substat` = 'Crit DMG' THEN 1 ELSE 0 END) AS `AddedSubstat_Crit_DMG`,
         SUM(CASE WHEN l.`Added Substat` = 'None' THEN 1 ELSE 0 END) AS `AddedSubstat_None`
     FROM 
-        `Artifact leveling` l
+        `Drive Disc leveling` l
     INNER JOIN 
-        `Artifact itself` i
+        `Drive Disc` i
     ON 
         l.ID = i.ID
     GROUP BY 
-        `Type`, 
+        `Slot`, 
         `Main Stat`;
 
     """
@@ -544,8 +544,8 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
                     "sub_ATK": row[6],
                     "sub_HP": row[7],
                     "sub_DEF": row[8],
-                    "sub_ER": row[9],
-                    "sub_EM": row[10],
+                    "sub_PEN": row[9],
+                    "sub_AP": row[10],
                     "sub_Crit_Rate": row[11],
                     "sub_Crit_DMG": row[12],
                     "substatCount": row[13],
@@ -555,8 +555,8 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
                     "roll_HP_per": row[17],
                     "roll_ATK_per": row[18],
                     "roll_DEF_per": row[19],
-                    "roll_EM": row[20],
-                    "roll_ER": row[21],
+                    "roll_AP": row[20],
+                    "roll_PEN": row[21],
                     "roll_Crit_Rate": row[22],
                     "roll_Crit_DMG": row[23],
                     "TotalRoll": row[24],
@@ -566,8 +566,8 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
                     "added_ATK_per": row[28],
                     "added_DEF_per": row[29],
                     "added_HP_per": row[30],
-                    "added_ER": row[31],
-                    "added_EM": row[32],
+                    "added_PEN": row[31],
+                    "added_AP": row[32],
                     "added_Crit_Rate": row[33],
                     "added_Crit_DMG": row[34],
                     "added_None": row[35]
@@ -581,7 +581,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 @app.get("/set/set_where")
 def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = """
-    select `Set`, `Where got it`, count(*) as totalcount from `Artifact itself`
+    select `Set`, `Where got it`, count(*) as totalcount from `Drive Disc`
     group by `Set`, `Where got it`
     order by totalcount desc;
     """
@@ -603,7 +603,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 @app.get("/set/set")
 def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = """
-    select `Set`, count(*) as totalcount from `Artifact itself`
+    select `Set`, count(*) as totalcount from `Drive Disc`
     group by `Set`
     order by totalcount desc;
     """
@@ -624,7 +624,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 @app.get("/set/where")
 def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
     query = """
-    select `Where got it`, count(*) as totalcount from `Artifact itself`
+    select `Where got it`, count(*) as totalcount from `Drive Disc`
     group by `Where got it`
     order by totalcount desc;
     """

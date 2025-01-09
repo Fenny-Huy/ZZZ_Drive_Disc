@@ -56,8 +56,8 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
         <td>{renderCheckbox(artifact.atk)}</td>
         <td>{renderCheckbox(artifact.hp)}</td>
         <td>{renderCheckbox(artifact.defense)}</td>
-        <td>{renderCheckbox(artifact.er)}</td>
-        <td>{renderCheckbox(artifact.em)}</td>
+        <td>{renderCheckbox(artifact.pen)}</td>
+        <td>{renderCheckbox(artifact.ap)}</td>
         <td>{renderCheckbox(artifact.crit_rate)}</td>
         <td>{renderCheckbox(artifact.crit_dmg)}</td>
         <td>{artifact.where_got_it}</td>

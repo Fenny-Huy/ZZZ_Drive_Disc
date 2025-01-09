@@ -70,8 +70,8 @@ const ArtifactListing = () => {
             <th>ATK</th>
             <th>HP</th>
             <th>DEF</th>
-            <th>ER</th>
-            <th>EM</th>
+            <th>PEN</th>
+            <th>AP</th>
             <th>Crit Rate</th>
             <th>Crit DMG</th>
             <th>Source</th>

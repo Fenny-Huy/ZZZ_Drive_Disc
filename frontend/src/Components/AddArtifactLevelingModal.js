@@ -12,8 +12,8 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
     L_HP_per: 0,
     L_ATK_per: 0,
     L_DEF_per: 0,
-    L_EM: 0,
-    L_ER: 0,
+    L_AP: 0,
+    L_PEN: 0,
     L_CritRate: 0,
     L_CritDMG: 0,
     addedSubstat: 'None',
@@ -32,7 +32,7 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
     if (artifact.atk) substats.push('ATK');
     if (artifact.hp) substats.push('HP');
     if (artifact.defense) substats.push('DEF');
-    if (artifact.er) substats.push('ER');
+    if (artifact.pen) substats.push('PEN');
     if (artifact.em) substats.push('EM');
     if (artifact.crit_rate) substats.push('Crit Rate');
     if (artifact.crit_dmg) substats.push('Crit DMG');

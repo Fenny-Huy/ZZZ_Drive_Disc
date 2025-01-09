@@ -54,8 +54,8 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
       artifact.atk && 'ATK',
       artifact.hp && 'HP',
       artifact.defense && 'DEF',
-      artifact.er && 'ER',
-      artifact.em && 'EM',
+      artifact.pen && 'PEN',
+      artifact.ap && 'AP',
       artifact.crit_rate && 'Crit Rate',
       artifact.crit_dmg && 'Crit DMG',
       artifact.addedSubstat,
@@ -87,8 +87,8 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
           <th>%HP</th>
           <th>%ATK</th>
           <th>%DEF</th>
-          <th>EM</th>
-          <th>ER</th>
+          <th>AP</th>
+          <th>PEN</th>
           <th>C.Rate</th>
           <th>C.DMG</th>
           <th>Source</th>
@@ -110,8 +110,8 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
                 artifact.atk && 'ATK',
                 artifact.hp && 'HP',
                 artifact.defense && 'DEF',
-                artifact.er && 'ER',
-                artifact.em && 'EM',
+                artifact.pen && 'PEN',
+                artifact.ap && 'AP',
                 artifact.crit_rate && 'Crit Rate',
                 artifact.crit_dmg && 'Crit DMG',
               ]
@@ -125,8 +125,8 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
             <td>{renderSubstatCell(artifact, '%HP')}</td>
             <td>{renderSubstatCell(artifact, '%ATK')}</td>
             <td>{renderSubstatCell(artifact, '%DEF')}</td>
-            <td>{renderSubstatCell(artifact, 'EM')}</td>
-            <td>{renderSubstatCell(artifact, 'ER')}</td>
+            <td>{renderSubstatCell(artifact, 'AP')}</td>
+            <td>{renderSubstatCell(artifact, 'PEN')}</td>
             <td>{renderSubstatCell(artifact, 'Crit Rate')}</td>
             <td>{renderSubstatCell(artifact, 'Crit DMG')}</td>
             <td>{artifact.where_got_it}</td>
