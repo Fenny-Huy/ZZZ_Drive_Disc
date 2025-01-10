@@ -779,8 +779,8 @@ const StatisticsPage = () => {
             chartType="pie"
             chartData={prepareChartData(data, 'substat', 'percentage')}
             tableData={data}
-            chartTitle={selectedChart === 'Types' ? 'Type Distribution' : `${selectedChart} Main Stat Distribution`}
-            tableTitle={selectedChart === 'Types' ? 'Type Counts' : `${selectedChart} Main Stat Counts`}
+            chartTitle={selectedChart === 'Types' ? 'Type Distribution' : `Slot ${selectedChart} Main Stat Distribution`}
+            tableTitle={selectedChart === 'Types' ? 'Type Counts' : `Slot ${selectedChart} Main Stat Counts`}
             tableFirstField={selectedChart === 'Types' ? 'Type' : 'Main Stat'}
           />
         </>

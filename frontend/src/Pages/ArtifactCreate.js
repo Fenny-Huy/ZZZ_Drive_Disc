@@ -113,7 +113,7 @@ const ArtifactCreate = () => {
         <div className="artifact-create">
         
           <div className="artifact-create-container">
-            <h1>Create Artifact</h1>
+            <h1>Create Drive Disc</h1>
             <ArtifactCreateForm formData={formData} handleSubmit={handleSubmit} artifactTypes={artifactTypes} mainStatsOptions={mainStatsOptions} filteredSubstats={filteredSubstats} scores={scores} sources={sources} artifactSets={artifactSets} handleSelectChange={handleSelectChange} handleInputChange={handleInputChange} isSubmitDisabled={isSubmitDisabled} />
           </div>
 

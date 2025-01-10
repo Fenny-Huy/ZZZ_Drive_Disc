@@ -61,7 +61,7 @@ const ArtifactListing = () => {
           <tr>
             <th>ID</th>
             <th>Set</th>
-            <th>Type</th>
+            <th>Slot</th>
             <th>Main Stat</th>
             <th>Subs Numb</th>
             <th>%ATK</th>
@@ -71,9 +71,9 @@ const ArtifactListing = () => {
             <th>HP</th>
             <th>DEF</th>
             <th>PEN</th>
-            <th>AP</th>
-            <th>Crit Rate</th>
-            <th>Crit DMG</th>
+            <th>A.Proficiency</th>
+            <th>C.Rate</th>
+            <th>C.DMG</th>
             <th>Source</th>
             <th>Score</th>
           </tr>

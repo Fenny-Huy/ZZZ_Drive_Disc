@@ -9,7 +9,7 @@ const ArtifactCreateForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
       <form onSubmit={handleSubmit} className="form">
 
           <div className="inputGroup">
-            <label className="label">Artifact Set:</label>
+            <label className="label">Drive Disc Set:</label>
             <Select
               options={artifactSets.map((set) => ({ value: set, label: set }))}
               value={formData.artifactSet}
@@ -21,7 +21,7 @@ const ArtifactCreateForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
 
 
           <div className="inputGroup">
-            <label className="label">Artifact Type:</label>
+            <label className="label">Drive Disc Slot:</label>
             <Select
               options={artifactTypes}
               value={formData.type}
@@ -36,7 +36,7 @@ const ArtifactCreateForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
               options={formData.type ? mainStatsOptions[formData.type.value] : []}
               value={formData.mainStat}
               onChange={(selected) => handleSelectChange(selected, "mainStat")}
-              placeholder={formData.type ? "Select or type to search" : "Select Artifact Type first"}
+              placeholder={formData.type ? "Select or type to search" : "Select Drive Disc Slot first"}
               isDisabled={!formData.type}
               className="react-select"
             />
