@@ -13,12 +13,35 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
   const [artifactLevelingData, setArtifactLevelingData] = useState(null);
   const [notification, setNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
+
+  const [artifactLevelingIds, setArtifactLevelingIds] = useState([]);
   
   useEffect(() => {
 
     onEditModalChange(isEditModalOpen);
 
   }, [isEditModalOpen, onEditModalChange]);
+
+
+
+  useEffect(() => {
+
+    const fetchArtifactLevelingIds = async () => {
+
+      try {
+        const response = await axios.get(`${apiConfig.apiUrl}/artifactlevelingids`);
+        setArtifactLevelingIds(response.data);
+      } catch (error) {
+        console.error("Error fetching artifact leveling IDs:", error);
+      }
+    };
+    fetchArtifactLevelingIds();
+
+  }, [isLevelingModalOpen]);
+
+
+
+const isArtifactInLeveling = artifactLevelingIds.includes(artifact.id);
 
   const renderCheckbox = (value) => (
     <input type="checkbox" checked={value === 1} readOnly />
@@ -63,9 +86,16 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
         <td>{artifact.where_got_it}</td>
         <td>{artifact.score}</td>
         <td>
+
+        {isArtifactInLeveling ? (
+        <button onClick={openLevelingModal}>Change Leveling</button>
+        ) : (
+        <>
           <button onClick={() => setIsEditModalOpen(true)}>Edit</button>
           <button onClick={openLevelingModal}>Add Leveling</button>
-        </td>
+        </>
+        )}
+      </td>
       </tr>
       {isEditModalOpen && (
         <EditArtifactModal

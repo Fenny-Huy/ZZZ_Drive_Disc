@@ -326,6 +326,14 @@ def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection =
         }
     return artifact_leveling
 
+@app.get("/artifactlevelingids/")
+def get_artifact_leveling_ids(db: pymysql.connections.Connection = Depends(get_db_connection)):
+    query = "SELECT `ID` FROM `Drive Disc leveling`"
+    with db.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        ids = [row[0] for row in rows]
+    return ids
 
 
 # API endpoint to fetch an artifact
