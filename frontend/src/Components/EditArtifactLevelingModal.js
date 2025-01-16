@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { apiConfig } from '../config/config';
-import '../Styles/EditArtifactLevelingModal.css'; // Import the CSS file
+import styles from '../Styles/Components/EditArtifactLevelingModal.module.css'; // Import the CSS file
 
 const EditArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdateSuccess }) => {
   const [formData, setFormData] = useState({
@@ -100,28 +100,28 @@ const EditArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpda
   ].filter(Boolean);
 
   return (
-    <div className="edit-leveling-modal">
-      <div className="edit-leveling-modal-content">
+    <div className={styles.modal}>
+      <div className={styles.modal_content}>
         <h2>Edit Artifact Leveling</h2>
-        <form className="edit-leveling-form">
+        <form className={styles.form}>
           {initialSubstats.map((substat) => (
-            <div className="edit-leveling-inputGroup" key={substat}>
-              <label className="edit-leveling-label">{substat}:</label>
+            <div className={styles.inputGroup} key={substat}>
+              <label className={styles.label}>{substat}:</label>
               <input
                 type="number"
                 name={getFormDataKey(substat)}
                 value={formData[getFormDataKey(substat)]}
                 onChange={handleInputChange}
-                className="edit-leveling-input"
+                className={styles.input}
                 min="0"
               />
             </div>
           ))}
-          <div className="edit-leveling-modal-actions">
-            <button type="button" className="edit-leveling-button" onClick={handleSave} disabled={isSaveDisabled}>
+          <div className={styles.modal_actions}>
+            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled}>
               Save
             </button>
-            <button type="button" className="edit-leveling-button" onClick={onClose}>
+            <button type="button" className={styles.button} onClick={onClose}>
               Cancel
             </button>
           </div>

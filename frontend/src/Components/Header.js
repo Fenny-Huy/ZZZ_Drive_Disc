@@ -1,15 +1,14 @@
-// src/Components/Header.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../Styles/Header.css'; // Import the CSS file for styling
+import styles from '../Styles/Components/Header.module.css'; // Import the CSS file for styling
 
 const Header = () => {
   return (
-    <header className="header">
-      <div className="header-left">
+    <header className={styles.header}>
+      <div className={styles.header_left}>
         <Link to="/">Home</Link>
       </div>
-      <div className="header-right">
+      <div className={styles.header_right}>
         <Link to="/artifactcreate">Create Drive Disc</Link>
         <Link to="/artifact-list">Drive Disc List</Link>
         <Link to="/search-artifacts">Search Drive Discs</Link>

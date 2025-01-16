@@ -1,0 +1,8 @@
+.artifact_create_container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}

@@ -1,24 +1,24 @@
 import React from 'react';
 import { Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import '../Styles/ChartTable.css'; // Import the CSS file for the component
+import styles from '../Styles/Components/ChartTable.module.css'; // Import the CSS file for the component
 
 const ChartTable = ({ chartType, chartData, tableData, chartTitle, tableTitle, tableFirstField }) => {
   const renderChart = () => {
     if (chartType === 'pie') {
       return (
-        <div className="chart-container">
+        <div className={styles.chart_container}>
           <h2>{chartTitle}</h2>
-          <div className="pie-chart">
+          <div className={styles.pie_chart}>
             <Pie data={chartData} />
           </div>
         </div>
       );
     } else if (chartType === 'bar') {
       return (
-        <div className="chart-container">
+        <div className={styles.chart_container}>
           <h2>{chartTitle}</h2>
-          <div className="bar-chart">
+          <div className={styles.bar_chart}>
             <Bar data={chartData} />
           </div>
         </div>
@@ -31,7 +31,7 @@ const ChartTable = ({ chartType, chartData, tableData, chartTitle, tableTitle, t
     const totalCount = tableData.reduce((sum, item) => sum + item.count, 0);
 
     return (
-      <div className="table-container">
+      <div className={styles.table_container}>
         <h2>{tableTitle}</h2>
         <table>
           <thead>
@@ -61,7 +61,7 @@ const ChartTable = ({ chartType, chartData, tableData, chartTitle, tableTitle, t
   };
 
   return (
-    <div className="chart-table-container">
+    <div className={styles.chart_table_container}>
       {renderChart()}
       {renderTable()}
     </div>

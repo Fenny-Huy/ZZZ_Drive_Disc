@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import ArtifactCreateForm from '../Components/ArtifactCreateForm';
 import { apiConfig, artifactConfig } from '../config/config';
-import '../Styles/Pages.css';
+import styles from '../Styles/Pages/ArtifactCreate.module.css';
 
 
 const ArtifactCreate = () => {
@@ -112,7 +112,7 @@ const ArtifactCreate = () => {
       return (
         <div className="artifact-create">
         
-          <div className="artifact-create-container">
+          <div className={styles.artifact_create_container}>
             <h1>Create Drive Disc</h1>
             <ArtifactCreateForm formData={formData} handleSubmit={handleSubmit} artifactTypes={artifactTypes} mainStatsOptions={mainStatsOptions} filteredSubstats={filteredSubstats} scores={scores} sources={sources} artifactSets={artifactSets} handleSelectChange={handleSelectChange} handleInputChange={handleInputChange} isSubmitDisabled={isSubmitDisabled} />
           </div>

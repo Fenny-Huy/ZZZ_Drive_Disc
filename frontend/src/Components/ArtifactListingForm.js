@@ -4,7 +4,7 @@ import EditArtifactModal from './EditArtifactModal';
 import AddArtifactLevelingModal from './AddArtifactLevelingModal';
 import axios from 'axios';
 import { apiConfig } from '../config/config';
-import '../Styles/ArtifactListingForm.css';
+import styles from '../Styles/Components/ArtifactListingForm.module.css';
 
 const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -22,12 +22,8 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
 
   }, [isEditModalOpen, onEditModalChange]);
 
-
-
   useEffect(() => {
-
     const fetchArtifactLevelingIds = async () => {
-
       try {
         const response = await axios.get(`${apiConfig.apiUrl}/artifactlevelingids`);
         setArtifactLevelingIds(response.data);
@@ -35,13 +31,11 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
         console.error("Error fetching artifact leveling IDs:", error);
       }
     };
+  
     fetchArtifactLevelingIds();
-
   }, [isLevelingModalOpen]);
 
-
-
-const isArtifactInLeveling = artifactLevelingIds.includes(artifact.id);
+  const isArtifactInLeveling = artifactLevelingIds.includes(artifact.id);
 
   const renderCheckbox = (value) => (
     <input type="checkbox" checked={value === 1} readOnly />
@@ -67,35 +61,34 @@ const isArtifactInLeveling = artifactLevelingIds.includes(artifact.id);
 
   return (
     <>
-      <tr className="artifact-row">
+      <tr className={styles.artifact_row}>
         <td>{artifact.id}</td>
         <td>{artifact.set}</td>
         <td>{artifact.type}</td>
         <td>{artifact.main_stat}</td>
-        <td>{artifact.number_of_substats}</td>
-        <td>{renderCheckbox(artifact.atk_percent)}</td>
-        <td>{renderCheckbox(artifact.hp_percent)}</td>
-        <td>{renderCheckbox(artifact.def_percent)}</td>
-        <td>{renderCheckbox(artifact.atk)}</td>
-        <td>{renderCheckbox(artifact.hp)}</td>
-        <td>{renderCheckbox(artifact.defense)}</td>
-        <td>{renderCheckbox(artifact.pen)}</td>
-        <td>{renderCheckbox(artifact.ap)}</td>
-        <td>{renderCheckbox(artifact.crit_rate)}</td>
-        <td>{renderCheckbox(artifact.crit_dmg)}</td>
+        <td className={styles.center_checkbox}>{artifact.number_of_substats}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.atk_percent)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.hp_percent)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.def_percent)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.atk)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.hp)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.defense)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.pen)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.ap)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.crit_rate)}</td>
+        <td className={styles.center_checkbox}>{renderCheckbox(artifact.crit_dmg)}</td>
         <td>{artifact.where_got_it}</td>
         <td>{artifact.score}</td>
         <td>
-
         {isArtifactInLeveling ? (
-        <button onClick={openLevelingModal}>Change Leveling</button>
+          <button onClick={openLevelingModal}>Change Leveling</button>
         ) : (
-        <>
-          <button onClick={() => setIsEditModalOpen(true)}>Edit</button>
-          <button onClick={openLevelingModal}>Add Leveling</button>
-        </>
+          <>
+            <button onClick={() => setIsEditModalOpen(true)}>Edit</button>
+            <button onClick={openLevelingModal}>Add Leveling</button>
+          </>
         )}
-      </td>
+        </td>
       </tr>
       {isEditModalOpen && (
         <EditArtifactModal
@@ -112,7 +105,7 @@ const isArtifactInLeveling = artifactLevelingIds.includes(artifact.id);
           onUpdateSuccess={() => handleUpdateSuccess('Artifact leveling added or updated successfully!')}
         />
       )}
-      {notification && <div className="notification">{notificationMessage}</div>}
+      {notification && <div className={styles.notification}>{notificationMessage}</div>}
     </>
   );
 };

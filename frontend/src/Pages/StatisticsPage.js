@@ -3,7 +3,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import ChartTable from '../Components/ChartTable'; // Import the new component
 import 'chart.js/auto';
-import '../Styles/Pages.css';
+import styles from '../Styles/Pages/StatisticsPage.module.css';
 import { apiConfig, keysConfig } from '../config/config';
 import LevelingChartTable from '../Components/LevelingChartTable';
 
@@ -381,11 +381,11 @@ const StatisticsPage = () => {
   
     return (
       <>
-        <div className="button-container">
+        <div className={styles.button_container}>
           {levelingData.map(item => item.type).filter((value, index, self) => self.indexOf(value) === index).map(type => (
             <button
               key={type}
-              className={selectedType === type ? 'active' : ''}
+              className={`${styles.button} ${selectedType === type ? styles.active : ''}`}
               onClick={() => handleTypeSelection(type)}
             >
               {type}
@@ -393,11 +393,11 @@ const StatisticsPage = () => {
           ))}
         </div>
         {selectedType && (
-          <div className="button-container">
+          <div className={styles.button_container}>
             {levelingData.filter(item => item.type === selectedType).map(item => item.main_stat).filter((value, index, self) => self.indexOf(value) === index).map(mainStat => (
               <button
                 key={mainStat}
-                className={selectedMainStat === mainStat ? 'active' : ''}
+                className={`${styles.button} ${selectedMainStat === mainStat ? styles.active : ''}`}
                 onClick={() => handleMainStatSelection(mainStat)}
               >
                 {mainStat}
@@ -425,6 +425,7 @@ const StatisticsPage = () => {
 
     
     keysConfig.forEach(mapping => {
+      // eslint-disable-next-line
       const [subKey, rollKey, addedKey, value] = mapping;
       if (subKey) substatKeyToMainStat[subKey] = value;
     });
@@ -472,6 +473,7 @@ const StatisticsPage = () => {
 
     
     keysConfig.forEach(mapping => {
+      // eslint-disable-next-line
       const [subKey, rollKey, addedKey, value] = mapping;
       if (subKey) substatKeyToMainStat[subKey] = value;
     });
@@ -490,12 +492,12 @@ const StatisticsPage = () => {
     })) : [];
 
     return (
-      <div className="substat-content-container">
-        <div className="button-container">
+      <div className={styles.substat_content_container}>
+        <div className={styles.button_container}>
           {typeData.map(item => (
             <button
               key={item[0]}
-              className={selectedType === item[0] ? 'active' : ''}
+              className={`${styles.button} ${selectedType === item[0] ? styles.active : ''}`}
               onClick={() => handleTypeSelection(item[0])}
             >
               {item[0]}
@@ -503,11 +505,11 @@ const StatisticsPage = () => {
           ))}
         </div>
         {selectedType && (
-          <div className="button-container">
+          <div className={styles.button_container}>
             {mainStatData.filter(item => item[0] === selectedType).map(item => (
               <button
                 key={item[1]}
-                className={selectedMainStat === item[1] ? 'active' : ''}
+                className={`${styles.button} ${selectedMainStat === item[1] ? styles.active : ''}`}
                 onClick={() => setSelectedMainStat(item[1])}
               >
                 {item[1]}
@@ -652,7 +654,7 @@ const StatisticsPage = () => {
             label: source,
           }));
           return (
-            <div className="select-container">
+            <div className={styles.select_container}>
               <Select
                 value={sources.find(option => option.value === selectedSource)}
                 onChange={(selectedOption) => setSelectedSource(selectedOption ? selectedOption.value : '')}
@@ -669,7 +671,7 @@ const StatisticsPage = () => {
             label: set,
           }));
           return (
-            <div className="select-container">
+            <div className={styles.select_container}>
               <Select
                 value={sets.find(option => option.value === selectedSet)}
                 onChange={(selectedOption) => setSelectedSet(selectedOption ? selectedOption.value : '')}
@@ -769,11 +771,11 @@ const StatisticsPage = () => {
 
       return (
         <>
-          <div className="button-container">
-            <button className={selectedChart === 'Types' ? 'active' : ''} onClick={() => setSelectedChart('Types')}>Types</button>
-            <button className={selectedChart === '4' ? 'active' : ''} onClick={() => setSelectedChart('4')}>4</button>
-            <button className={selectedChart === '5' ? 'active' : ''} onClick={() => setSelectedChart('5')}>5</button>
-            <button className={selectedChart === '6' ? 'active' : ''} onClick={() => setSelectedChart('6')}>6</button>
+          <div className={styles.button_container}>
+            <button className={`${styles.button} ${selectedChart === 'Types' ? styles.active : ''}`} onClick={() => setSelectedChart('Types')}>Slots</button>
+            <button className={`${styles.button} ${selectedChart === '4' ? styles.active : ''}`} onClick={() => setSelectedChart('4')}>4</button>
+            <button className={`${styles.button} ${selectedChart === '5' ? styles.active : ''}`} onClick={() => setSelectedChart('5')}>5</button>
+            <button className={`${styles.button} ${selectedChart === '6' ? styles.active : ''}`} onClick={() => setSelectedChart('6')}>6</button>
           </div>
           <ChartTable
             chartType="pie"
@@ -788,9 +790,9 @@ const StatisticsPage = () => {
     } else if (selectedCategory === 'Substats') {
       return (
         <>
-          <div className="button-container">
-            <button className={selectedSubstatChart === 'Overall' ? 'active' : ''} onClick={() => setSelectedSubstatChart('Overall')}>Overall</button>
-            <button className={selectedSubstatChart === 'Specific' ? 'active' : ''} onClick={() => setSelectedSubstatChart('Specific')}>Specific</button>
+          <div className={styles.button_container}>
+            <button className={`${styles.button} ${selectedSubstatChart === 'Overall' ? styles.active : ''}`} onClick={() => setSelectedSubstatChart('Overall')}>Overall</button>
+            <button className={`${styles.button} ${selectedSubstatChart === 'Specific' ? styles.active : ''}`} onClick={() => setSelectedSubstatChart('Specific')}>Specific</button>
           </div>
           {selectedSubstatChart === 'Overall' && renderSubstatOverall()}
           {selectedSubstatChart === 'Specific' && renderSubstatSpecific()}
@@ -799,9 +801,9 @@ const StatisticsPage = () => {
     } else if (selectedCategory === 'Leveling') {
       return (
         <>
-          <div className="button-container">
-            <button className={selectedLevelingChart === 'Overall' ? 'active' : ''} onClick={() => setSelectedLevelingChart('Overall')}>Overall</button>
-            <button className={selectedLevelingChart === 'Specific' ? 'active' : ''} onClick={() => setSelectedLevelingChart('Specific')}>Specific</button>
+          <div className={styles.button_container}>
+            <button className={`${styles.button} ${selectedLevelingChart === 'Overall' ? styles.active : ''}`} onClick={() => setSelectedLevelingChart('Overall')}>Overall</button>
+            <button className={`${styles.button} ${selectedLevelingChart === 'Specific' ? styles.active : ''}`} onClick={() => setSelectedLevelingChart('Specific')}>Specific</button>
           </div>
           {selectedLevelingChart === 'Overall' && renderLevelingOverall()}
           {selectedLevelingChart === 'Specific' && renderLevelingSpecific()}
@@ -810,10 +812,10 @@ const StatisticsPage = () => {
     } else if (selectedCategory === 'Set/Source') {
       return (
         <>
-          <div className="button-container">
-          <button className={isSetSelected ? 'active' : ''} onClick={handleSetSelection}>Set</button>
-          <button className={isSourceSelected ? 'active' : ''} onClick={handleSourceSelection}>Source</button>
-          <button className={isSpecificSelected ? 'active' : ''} onClick={handleSpecificSelection}>Specific</button>
+          <div className={styles.button_container}>
+          <button className={`${styles.button} ${isSetSelected ? styles.active : ''}`} onClick={handleSetSelection}>Set</button>
+          <button className={`${styles.button} ${isSourceSelected ? styles.active : ''}`} onClick={handleSourceSelection}>Source</button>
+          <button className={`${styles.button} ${isSpecificSelected ? styles.active : ''}`} onClick={handleSpecificSelection}>Specific</button>
           </div>
           {renderSetSourceContent()}
         </>
@@ -823,13 +825,13 @@ const StatisticsPage = () => {
   };
 
   return (
-    <div className="statistics-page">
+    <div className={styles.statistics_page}>
       <h1>Artifact Statistics</h1>
-      <div className="button-container">
-        <button className={selectedCategory === 'Main Stat' ? 'active' : ''} onClick={() => setSelectedCategory('Main Stat')}>Main Stat</button>
-        <button className={selectedCategory === 'Substats' ? 'active' : ''} onClick={() => setSelectedCategory('Substats')}>Substats</button>
-        <button className={selectedCategory === 'Leveling' ? 'active' : ''} onClick={() => setSelectedCategory('Leveling')}>Leveling</button>
-        <button className={selectedCategory === 'Set/Source' ? 'active' : ''} onClick={() => setSelectedCategory('Set/Source')}>Set/Source</button>
+      <div className={styles.button_container}>
+        <button className={`${styles.button} ${selectedCategory === 'Main Stat' ? styles.active : ''}`} onClick={() => setSelectedCategory('Main Stat')}>Main Stat</button>
+        <button className={`${styles.button} ${selectedCategory === 'Substats' ? styles.active : ''}`} onClick={() => setSelectedCategory('Substats')}>Substats</button>
+        <button className={`${styles.button} ${selectedCategory === 'Leveling' ? styles.active : ''}`} onClick={() => setSelectedCategory('Leveling')}>Leveling</button>
+        <button className={`${styles.button} ${selectedCategory === 'Set/Source' ? styles.active : ''}`} onClick={() => setSelectedCategory('Set/Source')}>Set/Source</button>
       </div>
       {renderContent()}
     </div>

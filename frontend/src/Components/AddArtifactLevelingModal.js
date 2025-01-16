@@ -1,7 +1,7 @@
 // src/Components/AddArtifactLevelingModal.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../Styles/AddArtifactLevelingModal.css'; // Import the CSS file
+import styles from '../Styles/Components/AddArtifactLevelingModal.module.css'; // Import the CSS file
 import { apiConfig, artifactConfig } from '../config/config';
 
 const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdateSuccess }) => {
@@ -33,7 +33,7 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
     if (artifact.hp) substats.push('HP');
     if (artifact.defense) substats.push('DEF');
     if (artifact.pen) substats.push('PEN');
-    if (artifact.em) substats.push('EM');
+    if (artifact.AP) substats.push('AP');
     if (artifact.crit_rate) substats.push('Crit Rate');
     if (artifact.crit_dmg) substats.push('Crit DMG');
     setInitialSubstats(substats);
@@ -116,18 +116,18 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
   };
 
   return (
-    <div className="leveling-modal">
-      <div className="leveling-modal-content">
+    <div className={styles.leveling_modal}>
+      <div className={styles.leveling_modal_content}>
         <h2>{isUpdating ? 'Update' : 'Add'} Artifact Leveling</h2>
-        <form className="form">
+        <form className={styles.form}>
           {artifact.number_of_substats === 3 && (!formData.addedSubstat || formData.addedSubstat === "None") && (
-            <div className="inputGroup">
-              <label className="label">Added Substat:</label>
+            <div className={styles.inputGroup}>
+              <label className = {styles.label}>Added Substat:</label>
               <select
                 name="addedSubstat"
                 value={formData.addedSubstat}
                 onChange={handleSelectChange}
-                className="select"
+                className={styles.select}
               >
                 <option value="">Select Substat</option>
                 {availableSubstats.map((substat) => (
@@ -139,23 +139,23 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
             </div>
           )}
           {(initialSubstats.concat(formData.addedSubstat && formData.addedSubstat !== "None" ? formData.addedSubstat : []).filter(Boolean)).map((substat) => (
-            <div className="inputGroup" key={substat}>
-              <label className="label">{substat}:</label>
+            <div className= {styles.inputGroup} key={substat}>
+              <label className={styles.label}>{substat}:</label>
               <input
                 type="number"
                 name={getFormDataKey(substat)}
                 value={formData[getFormDataKey(substat)]}
                 onChange={handleInputChange}
-                className="input"
+                className={styles.input}
                 min="0"
               />
             </div>
           ))}
-          <div className="actions">
-            <button type="button" className="button" onClick={handleSave} disabled={isSaveDisabled}>
+          <div className={styles.actions}>
+            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled}>
               Save
             </button>
-            <button type="button" className="button" onClick={onClose}>
+            <button type="button" className={styles.button} onClick={onClose}>
               Cancel
             </button>
           </div>

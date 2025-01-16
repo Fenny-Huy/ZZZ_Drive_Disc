@@ -4,7 +4,7 @@ import axios from 'axios';
 import ArtifactLevelingListTable from '../Components/ArtifactLevelingListTable';
 import EditArtifactLevelingModal from '../Components/EditArtifactLevelingModal';
 import { apiConfig } from '../config/config';
-import '../Styles/Pages.css';
+import styles from '../Styles/Pages/ArtifactLevelingList.module.css';
 
 
 const ArtifactLevelingList = () => {
@@ -37,7 +37,7 @@ const ArtifactLevelingList = () => {
   };
 
   return (
-    <div className="artifact-leveling-list">
+    <div className={styles.artifact_leveling_list}>
       <h1>Artifact Leveling List</h1>
       <ArtifactLevelingListTable artifacts={artifacts} onEdit={handleEdit} />
       {isEditModalOpen && selectedArtifact && (

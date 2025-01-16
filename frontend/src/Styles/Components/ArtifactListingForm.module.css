@@ -1,8 +1,8 @@
-.artifact-row {
+.artifact_row {
     border-bottom: 1px solid #ddd;
   }
   
-  .artifact-row td {
+  .artifact_row td {
     padding: 8px;
   }
 
@@ -18,4 +18,10 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+  }
+
+
+  .center_checkbox {
+    text-align: center; /* Center horizontally */
+    vertical-align: middle; /* Center vertically */
   }

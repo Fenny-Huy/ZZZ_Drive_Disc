@@ -1,0 +1,29 @@
+.artifact_search_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.artifact_search_table th,
+.artifact_search_table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.artifact_search_table th {
+    background-color: #f2f2f2;
+}
+
+.search_container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+.center_checkbox {
+    text-align: center; /* Center horizontally */
+    vertical-align: middle; /* Center vertically */
+  }

@@ -4,7 +4,7 @@ import axios from 'axios';
 import ArtifactSearchForm from '../Components/ArtifactSearchForm';
 import ArtifactListingForm from '../Components/ArtifactListingForm';
 import { apiConfig, artifactConfig } from '../config/config';
-import '../Styles/Pages.css';
+import styles from '../Styles/Pages/SearchArtifacts.module.css';
 
 const SearchArtifacts = () => {
   
@@ -92,7 +92,7 @@ const SearchArtifacts = () => {
 
   return (
     <div>
-      <div className='search-container'>
+      <div className={styles.search_container}>
         <h1>Search Artifacts</h1>
         <ArtifactSearchForm
           formData={formData}
@@ -107,24 +107,24 @@ const SearchArtifacts = () => {
           handleInputChange={handleInputChange}
         />
       </div>
-      <table className="artifact-search-table">
+      <table className={styles.artifact_search_table}>
         <thead>
           <tr>
             <th>ID</th>
             <th>Set</th>
             <th>Type</th>
             <th>Main Stat</th>
-            <th>Subs Numb</th>
-            <th>%ATK</th>
-            <th>%HP</th>
-            <th>%DEF</th>
-            <th>ATK</th>
-            <th>HP</th>
-            <th>DEF</th>
-            <th>PEN</th>
-            <th>A.Proficiency </th>
-            <th>Crit Rate</th>
-            <th>Crit DMG</th>
+            <th className={styles.center_checkbox}>Numb</th>
+            <th className={styles.center_checkbox}>%ATK</th>
+            <th className={styles.center_checkbox}>%HP</th>
+            <th className={styles.center_checkbox}>%DEF</th>
+            <th className={styles.center_checkbox}>ATK</th>
+            <th className={styles.center_checkbox}>HP</th>
+            <th className={styles.center_checkbox}>DEF</th>
+            <th className={styles.center_checkbox}>PEN</th>
+            <th className={styles.center_checkbox}>A.Proficiency</th>
+            <th className={styles.center_checkbox}>C.Rate</th>
+            <th className={styles.center_checkbox}>C.DMG</th>
             <th>Source</th>
             <th>Score</th>
           </tr>

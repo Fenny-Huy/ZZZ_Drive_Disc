@@ -13,10 +13,10 @@
     margin: 0 10px;
   }
   
-  .header-left a {
+  .header_left a {
     font-weight: bold;
   }
   
-  .header-right a:hover {
+  .header_right a:hover {
     text-decoration: underline;
   }

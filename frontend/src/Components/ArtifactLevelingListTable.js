@@ -1,7 +1,7 @@
 // src/Components/ArtifactLevelingListTable.js
 
 import React, { useEffect, useState } from 'react';
-import '../Styles/ArtifactLevelingListTable.css'; // Import the CSS file
+import styles from '../Styles/Components/ArtifactLevelingListTable.module.css'; // Import the CSS file
 import ReactPaginate from 'react-paginate';
 
 const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
@@ -55,7 +55,7 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
       artifact.hp && 'HP',
       artifact.defense && 'DEF',
       artifact.pen && 'PEN',
-      artifact.ap && 'AP',
+      artifact.AP && 'AP',
       artifact.crit_rate && 'Crit Rate',
       artifact.crit_dmg && 'Crit DMG',
       artifact.addedSubstat,
@@ -64,7 +64,7 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
     if (initialSubstats.includes(substat)) {
       return artifact[substatKey];
     } else {
-      return <span className="unavailable-substat">X</span>;
+      return <span className={styles.unavailable_substat}>X</span>;
     }
   };
 
@@ -72,7 +72,7 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
     <>
 
     
-    <table className="artifact-listing-table">
+    <table className={styles.artifact_listing_table}>
       <thead>
         <tr>
           <th>ID</th>
@@ -81,16 +81,16 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
           <th>Main Stat</th>
           <th>Initial Substats</th>
           <th>Added</th>
-          <th>HP</th>
-          <th>ATK</th>
-          <th>DEF</th>
-          <th>%HP</th>
-          <th>%ATK</th>
-          <th>%DEF</th>
-          <th>AP</th>
-          <th>PEN</th>
-          <th>C.Rate</th>
-          <th>C.DMG</th>
+          <th className={styles.center_checkbox}>HP</th>
+          <th className={styles.center_checkbox}>ATK</th>
+          <th className={styles.center_checkbox}>DEF</th>
+          <th className={styles.center_checkbox}>%HP</th>
+          <th className={styles.center_checkbox}>%ATK</th>
+          <th className={styles.center_checkbox}>%DEF</th>
+          <th className={styles.center_checkbox}>AP</th>
+          <th className={styles.center_checkbox}>PEN</th>
+          <th className={styles.center_checkbox}>C.Rate</th>
+          <th className={styles.center_checkbox}>C.DMG</th>
           <th>Source</th>
           <th>Score</th>
         </tr>
@@ -119,16 +119,16 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
                 .join(', ')}
             </td>
             <td>{artifact.addedSubstat}</td>
-            <td>{renderSubstatCell(artifact, 'HP')}</td>
-            <td>{renderSubstatCell(artifact, 'ATK')}</td>
-            <td>{renderSubstatCell(artifact, 'DEF')}</td>
-            <td>{renderSubstatCell(artifact, '%HP')}</td>
-            <td>{renderSubstatCell(artifact, '%ATK')}</td>
-            <td>{renderSubstatCell(artifact, '%DEF')}</td>
-            <td>{renderSubstatCell(artifact, 'AP')}</td>
-            <td>{renderSubstatCell(artifact, 'PEN')}</td>
-            <td>{renderSubstatCell(artifact, 'Crit Rate')}</td>
-            <td>{renderSubstatCell(artifact, 'Crit DMG')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'HP')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'ATK')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'DEF')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, '%HP')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, '%ATK')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, '%DEF')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'AP')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'PEN')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'Crit Rate')}</td>
+            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'Crit DMG')}</td>
             <td>{artifact.where_got_it}</td>
             <td>{artifact.score}</td>
             <td>

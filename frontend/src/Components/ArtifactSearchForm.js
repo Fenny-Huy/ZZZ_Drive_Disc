@@ -1,15 +1,12 @@
 // src/Components/ArtifactSearchForm.js
 import React from 'react';
 import Select from "react-select"; // Import React-Select
-import '../Styles/ArtifactSearchForm.css';
+import styles from '../Styles/Components/ArtifactSearchForm.module.css';
 import { artifactConfig } from '../config/config';
-
 
 const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, scores, sources, artifactSets, handleSelectChange, handleInputChange }) => {
   // Define all substats
   const allSubstats = artifactConfig.allSubstats;
-
-
 
   const isSubmitDisabled = !(
     formData.artifactSet ||
@@ -22,9 +19,9 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
   );
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <div className="inputGroup">
-        <label className="label">Artifact Set:</label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Drive Disc Set:</label>
         <Select
           options={artifactSets.map((set) => ({ value: set, label: set }))}
           value={formData.artifactSet}
@@ -35,8 +32,8 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         />
       </div>
 
-      <div className="inputGroup">
-        <label className="label">Artifact Type:</label>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Drive Disc Slot:</label>
         <Select
           options={artifactTypes}
           value={formData.type}
@@ -47,8 +44,8 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         />
       </div>
 
-      <div className="inputGroup">
-        <label className="label">Main Stat:</label>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Main Stat:</label>
         <Select
           options={Object.values(mainStatsOptions).flat()}
           value={formData.mainStat}
@@ -59,13 +56,13 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         />
       </div>
 
-      <div className="inputGroup">
-        <label className="label">Number of Substats:</label>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Number of Substats:</label>
         <select
           name="numberOfSubstats"
           value={formData.numberOfSubstats}
           onChange={handleInputChange}
-          className="select"
+          className={styles.select}
         >
           <option value="">Select Number</option>
           <option value="3">3</option>
@@ -73,18 +70,18 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         </select>
       </div>
 
-      <div className="inputGroup">
-        <label className="label">Substats:</label>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Substats:</label>
         <div>
           {allSubstats.map((substat) => (
-            <label key={substat} className="checkboxLabel">
+            <label key={substat} className={styles.checkboxLabel}>
               <input
                 type="checkbox"
                 name="substats"
                 value={substat}
                 checked={formData.substats.includes(substat)}
                 onChange={handleInputChange}
-                className="checkbox"
+                className={styles.checkbox}
               />
               {substat}
             </label>
@@ -92,9 +89,9 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         </div>
       </div>
 
-      <div className="inputGroup">
-        <label className="label">Score:</label>
-        <select name="score" value={formData.score} onChange={handleInputChange} className="select">
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Score:</label>
+        <select name="score" value={formData.score} onChange={handleInputChange} className={styles.select}>
           <option value="">Select Score</option>
           {scores.map((score) => (
             <option key={score} value={score}>
@@ -104,9 +101,9 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         </select>
       </div>
 
-      <div className="inputGroup">
-        <label className="label">Where Got It:</label>
-        <select name="source" value={formData.source} onChange={handleInputChange} className="select">
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Where Got It:</label>
+        <select name="source" value={formData.source} onChange={handleInputChange} className={styles.select}>
           <option value="">Select Source</option>
           {sources.map((source) => (
             <option key={source} value={source}>
@@ -116,7 +113,7 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         </select>
       </div>
 
-      <button type="submit" className="submitButton" disabled={isSubmitDisabled}>
+      <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled}>
         Search
       </button>
     </form>

@@ -1,5 +1,5 @@
 /* src/Components/EditArtifactLevelingModal.css */
-.edit-leveling-modal {
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     z-index: 1000;
   }
   
-  .edit-leveling-modal-content {
+  .modal_content {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -23,23 +23,23 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
   
-  .edit-leveling-form {
+  .form {
     display: flex;
     flex-direction: column;
   }
   
-  .edit-leveling-inputGroup {
+  .inputGroup {
     margin-bottom: 15px;
   }
   
-  .edit-leveling-label {
+  .label {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
   }
   
-  .edit-leveling-input,
-  .edit-leveling-select {
+  .input,
+  .select {
     padding: 8px;
     font-size: 16px;
     width: 100%;
@@ -47,13 +47,13 @@
     border: 1px solid #ccc;
   }
   
-  .edit-leveling-modal-actions {
+  .modal_actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
   }
   
-  .edit-leveling-button {
+  .button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -64,11 +64,11 @@
     transition: background-color 0.3s;
   }
   
-  .edit-leveling-button:disabled {
+  .button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
   
-  .edit-leveling-button:hover:not(:disabled) {
+  .button:hover:not(:disabled) {
     background-color: #45a049;
   }
