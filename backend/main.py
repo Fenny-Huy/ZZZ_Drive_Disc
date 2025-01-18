@@ -648,3 +648,96 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
             for row in rows
         ]
     return artifacts_with_subs
+
+
+
+
+
+
+@app.get("/score")
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+    query = """
+    select `Score`, count(*) as totalcount from `Drive Disc`
+    group by `Score`
+    order by totalcount desc;
+    """
+    with db.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        artifacts_with_subs = [
+            {
+                "score": row[0],
+                "count": row[1],
+                
+            }
+            for row in rows
+        ]
+    return artifacts_with_subs
+
+
+@app.get("/score/set")
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+    query = """
+    select `Score`, `Set`, count(*) as totalcount from `Drive Disc`
+    group by `Score`, `Set`
+    order by totalcount desc;
+    """
+    with db.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        artifacts_with_subs = [
+            {
+                "score": row[0],
+                "set": row[1],
+                "count": row[2],
+                
+            }
+            for row in rows
+        ]
+    return artifacts_with_subs
+
+
+@app.get("/score/where")
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+    query = """
+    select `Score`, `Where got it`, count(*) as totalcount from `Drive Disc`
+    group by `Score`, `Where got it`
+    order by totalcount desc;
+    """
+    with db.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        artifacts_with_subs = [
+            {
+                "score": row[0],
+                "where": row[1],
+                "count": row[2],
+                
+            }
+            for row in rows
+        ]
+    return artifacts_with_subs
+
+
+
+@app.get("/score/set_where")
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+    query = """
+    select `Score`, `Set`, `Where got it`, count(*) as totalcount from `Drive Disc`
+    group by `Score`,`Set`, `Where got it`
+    order by totalcount desc;
+    """
+    with db.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        artifacts_with_subs = [
+            {
+                "score": row[0],
+                "set": row[1],
+                "where": row[2],
+                "count": row[3],
+                
+            }
+            for row in rows
+        ]
+    return artifacts_with_subs

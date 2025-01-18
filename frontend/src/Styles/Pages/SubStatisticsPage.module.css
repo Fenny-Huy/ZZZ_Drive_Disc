@@ -1,0 +1,66 @@
+
+.statistics_page {
+    padding: 20px;
+}
+
+.button_container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+}
+
+.button_container button {
+    margin: 5px 10px; /* Adjust margins for better spacing */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+.button_container button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.button_container button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.select_container {
+    display: flex;
+    justify-content: space-between; /* Adjust spacing between the Select components */
+    width: 550px; /* Adjust the width as needed */
+    margin: 0; /* Center the dropdown */
+  }
+
+  .select_container .select {
+    flex: 1; /* Allow the Select components to grow and fill the container */
+    margin-right: 10px; /* Add some space between the Select components */
+  }
+  
+  .select_container .select:last-child {
+    margin-right: 0; /* Remove the margin from the last Select component */
+  }
+  
+  .select__control {
+    min-height: 30px; /* Adjust the height as needed */
+  }
+  
+  .select__value_container {
+    padding: 0 8px; /* Adjust the padding as needed */
+  }
+  
+  .select__input {
+    margin: 0; /* Remove default margin */
+  }
+  
+  .select__indicators {
+    height: 30px; /* Adjust the height as needed */
+  }
+
+

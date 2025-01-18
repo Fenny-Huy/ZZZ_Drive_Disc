@@ -14,6 +14,7 @@ const HomePage = () => {
         <Link to="/search-artifacts" className={styles.button}>Search Drive Discs</Link>
         <Link to="/leveling-list" className={styles.button}>Drive Discs Leveling List</Link>
         <Link to="/statistics" className={styles.button}>Statistics</Link>
+        <Link to="/substatistics" className={styles.button}>Substatistics</Link>
       </div>
     </div>
   );
