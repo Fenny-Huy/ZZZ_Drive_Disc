@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Select from 'react-select';
 import ChartTable from '../Components/ChartTable'; // Import the new component
 import 'chart.js/auto';
 import styles from '../Styles/Pages/StatisticsPage.module.css';
@@ -20,15 +19,6 @@ const StatisticsPage = () => {
   const [selectedLevelingChart, setSelectedLevelingChart] = useState('Overall');
 
 
-  const [setData, setSetData] = useState([]);
-  const [sourceData, setSourceData] = useState([]);
-  const [setSourceComboData, setSetSourceComboData] = useState([]);
-  const [isSetSelected, setIsSetSelected] = useState(false);
-  const [isSourceSelected, setIsSourceSelected] = useState(false);
-
-  const [isSpecificSelected, setIsSpecificSelected] = useState(false);
-  const [selectedSource, setSelectedSource] = useState('');
-  const [selectedSet, setSelectedSet] = useState('');
 
   useEffect(() => {
     const fetchStatistics = async () => {
@@ -80,44 +70,6 @@ const StatisticsPage = () => {
 
 
 
-  useEffect(() => {
-    const fetchSetData = async () => {
-      try {
-        const response = await axios.get(`${apiConfig.apiUrl}/set/set`);
-        setSetData(response.data);
-      } catch (error) {
-        console.error('Error fetching set data:', error);
-      }
-    };
-  
-    fetchSetData();
-  }, []);
-  
-  useEffect(() => {
-    const fetchSourceData = async () => {
-      try {
-        const response = await axios.get(`${apiConfig.apiUrl}/set/where`);
-        setSourceData(response.data);
-      } catch (error) {
-        console.error('Error fetching source data:', error);
-      }
-    };
-  
-    fetchSourceData();
-  }, []);
-  
-  useEffect(() => {
-    const fetchSetSourceComboData = async () => {
-      try {
-        const response = await axios.get(`${apiConfig.apiUrl}/set/set_where`);
-        setSetSourceComboData(response.data);
-      } catch (error) {
-        console.error('Error fetching set and source data:', error);
-      }
-    };
-  
-    fetchSetSourceComboData();
-  }, []);
 
   const prepareChartData = (data, labelKey, valueKey) => {
     // Sort data in descending order based on the value
@@ -533,236 +485,6 @@ const StatisticsPage = () => {
 
 
 
-  const renderSetSourceContent = () => {
-    const combineCap = 4; //records with value under this cap will be combined into 'Other'
-    const prepareTableSetData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      return data.map(item => ({
-        substat: item.set,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    };
-
-    const prepareChartSetData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      const processedData = data.map(item => ({
-        label: item.set,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    
-      const other = {
-        label: 'Other',
-        percentage: 0,
-        count: 0,
-      };
-    
-      const filteredData = processedData.filter(item => {
-        if (item.percentage < combineCap) {
-          other.percentage += item.percentage;
-          other.count += item.count;
-          return false;
-        }
-        return true;
-      });
-    
-      if (other.count > 0) {
-        filteredData.push(other);
-      }
-    
-      return filteredData;
-    };
-    
-    const prepareSourceData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      return data.map(item => ({
-        label: item.where,
-        substat: item.where,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    };
-
-    const prepareSetSpecificData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      return data.map(item => ({
-        label: item.set,
-        substat: item.set,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    };
-
-    const prepareSourceSpecificData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      return data.map(item => ({
-        label: item.where,
-        substat: item.where,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    };
-    
-    const prepareTableSetSourceComboData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      return data.map(item => ({
-        substat: `${item.set} - ${item.where}`,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    };
-
-    const prepareChartSetSourceComboData = (data) => {
-      const total = data.reduce((sum, item) => sum + item.count, 0);
-      const processedData = data.map(item => ({
-        label: `${item.set} - ${item.where}`,
-        percentage: (item.count / total) * 100,
-        count: item.count,
-      }));
-    
-      const other = {
-        label: 'Other',
-        substat: 'Other',
-        percentage: 0,
-        count: 0,
-      };
-    
-      const filteredData = processedData.filter(item => {
-        if (item.percentage < combineCap) {
-          other.percentage += item.percentage;
-          other.count += item.count;
-          return false;
-        }
-        return true;
-      });
-    
-      if (other.count > 0) {
-        filteredData.push(other);
-      }
-    
-      return filteredData;
-    };
-
-
-    
-    const renderDropdown = () => {
-      if (isSpecificSelected) {
-        if (isSetSelected) {
-          const sources = [...new Set(setSourceComboData.map(item => item.where))].map(source => ({
-            value: source,
-            label: source,
-          }));
-          return (
-            <div className={styles.select_container}>
-              <Select
-                value={sources.find(option => option.value === selectedSource)}
-                onChange={(selectedOption) => setSelectedSource(selectedOption ? selectedOption.value : '')}
-                options={sources}
-                placeholder="Select or type to search Source"
-                isClearable
-                classNamePrefix="select"
-              />
-            </div>
-          );
-        } else if (isSourceSelected) {
-          const sets = [...new Set(setSourceComboData.map(item => item.set))].map(set => ({
-            value: set,
-            label: set,
-          }));
-          return (
-            <div className={styles.select_container}>
-              <Select
-                value={sets.find(option => option.value === selectedSet)}
-                onChange={(selectedOption) => setSelectedSet(selectedOption ? selectedOption.value : '')}
-                options={sets}
-                placeholder="Select or type to search Set"
-                isClearable
-                classNamePrefix="select"
-              />
-            </div>
-          );
-        }
-      }
-      return null;
-    };
-
-
-
-    let chartdata = [];
-    let tabledata = [];
-    let title = '';
-
-    if (isSpecificSelected) {
-      if (isSetSelected && selectedSource) {
-        chartdata = prepareSetSpecificData(setSourceComboData.filter(item => item.where === selectedSource));
-        tabledata = prepareSetSpecificData(setSourceComboData.filter(item => item.where === selectedSource));
-        title = `Set Distribution for Source: ${selectedSource}`;
-      } else if (isSourceSelected && selectedSet) {
-        chartdata = prepareSourceSpecificData(setSourceComboData.filter(item => item.set === selectedSet));
-        tabledata = prepareSourceSpecificData(setSourceComboData.filter(item => item.set === selectedSet));
-        title = `Source Distribution for Set: ${selectedSet}`;
-      }
-    } else
-    {
-      if (isSetSelected && isSourceSelected) {
-        tabledata = prepareTableSetSourceComboData(setSourceComboData);
-        chartdata = prepareChartSetSourceComboData(setSourceComboData);
-        title = 'Set and Source Distribution';
-      } else if (isSetSelected) {
-        chartdata = prepareChartSetData(setData);
-        tabledata = prepareTableSetData(setData);
-        title = 'Set Distribution';
-      } else if (isSourceSelected) {
-        chartdata = prepareSourceData(sourceData);
-        tabledata = prepareSourceData(sourceData);
-        title = 'Source Distribution';
-      }
-    }
-    
-    
-
-  
-    return (
-      <>
-        {renderDropdown()}
-        {(isSetSelected || isSourceSelected) && (
-          <ChartTable
-            chartType="pie"
-            chartData={prepareChartData(chartdata, 'label', 'percentage')}
-            tableData={tabledata}
-            chartTitle={title}
-            tableTitle={title}
-            tableFirstField="Label"
-          />
-        )}
-      </>
-    );
-  };
-
-
-  const handleSetSelection = () => {
-    if (isSpecificSelected) {
-      setIsSourceSelected(false);
-    }
-    setIsSetSelected(!isSetSelected);
-  };
-  
-  const handleSourceSelection = () => {
-    if (isSpecificSelected) {
-      setIsSetSelected(false);
-    }
-    setIsSourceSelected(!isSourceSelected);
-  };
-  
-  const handleSpecificSelection = () => {
-    setIsSpecificSelected(!isSpecificSelected);
-    setIsSetSelected(false);
-    setIsSourceSelected(false);
-    setSelectedSource('');
-    setSelectedSet('');
-  };
-
   const renderContent = () => {
     if (selectedCategory === 'Main Stat') {
       const data = selectedChart === 'Types'
@@ -809,17 +531,6 @@ const StatisticsPage = () => {
           {selectedLevelingChart === 'Specific' && renderLevelingSpecific()}
         </>
       );
-    } else if (selectedCategory === 'Set/Source') {
-      return (
-        <>
-          <div className={styles.button_container}>
-          <button className={`${styles.button} ${isSetSelected ? styles.active : ''}`} onClick={handleSetSelection}>Set</button>
-          <button className={`${styles.button} ${isSourceSelected ? styles.active : ''}`} onClick={handleSourceSelection}>Source</button>
-          <button className={`${styles.button} ${isSpecificSelected ? styles.active : ''}`} onClick={handleSpecificSelection}>Specific</button>
-          </div>
-          {renderSetSourceContent()}
-        </>
-      );
     }
 
   };
@@ -831,7 +542,6 @@ const StatisticsPage = () => {
         <button className={`${styles.button} ${selectedCategory === 'Main Stat' ? styles.active : ''}`} onClick={() => setSelectedCategory('Main Stat')}>Main Stat</button>
         <button className={`${styles.button} ${selectedCategory === 'Substats' ? styles.active : ''}`} onClick={() => setSelectedCategory('Substats')}>Substats</button>
         <button className={`${styles.button} ${selectedCategory === 'Leveling' ? styles.active : ''}`} onClick={() => setSelectedCategory('Leveling')}>Leveling</button>
-        <button className={`${styles.button} ${selectedCategory === 'Set/Source' ? styles.active : ''}`} onClick={() => setSelectedCategory('Set/Source')}>Set/Source</button>
       </div>
       {renderContent()}
     </div>
