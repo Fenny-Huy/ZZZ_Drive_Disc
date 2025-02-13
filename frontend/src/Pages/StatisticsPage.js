@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 import ChartTable from '../Components/ChartTable'; // Import the new component
 import 'chart.js/auto';
 import styles from '../Styles/Pages/StatisticsPage.module.css';
@@ -17,50 +18,75 @@ const StatisticsPage = () => {
   const [selectedMainStat, setSelectedMainStat] = useState(null);
   const [levelingData, setLevelingData] = useState([]);
   const [selectedLevelingChart, setSelectedLevelingChart] = useState('Overall');
+  const [selectedSet, setSelectedSet] = useState(null);
+  const [availableSets, setAvailableSets] = useState([]);
 
+
+
+  useEffect(() => {
+    const fetchAvailableSets = async () => {
+      try {
+        if (selectedCategory === 'Main Stat') {
+          const response = await axios.get(`${apiConfig.apiUrl}/mainstatsets`);
+          setAvailableSets(response.data);
+        } else if (selectedCategory === 'Substats') {
+          const response = await axios.get(`${apiConfig.apiUrl}/mainstatsets`);
+          setAvailableSets(response.data);
+        } else if (selectedCategory === 'Leveling') {
+          const response = await axios.get(`${apiConfig.apiUrl}/levelingsets`);
+          setAvailableSets(response.data);
+        }
+        
+      } catch (error) {
+        console.error('Error fetching available sets:', error);
+      }
+    };
+    fetchAvailableSets();
+  }, [selectedCategory]);
 
 
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const response = await axios.get(`${apiConfig.apiUrl}/statistics/mainstat`);
-        
+        const url = selectedSet ? `${apiConfig.apiUrl}/statistics/mainstat/${selectedSet}` : `${apiConfig.apiUrl}/statistics/mainstat`;
+        const response = await axios.get(url);
         setTypeData(response.data.type_percentages);
         setMainStatData(response.data.main_stat_percentages);
       } catch (error) {
         console.error('Error fetching statistics:', error);
       }
     };
-
+  
     fetchStatistics();
-  }, []);
-
+  }, [selectedSet]);
+  
   useEffect(() => {
     const fetchSubstatStatistics = async () => {
       try {
-        const response = await axios.get(`${apiConfig.apiUrl}/statistics/substats`);
-        
+        const url = selectedSet ? `${apiConfig.apiUrl}/statistics/substats/${selectedSet}` : `${apiConfig.apiUrl}/statistics/substats`;
+        const response = await axios.get(url);
         setSubstatData(response.data);
       } catch (error) {
         console.error('Error fetching substat statistics:', error);
       }
     };
-
+  
     fetchSubstatStatistics();
-  }, []);
-
+  }, [selectedSet]);
+  
   useEffect(() => {
     const fetchLevelingStatistics = async () => {
       try {
-        const response = await axios.get(`${apiConfig.apiUrl}/statistics/leveling`);
+        const url = selectedSet ? `${apiConfig.apiUrl}/statistics/leveling/${selectedSet}` : `${apiConfig.apiUrl}/statistics/leveling`;
+        const response = await axios.get(url);
         setLevelingData(response.data);
       } catch (error) {
         console.error('Error fetching leveling statistics:', error);
       }
     };
-
+  
     fetchLevelingStatistics();
-  }, []);
+  }, [selectedSet]);
 
   useEffect(() => {
     setSelectedMainStat(null);
@@ -542,6 +568,16 @@ const StatisticsPage = () => {
         <button className={`${styles.button} ${selectedCategory === 'Main Stat' ? styles.active : ''}`} onClick={() => setSelectedCategory('Main Stat')}>Main Stat</button>
         <button className={`${styles.button} ${selectedCategory === 'Substats' ? styles.active : ''}`} onClick={() => setSelectedCategory('Substats')}>Substats</button>
         <button className={`${styles.button} ${selectedCategory === 'Leveling' ? styles.active : ''}`} onClick={() => setSelectedCategory('Leveling')}>Leveling</button>
+      </div>
+      <div className={styles.select_container}>
+      <Select
+        value={availableSets.find(option => option.value === selectedSet)}
+        onChange={(selectedOption) => setSelectedSet(selectedOption ? selectedOption.value : null)}
+        options={availableSets.map(set => ({ value: set, label: set }))}
+        placeholder="Select or type to search Set"
+        isClearable
+        classNamePrefix="select"
+      />
       </div>
       {renderContent()}
     </div>

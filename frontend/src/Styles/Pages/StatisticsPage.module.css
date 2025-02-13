@@ -35,21 +35,4 @@
     width: 300px; /* Adjust the width as needed */
     margin: 0; /* Center the dropdown */
   }
-  
-  .select__control {
-    min-height: 30px; /* Adjust the height as needed */
-  }
-  
-  .select__value_container {
-    padding: 0 8px; /* Adjust the padding as needed */
-  }
-  
-  .select__input {
-    margin: 0; /* Remove default margin */
-  }
-  
-  .select__indicators {
-    height: 30px; /* Adjust the height as needed */
-  }
-
-
+ 

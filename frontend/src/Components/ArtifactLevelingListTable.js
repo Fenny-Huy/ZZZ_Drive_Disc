@@ -55,7 +55,7 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
       artifact.hp && 'HP',
       artifact.defense && 'DEF',
       artifact.pen && 'PEN',
-      artifact.AP && 'AP',
+      artifact.ap && 'AP',
       artifact.crit_rate && 'Crit Rate',
       artifact.crit_dmg && 'Crit DMG',
       artifact.addedSubstat,
