@@ -21,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-no-browser": "set BROWSER=none&& set PORT=3002&& react-scripts start"
   },
   "eslintConfig": {
     "extends": [
