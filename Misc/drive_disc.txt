@@ -857,6 +857,7 @@
 857,"Thunder Metal","2","ATK",3,1,0,1,0,0,0,0,0,1,0,"Routine Cleanup","Usable",2025-1-18 0:00:00
 858,"Proto Punk","3","DEF",3,0,1,0,0,0,0,1,1,0,0,"Routine Cleanup","Trash",2025-1-19 0:00:00
 859,"Proto Punk","6","%ATK",3,0,1,0,0,0,0,0,0,1,1,"Routine Cleanup","Usable",2025-1-19 0:00:00
+860,"Thunder Metal","2","ATK",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-1 0:00:00
 861,"Proto Punk","2","ATK",3,1,0,0,0,1,0,0,1,0,0,"Routine Cleanup","Trash",2025-1-19 0:00:00
 862,"Proto Punk","3","DEF",3,0,1,0,0,0,0,0,1,1,0,"Routine Cleanup","Usable",2025-1-19 0:00:00
 863,"Freedom Blues","4","Crit Rate",3,0,1,0,1,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-1-19 0:00:00
@@ -898,4 +899,203 @@
 899,"Freedom Blues","2","ATK",3,1,1,0,0,0,0,0,1,0,0,"Routine Cleanup","Usable",2025-1-24 0:00:00
 900,"Freedom Blues","5","%DEF",3,1,0,0,0,0,0,0,1,1,0,"Routine Cleanup","Trash",2025-1-24 0:00:00
 901,"Polar Metal","6","%ATK",3,0,0,1,0,0,0,0,0,1,1,"Routine Cleanup","Good",2025-1-24 0:00:00
+902,"Hormone Punk","1","HP",4,0,0,0,0,0,1,1,0,1,1,"Routine Cleanup","Good",2025-1-25 0:00:00
+903,"Hormone Punk","5","%ATK",3,0,0,0,1,0,0,0,1,1,0,"Routine Cleanup","Good",2025-1-25 0:00:00
+904,"Fanged Metal","4","Crit Rate",3,0,0,1,1,1,0,0,0,0,0,"Routine Cleanup","Trash",2025-1-25 0:00:00
+905,"Branch & Blade Song","3","DEF",3,1,1,0,0,0,0,0,0,0,1,"Routine Cleanup","Good",2025-1-25 0:00:00
+906,"Branch & Blade Song","6","%ATK",3,0,0,0,0,0,1,0,1,0,1,"Routine Cleanup","Usable",2025-1-25 0:00:00
+907,"Astral Voice","5","%HP",3,0,0,1,0,0,0,1,0,0,1,"Routine Cleanup","Trash",2025-1-25 0:00:00
+908,"Hormone Punk","3","DEF",3,1,0,0,1,0,0,0,1,0,0,"Routine Cleanup","Usable",2025-1-26 0:00:00
+909,"Fanged Metal","6","%ATK",3,0,1,0,0,0,1,0,1,0,0,"Routine Cleanup","Complete trash",2025-1-26 0:00:00
+910,"Fanged Metal","6","%HP",3,0,0,0,1,0,0,0,1,0,1,"Routine Cleanup","Trash",2025-1-26 0:00:00
+911,"Freedom Blues","6","%DEF",3,1,0,0,1,0,1,0,0,0,0,"Routine Cleanup","Complete trash",2025-1-26 0:00:00
+912,"Polar Metal","3","DEF",3,0,1,1,0,0,0,0,0,0,1,"Routine Cleanup","Trash",2025-1-26 0:00:00
+913,"Woodpecker Electro","1","HP",3,0,0,1,0,0,1,0,0,1,0,"Music Store","Trash",2025-1-26 0:00:00
+914,"Woodpecker Electro","2","ATK",3,0,0,1,0,0,0,0,1,1,0,"Music Store","Trash",2025-1-26 0:00:00
+915,"Woodpecker Electro","3","DEF",3,0,0,0,0,0,0,1,0,1,1,"Music Store","Good",2025-1-26 0:00:00
+916,"Woodpecker Electro","4","%HP",3,1,0,0,0,0,1,0,1,0,0,"Music Store","Complete trash",2025-1-26 0:00:00
+917,"Woodpecker Electro","4","Anomaly Proficiency",3,1,0,0,0,1,1,0,0,0,0,"Music Store","Trash",2025-1-26 0:00:00
+918,"Woodpecker Electro","4","Crit Rate",3,0,1,0,1,1,0,0,0,0,0,"Music Store","Trash",2025-1-26 0:00:00
+919,"Woodpecker Electro","4","Crit DMG",4,0,1,1,1,0,0,0,1,0,0,"Music Store","Trash",2025-1-26 0:00:00
+920,"Woodpecker Electro","4","%DEF",3,0,0,0,1,0,1,0,0,0,1,"Music Store","Complete trash",2025-1-26 0:00:00
+921,"Woodpecker Electro","4","Crit DMG",3,0,1,0,0,0,0,1,1,0,0,"Music Store","Trash",2025-1-26 0:00:00
+922,"Woodpecker Electro","6","%ATK",3,0,0,0,0,1,0,1,0,1,0,"Music Store","Usable",2025-1-26 0:00:00
+923,"Chaos Jazz","1","HP",3,0,1,0,1,0,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-1-27 0:00:00
+924,"Proto Punk","2","ATK",4,1,1,0,0,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-1-27 0:00:00
+925,"Shockstar Disco","4","Anomaly Proficiency",3,0,0,0,0,0,0,1,0,1,1,"Routine Cleanup","Usable",2025-1-27 0:00:00
+926,"Shockstar Disco","6","%DEF",3,0,0,0,1,0,0,1,0,1,0,"Routine Cleanup","Trash",2025-1-27 0:00:00
+927,"Swing Jazz","4","%HP",3,0,0,0,0,0,1,1,1,0,0,"Routine Cleanup","Complete trash",2025-1-27 0:00:00
+928,"Chaotic Metal","2","ATK",4,0,0,0,0,1,1,1,0,1,0,"Routine Cleanup","Trash",2025-1-27 0:00:00
+929,"Chaos Jazz","2","ATK",3,1,0,1,0,0,1,0,0,0,0,"Routine Cleanup","Trash",2025-1-27 0:00:00
+930,"Chaos Jazz","4","Anomaly Proficiency",4,1,1,0,0,1,1,0,0,0,0,"Routine Cleanup","Usable",2025-1-27 0:00:00
+931,"Freedom Blues","4","%DEF",3,0,1,0,0,1,0,0,0,0,1,"Routine Cleanup","Complete trash",2025-1-27 0:00:00
+932,"Freedom Blues","6","%HP",3,0,0,0,1,0,0,1,0,1,0,"Routine Cleanup","Complete trash",2025-1-27 0:00:00
+933,"Polar Metal","2","ATK",3,0,0,0,0,0,1,0,1,1,0,"Routine Cleanup","Trash",2025-1-27 0:00:00
+934,"Hormone Punk","1","HP",3,0,0,1,0,0,0,0,0,1,1,"Routine Cleanup","Good",2025-1-27 0:00:00
+935,"Hormone Punk","4","Crit DMG",3,0,0,1,1,0,0,0,1,0,0,"Routine Cleanup","Trash",2025-1-27 0:00:00
+936,"Fanged Metal","3","DEF",3,1,0,0,0,0,0,0,1,1,0,"Routine Cleanup","Good",2025-1-27 0:00:00
+937,"Freedom Blues","4","Crit Rate",3,0,1,0,1,0,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-1-28 0:00:00
+938,"Freedom Blues","5","%DEF",3,0,0,0,0,1,0,1,0,0,1,"Routine Cleanup","Complete trash",2025-1-28 0:00:00
+939,"Polar Metal","1","HP",3,1,0,0,0,0,1,1,0,0,0,"Routine Cleanup","Trash",2025-1-28 0:00:00
+940,"Proto Punk","2","ATK",4,1,0,0,0,0,0,1,1,1,0,"Routine Cleanup","Good",2025-1-28 0:00:00
+941,"Proto Punk","4","%DEF",3,1,1,0,0,0,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-1-28 0:00:00
+942,"Polar Metal","2","ATK",3,0,1,1,0,0,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-1-29 0:00:00
+943,"Polar Metal","2","ATK",3,1,0,0,0,1,0,0,0,0,1,"Routine Cleanup","Usable",2025-1-29 0:00:00
+944,"Hormone Punk","3","DEF",3,0,0,1,0,0,0,1,0,0,1,"Routine Cleanup","Usable",2025-1-29 0:00:00
+945,"Hormone Punk","6","%DEF",3,0,1,0,0,1,0,0,0,1,0,"Routine Cleanup","Trash",2025-1-29 0:00:00
+946,"Freedom Blues","2","ATK",4,0,1,0,0,0,1,0,1,1,0,"Routine Cleanup","Usable",2025-1-31 0:00:00
+947,"Freedom Blues","3","DEF",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-1-31 0:00:00
+948,"Astral Voice","2","ATK",3,0,0,1,0,0,1,1,0,0,0,"Routine Cleanup","Complete trash",2025-1-31 0:00:00
+949,"Astral Voice","2","ATK",3,1,0,0,0,1,0,0,0,0,1,"Routine Cleanup","Usable",2025-1-31 0:00:00
+950,"Freedom Blues","1","HP",3,0,0,0,0,0,0,1,1,0,1,"Routine Cleanup","Usable",2025-1-31 0:00:00
+951,"Freedom Blues","5","Ice",3,0,0,0,0,1,0,1,0,0,1,"Routine Cleanup","Trash",2025-1-31 0:00:00
+952,"Polar Metal","5","%DEF",4,1,0,0,1,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-1-31 0:00:00
+953,"Shockstar Disco","3","DEF",3,0,0,0,1,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-1-31 0:00:00
+954,"Thunder Metal","3","DEF",3,0,0,1,0,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-1-31 0:00:00
+955,"Thunder Metal","4","%HP",3,0,0,0,1,0,1,0,0,1,0,"Routine Cleanup","Complete trash",2025-1-31 0:00:00
+956,"Swing Jazz","2","ATK",3,0,1,0,0,0,1,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-1 0:00:00
+957,"Swing Jazz","4","Crit DMG",3,1,0,1,0,0,0,0,1,0,0,"Routine Cleanup","Trash",2025-2-1 0:00:00
+958,"Chaotic Metal","5","%ATK",3,0,0,1,0,0,1,0,0,1,0,"Routine Cleanup","Trash",2025-2-1 0:00:00
+959,"Shockstar Disco","5","%PEN Ratio",3,0,1,0,0,1,1,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-1 0:00:00
 960,"Chaos Jazz","3","DEF",3,0,1,0,0,0,0,1,1,0,0,"Routine Cleanup","Usable",2025-1-19 0:00:00
+961,"Freedom Blues","2","ATK",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-2 0:00:00
+962,"Polar Metal","5","%DEF",3,0,1,0,0,0,0,1,0,1,0,"Routine Cleanup","Complete trash",2025-2-2 0:00:00
+963,"Shockstar Disco","2","ATK",3,1,1,0,0,0,0,0,1,0,0,"Routine Cleanup","Trash",2025-2-2 0:00:00
+964,"Thunder Metal","1","HP",3,0,1,1,1,0,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-2 0:00:00
+965,"Thunder Metal","3","DEF",4,0,0,1,1,0,0,0,1,0,1,"Routine Cleanup","Trash",2025-2-2 0:00:00
+966,"Shockstar Disco","3","DEF",3,0,0,0,0,1,0,0,0,1,1,"Routine Cleanup","Good",2025-2-3 0:00:00
+967,"Thunder Metal","3","DEF",4,1,0,0,0,0,0,1,1,1,0,"Routine Cleanup","Good",2025-2-3 0:00:00
+968,"Thunder Metal","3","DEF",4,0,1,1,0,0,0,0,1,0,1,"Routine Cleanup","Usable",2025-2-3 0:00:00
+969,"Puffer Electro","4","%DEF",3,0,1,0,0,0,0,1,0,0,1,"Routine Cleanup","Trash",2025-2-3 0:00:00
+970,"Puffer Electro","4","Crit DMG",3,0,1,0,0,0,1,0,1,0,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+971,"Inferno Metal","4","%DEF",3,0,0,0,1,0,1,0,0,1,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+972,"Freedom Blues","2","ATK",3,0,1,1,0,0,1,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-3 0:00:00
+973,"Freedom Blues","3","DEF",4,1,1,0,0,0,0,1,0,0,1,"Routine Cleanup","Usable",2025-2-3 0:00:00
+974,"Polar Metal","6","Impact",3,1,0,0,0,1,0,1,0,0,0,"Routine Cleanup","Usable",2025-2-3 0:00:00
+975,"Fanged Metal","3","DEF",3,0,1,0,1,0,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+976,"Fanged Metal","4","Crit Rate",3,1,1,0,0,0,0,0,1,0,0,"Routine Cleanup","Usable",2025-2-3 0:00:00
+977,"Fanged Metal","5","Electric",4,1,1,1,1,0,0,0,0,0,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+978,"Chaos Jazz","5","%DEF",3,0,1,0,0,0,1,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-3 0:00:00
+979,"Proto Punk","4","%DEF",3,1,0,0,0,0,0,1,1,0,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+980,"Freedom Blues","5","%DEF",4,0,1,0,1,0,1,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-3 0:00:00
+981,"Polar Metal","1","HP",4,1,1,0,0,0,0,0,0,1,1,"Routine Cleanup","Excellent",2025-2-3 0:00:00
+982,"Swing Jazz","1","HP",3,1,0,1,0,0,1,0,0,0,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+983,"Swing Jazz","1","HP",3,0,1,0,1,0,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+984,"Swing Jazz","3","DEF",3,0,1,0,0,1,0,0,0,1,0,"Routine Cleanup","Trash",2025-2-3 0:00:00
+985,"Puffer Electro","1","HP",4,0,0,1,1,0,1,0,0,0,1,"Routine Cleanup","Trash",2025-2-4 0:00:00
+986,"Puffer Electro","5","%ATK",3,0,0,1,1,0,0,0,1,0,0,"Routine Cleanup","Trash",2025-2-4 0:00:00
+987,"Inferno Metal","2","ATK",3,0,1,1,0,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-4 0:00:00
+988,"Swing Jazz","3","DEF",3,1,0,0,1,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-4 0:00:00
+989,"Chaotic Metal","3","DEF",3,0,1,0,1,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-4 0:00:00
+990,"Chaotic Metal","5","Ice",3,0,0,0,1,0,1,0,0,0,1,"Routine Cleanup","Trash",2025-2-4 0:00:00
+991,"Freedom Blues","2","ATK",3,0,1,0,0,1,0,0,1,0,0,"Routine Cleanup","Trash",2025-2-5 0:00:00
+992,"Freedom Blues","2","ATK",3,1,0,0,0,0,1,0,1,0,0,"Routine Cleanup","Good",2025-2-5 0:00:00
+993,"Polar Metal","5","%HP",4,0,0,1,0,1,0,0,0,1,1,"Routine Cleanup","Trash",2025-2-5 0:00:00
+994,"Chaotic Metal","2","ATK",3,1,1,0,0,0,1,0,0,0,0,"Routine Cleanup","Trash",2025-2-5 0:00:00
+995,"Chaotic Metal","6","%HP",3,1,0,1,0,0,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-5 0:00:00
+996,"Woodpecker Electro","1","HP",3,0,1,0,0,0,1,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+997,"Woodpecker Electro","1","HP",3,1,0,0,0,0,0,1,1,0,0,"Music Store","Trash",2025-2-5 0:00:00
+998,"Woodpecker Electro","2","ATK",3,0,0,1,0,0,1,1,0,0,0,"Music Store","Complete trash",2025-2-5 0:00:00
+999,"Woodpecker Electro","2","ATK",3,0,1,0,0,1,0,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1000,"Woodpecker Electro","3","DEF",3,1,0,0,0,1,0,0,1,0,0,"Music Store","Trash",2025-2-5 0:00:00
+1001,"Woodpecker Electro","3","DEF",4,1,0,1,0,0,0,0,0,1,1,"Music Store","Excellent",2025-2-5 0:00:00
+1002,"Woodpecker Electro","4","%DEF",3,0,0,0,1,1,0,0,0,0,1,"Music Store","Complete trash",2025-2-5 0:00:00
+1003,"Woodpecker Electro","5","Ether",3,1,1,0,0,0,0,0,0,1,0,"Music Store","Good",2025-2-5 0:00:00
+1004,"Woodpecker Electro","6","Impact",3,0,0,1,0,0,0,0,1,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1005,"Woodpecker Electro","6","%ATK",3,0,0,1,0,0,1,0,1,0,0,"Music Store","Trash",2025-2-5 0:00:00
+1006,"Polar Metal","2","ATK",3,0,1,1,0,0,0,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1007,"Polar Metal","2","ATK",4,1,1,0,0,0,0,0,1,0,1,"Music Store","Usable",2025-2-5 0:00:00
+1008,"Polar Metal","3","DEF",3,1,1,0,0,0,0,1,0,0,0,"Music Store","Trash",2025-2-5 0:00:00
+1009,"Polar Metal","4","%ATK",3,0,0,1,1,0,0,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1010,"Polar Metal","4","Anomaly Proficiency",3,0,0,0,1,0,1,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1011,"Polar Metal","4","%DEF",3,1,1,0,0,0,0,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1012,"Polar Metal","4","Anomaly Proficiency",3,0,1,0,0,0,1,0,0,0,1,"Music Store","Trash",2025-2-5 0:00:00
+1013,"Polar Metal","5","%PEN Ratio",3,1,0,0,0,0,1,1,0,0,0,"Music Store","Trash",2025-2-5 0:00:00
+1014,"Polar Metal","6","%DEF",3,0,0,0,0,1,0,1,0,1,0,"Music Store","Complete trash",2025-2-5 0:00:00
+1015,"Polar Metal","6","%ATK",3,0,0,1,0,1,0,0,1,0,0,"Music Store","Trash",2025-2-5 0:00:00
+1016,"Fanged Metal","2","ATK",3,0,0,0,0,1,0,1,0,0,1,"Music Store","Usable",2025-2-5 0:00:00
+1017,"Fanged Metal","2","ATK",3,0,1,0,0,0,0,0,1,0,1,"Music Store","Trash",2025-2-5 0:00:00
+1018,"Fanged Metal","3","DEF",3,0,0,0,1,1,0,1,0,0,0,"Music Store","Complete trash",2025-2-5 0:00:00
+1019,"Fanged Metal","3","DEF",3,0,0,0,1,1,0,0,1,0,1,"Music Store","Trash",2025-2-5 0:00:00
+1020,"Fanged Metal","3","DEF",3,0,0,0,1,1,0,0,0,1,0,"Music Store","Trash",2025-2-5 0:00:00
+1021,"Fanged Metal","3","DEF",3,1,1,0,0,0,0,0,0,0,1,"Music Store","Usable",2025-2-5 0:00:00
+1022,"Fanged Metal","4","Crit DMG",4,0,1,0,1,0,1,1,0,0,0,"Music Store","Trash",2025-2-5 0:00:00
+1023,"Fanged Metal","5","%ATK",3,0,0,0,0,0,0,0,1,1,1,"Music Store","Usable",2025-2-5 0:00:00
+1024,"Fanged Metal","5","%ATK",4,0,1,0,0,1,0,0,0,1,1,"Music Store","Usable",2025-2-5 0:00:00
+1025,"Fanged Metal","5","%PEN Ratio",3,1,0,0,0,0,0,0,1,1,0,"Music Store","Usable",2025-2-5 0:00:00
+1026,"Freedom Blues","6","ER",4,0,1,1,0,0,1,0,0,1,0,"Routine Cleanup","Usable",2025-2-6 0:00:00
+1027,"Polar Metal","6","%ATK",3,0,1,0,1,0,0,0,0,1,0,"Routine Cleanup","Usable",2025-2-6 0:00:00
+1028,"Hormone Punk","2","ATK",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-6 0:00:00
+1029,"Fanged Metal","4","%HP",3,0,0,1,0,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-6 0:00:00
+1030,"Fanged Metal","6","ER",3,0,1,0,0,0,1,0,0,0,1,"Routine Cleanup","Trash",2025-2-6 0:00:00
+1031,"Polar Metal","2","ATK",3,0,0,0,0,0,0,1,1,1,0,"Routine Cleanup","Usable",2025-2-6 0:00:00
+1032,"Polar Metal","6","%ATK",3,0,0,0,0,0,1,0,0,1,1,"Routine Cleanup","Good",2025-2-6 0:00:00
+1033,"Shockstar Disco","6","%ATK",4,0,1,1,0,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-6 0:00:00
+1034,"Thunder Metal","2","ATK",3,1,0,1,0,0,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-6 0:00:00
+1035,"Thunder Metal","5","%ATK",3,0,1,0,0,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-6 0:00:00
+1036,"Freedom Blues","2","ATK",3,0,0,1,0,0,1,0,0,0,1,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1037,"Freedom Blues","6","ER",3,1,0,1,1,0,0,0,0,0,0,"Routine Cleanup","Usable",2025-2-7 0:00:00
+1038,"Polar Metal","5","Physical",3,0,1,0,0,0,0,0,1,1,0,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1039,"Polar Metal","6","Impact",3,0,0,0,0,0,0,0,1,1,1,"Routine Cleanup","Usable",2025-2-7 0:00:00
+1040,"Hormone Punk","2","ATK",3,0,0,0,0,0,1,1,0,1,0,"Routine Cleanup","Usable",2025-2-7 0:00:00
+1041,"Hormone Punk","4","%HP",3,0,0,1,0,0,1,0,0,0,1,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1042,"Fanged Metal","2","ATK",3,1,1,1,0,0,0,0,0,0,0,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1043,"Hormone Punk","4","Anomaly Proficiency",3,0,0,0,0,1,1,0,0,1,0,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1044,"Fanged Metal","5","%DEF",4,0,1,0,0,1,0,0,1,0,1,"Routine Cleanup","Complete trash",2025-2-7 0:00:00
+1045,"Fanged Metal","6","%DEF",3,0,1,0,1,0,1,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-7 0:00:00
+1046,"Shockstar Disco","3","DEF",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-7 0:00:00
+1047,"Shockstar Disco","6","ER",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1048,"Thunder Metal","6","%DEF",3,1,0,0,0,0,0,1,1,0,0,"Routine Cleanup","Trash",2025-2-7 0:00:00
+1049,"Polar Metal","2","ATK",3,0,0,0,0,1,1,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-8 0:00:00
+1050,"Polar Metal","5","%HP",3,0,0,0,1,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-8 0:00:00
+1051,"Freedom Blues","5","%HP",3,1,0,0,0,0,1,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-8 0:00:00
+1052,"Freedom Blues","5","%PEN Ratio",3,1,0,0,0,1,0,0,1,0,0,"Routine Cleanup","Usable",2025-2-8 0:00:00
+1053,"Polar Metal","4","%HP",3,0,0,1,1,0,0,0,0,1,0,"Routine Cleanup","Complete trash",2025-2-8 0:00:00
+1054,"Shockstar Disco","2","ATK",3,1,0,1,0,0,0,0,0,1,0,"Routine Cleanup","Usable",2025-2-8 0:00:00
+1055,"Thunder Metal","5","Physical",3,0,0,0,0,1,0,1,0,1,0,"Routine Cleanup","Trash",2025-2-8 0:00:00
+1056,"Thunder Metal","6","Anomaly Mastery",3,0,0,0,0,1,1,0,1,0,0,"Routine Cleanup","Trash",2025-2-8 0:00:00
+1057,"Shockstar Disco","6","Impact",3,0,0,1,1,0,0,1,0,0,0,"Routine Cleanup","Usable",2025-2-8 0:00:00
+1058,"Thunder Metal","1","HP",3,1,0,1,0,0,0,0,0,0,1,"Routine Cleanup","Usable",2025-2-8 0:00:00
+1059,"Branch & Blade Song","4","%HP",3,0,0,0,1,1,0,0,0,0,1,"Routine Cleanup","Complete trash",2025-2-9 0:00:00
+1060,"Astral Voice","2","ATK",3,1,0,1,0,1,0,0,0,0,0,"Routine Cleanup","Trash",2025-2-9 0:00:00
+1061,"Astral Voice","3","DEF",3,0,0,1,0,1,0,0,1,0,0,"Routine Cleanup","Trash",2025-2-9 0:00:00
+1062,"Astral Voice","6","ER",3,0,1,0,0,0,1,0,0,1,0,"Routine Cleanup","Trash",2025-2-9 0:00:00
+1063,"Puffer Electro","2","ATK",3,0,0,0,0,0,1,1,0,1,0,"Routine Cleanup","Usable",2025-2-9 0:00:00
+1064,"Puffer Electro","2","ATK",3,0,0,0,0,0,0,0,1,1,1,"Routine Cleanup","Good",2025-2-9 0:00:00
+1065,"Puffer Electro","1","HP",3,0,0,0,1,0,0,1,0,1,0,"Routine Cleanup","Usable",2025-2-9 0:00:00
+1066,"Puffer Electro","5","%PEN Ratio",3,0,0,1,0,0,1,0,1,0,0,"Routine Cleanup","Usable",2025-2-9 0:00:00
+1067,"Inferno Metal","3","DEF",4,1,1,1,0,0,0,0,1,0,0,"Routine Cleanup","Trash",2025-2-9 0:00:00
+1068,"Thunder Metal","3","DEF",3,0,1,0,0,0,0,1,1,0,0,"Routine Cleanup","Trash",2025-2-9 0:00:00
+1069,"Thunder Metal","6","%HP",3,0,0,1,1,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-9 0:00:00
+1070,"Puffer Electro","3","DEF",3,0,1,0,1,0,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-10 0:00:00
+1071,"Puffer Electro","3","DEF",3,0,0,0,1,0,0,0,1,0,1,"Routine Cleanup","Trash",2025-2-10 0:00:00
+1072,"Inferno Metal","5","%PEN Ratio",3,0,1,0,0,0,0,0,1,0,1,"Routine Cleanup","Trash",2025-2-10 0:00:00
+1073,"Inferno Metal","6","%ATK",3,0,1,1,0,0,0,0,0,0,1,"Routine Cleanup","Usable",2025-2-10 0:00:00
+1074,"Shockstar Disco","4","%ATK",3,0,0,0,0,1,0,0,1,1,0,"Routine Cleanup","Trash",2025-2-10 0:00:00
+1075,"Thunder Metal","2","ATK",3,0,0,0,0,0,1,1,0,0,1,"Routine Cleanup","Usable",2025-2-10 0:00:00
+1076,"Shockstar Disco","4","%HP",3,0,0,1,0,0,1,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-10 0:00:00
+1077,"Thunder Metal","3","DEF",4,1,1,0,1,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-10 0:00:00
+1078,"Freedom Blues","2","ATK",3,0,0,0,0,0,0,1,1,0,1,"Routine Cleanup","Usable",2025-2-11 0:00:00
+1079,"Polar Metal","6","%HP",3,1,0,0,1,0,0,0,0,0,1,"Routine Cleanup","Trash",2025-2-11 0:00:00
+1080,"Freedom Blues","3","DEF",3,0,0,1,0,1,0,0,0,0,1,"Routine Cleanup","Trash",2025-2-11 0:00:00
+1081,"Polar Metal","3","DEF",3,1,1,0,0,1,0,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-11 0:00:00
+1082,"Polar Metal","2","ATK",3,0,0,0,0,0,1,1,0,1,0,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1083,"Polar Metal","5","Physical",3,1,0,0,1,0,0,1,0,0,0,"Routine Cleanup","Trash",2025-2-12 0:00:00
+1084,"Shockstar Disco","6","Anomaly Mastery",3,0,1,1,0,0,0,0,0,1,0,"Routine Cleanup","Complete trash",2025-2-12 0:00:00
+1085,"Thunder Metal","4","%HP",3,0,0,1,1,0,0,0,0,1,0,"Routine Cleanup","Complete trash",2025-2-12 0:00:00
+1086,"Puffer Electro","5","%DEF",3,1,0,0,0,1,0,0,1,0,0,"Routine Cleanup","Complete trash",2025-2-12 0:00:00
+1087,"Inferno Metal","5","Fire",3,0,0,1,0,0,1,0,0,1,0,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1088,"Inferno Metal","6","%ATK",4,0,0,1,0,0,0,1,1,1,0,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1089,"Shockstar Disco","6","Anomaly Mastery",3,0,0,0,0,1,1,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-12 0:00:00
+1090,"Thunder Metal","1","HP",3,0,0,1,0,0,1,0,1,0,0,"Routine Cleanup","Trash",2025-2-12 0:00:00
+1091,"Thunder Metal","1","HP",3,0,0,0,0,0,0,1,0,1,1,"Routine Cleanup","Good",2025-2-12 0:00:00
+1092,"Swing Jazz","6","Impact",3,1,0,1,0,0,1,0,0,0,0,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1093,"Chaotic Metal","2","ATK",3,0,0,0,0,0,1,1,0,0,1,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1094,"Chaotic Metal","6","%ATK",3,0,1,0,0,0,0,0,0,1,1,"Routine Cleanup","Good",2025-2-12 0:00:00
+1095,"Chaos Jazz","1","HP",3,1,0,1,0,0,0,1,0,0,0,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1096,"Chaos Jazz","1","HP",3,0,0,0,0,0,1,0,0,1,1,"Routine Cleanup","Trash",2025-2-12 0:00:00
+1097,"Proto Punk","1","HP",3,0,0,1,0,0,1,0,0,1,0,"Routine Cleanup","Trash",2025-2-12 0:00:00
+1098,"Shockstar Disco","5","%PEN Ratio",3,0,1,1,0,0,0,0,0,1,0,"Routine Cleanup","Trash",2025-2-12 0:00:00
+1099,"Thunder Metal","2","ATK",3,0,0,1,0,0,0,1,0,0,1,"Routine Cleanup","Usable",2025-2-12 0:00:00
+1100,"Swing Jazz","3","DEF",3,0,0,1,0,1,0,1,0,0,0,"Routine Cleanup","Complete trash",2025-2-12 0:00:00
+1101,"Chaotic Metal","2","ATK",3,0,1,0,0,1,1,0,0,0,0,"Routine Cleanup","Complete trash",2025-2-12 0:00:00

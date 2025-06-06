@@ -1,5 +1,5 @@
 const apiConfig = {
-    apiUrl: 'http://localhost:8002',
+    apiUrl: 'http://192.168.68.106:8002',
   };
   
   const artifactConfig = {
@@ -62,7 +62,11 @@ const apiConfig = {
         "Soul Rock",
         "Swing Jazz",
         "Thunder Metal",
-        "Woodpecker Electro"
+        "Woodpecker Electro",
+        "Shadow Harmony",
+        "Phaethon's Melody",
+        "King of the Summit",
+        "Yunkui Tales"
     ],
   };
 

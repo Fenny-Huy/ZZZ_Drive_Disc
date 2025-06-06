@@ -2,4 +2,4 @@
 
 
 
-pip install fastapi uvicorn pymysql sqlalchemy crytopgraphy
+pip install fastapi uvicorn pymysql sqlalchemy cryptography

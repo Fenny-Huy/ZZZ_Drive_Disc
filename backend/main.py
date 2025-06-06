@@ -377,6 +377,7 @@ def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_
            ai.`Set`, ai.`Slot`, ai.`Main Stat`, ai.`Number of substat`, ai.`%ATK`, ai.`%HP`, ai.`%DEF`, ai.`ATK`, ai.`HP`, ai.`DEF`, ai.`PEN`, ai.`AP`, ai.`Crit Rate`, ai.`Crit DMG`, ai.`Where got it`, ai.`Score`
     FROM `Drive Disc leveling` al
     JOIN `Drive Disc` ai ON al.ID = ai.ID
+    ORDER BY al.CreateDate
     """
     with db.cursor() as cursor:
         cursor.execute(query)

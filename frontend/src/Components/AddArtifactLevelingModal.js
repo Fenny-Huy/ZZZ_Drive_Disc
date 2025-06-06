@@ -33,7 +33,7 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
     if (artifact.hp) substats.push('HP');
     if (artifact.defense) substats.push('DEF');
     if (artifact.pen) substats.push('PEN');
-    if (artifact.AP) substats.push('AP');
+    if (artifact.ap) substats.push('AP');
     if (artifact.crit_rate) substats.push('Crit Rate');
     if (artifact.crit_dmg) substats.push('Crit DMG');
     setInitialSubstats(substats);
