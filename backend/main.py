@@ -125,7 +125,7 @@ def get_artifacts(db: pymysql.connections.Connection = Depends(get_local_db)):
 
 # API endpoint to create a new artifact
 @app.post("/genshinartifacts/")
-def create_artifact(artifact: Artifact, db: pymysql.connections.Connection = Depends(get_local_db)):
+def create_artifact(artifact: Artifact, local_db: pymysql.connections.Connection = Depends(get_local_db), prod_db:  pymysql.connections.Connection = Depends(get_prod_db)):
     # Construct the SQL query dynamically
     query = f"""
         INSERT INTO `Drive Disc` (
@@ -140,9 +140,10 @@ def create_artifact(artifact: Artifact, db: pymysql.connections.Connection = Dep
     """
 
     # Execute the query
-    with db.cursor() as cursor:
-        cursor.execute(query)
-        db.commit()
+    for db in (local_db, prod_db):
+        with db.cursor() as cursor:
+            cursor.execute(query, params)
+            db.commit()
     return {"message": "Artifact created successfully"}
 
 
@@ -274,13 +275,15 @@ def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connection
 
 # API endpoint for insert or update an artifact leveling
 @app.post("/artifactleveling/")
-def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.connections.Connection = Depends(get_local_db)):
-    query_check = "SELECT * FROM `Drive Disc leveling` WHERE ID = %s"
-    with db.cursor() as cursor:
+def add_or_update_artifact_leveling(leveling: ArtifactLeveling, local_db: pymysql.connections.Connection = Depends(get_local_db), prod_db:  pymysql.connections.Connection = Depends(get_prod_db)):
+
+    query_check = "SELECT 1 FROM `Drive Disc leveling` WHERE ID = %s"
+    with local_db.cursor() as cursor:
         cursor.execute(query_check, (leveling.id,))
-        row = cursor.fetchone()
-        if row:
-            query_update = f"""
+        exists = cursor.fetchone() is not None
+
+    if exists:
+        sql = f"""
             UPDATE `Drive Disc leveling` SET
                 `L_HP` = {leveling.L_HP},
                 `L_ATK` = {leveling.L_ATK},
@@ -295,22 +298,29 @@ def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.conn
                 `Added substat` = '{leveling.addedSubstat}',
                 `LastAdded` = CURDATE()
             WHERE ID = {leveling.id}
-            """
-            
-            logger.info(f"Executing query: {query_update}")
-            cursor.execute(query_update)
-        else:
-            query_insert = f"""
-            INSERT INTO `Drive Disc leveling` (`ID`, `L_HP`, `L_ATK`, `L_DEF`, `L_%HP`, `L_%ATK`, `L_%DEF`, `L_AP`, `L_PEN`, `L_Crit Rate`, `L_Crit DMG`, `Added substat`)
-            VALUES ({leveling.id}, {leveling.L_HP}, {leveling.L_ATK}, {leveling.L_DEF}, {leveling.L_HP_per}, {leveling.L_ATK_per}, {leveling.L_DEF_per}, {leveling.L_AP}, {leveling.L_PEN}, {leveling.L_CritRate}, {leveling.L_CritDMG}, '{leveling.addedSubstat}')
-            """
-            logger.info(f"Executing query: {query_insert}")
-            cursor.execute(query_insert)
+        """
         
+    else:
+        sql = f"""
+            INSERT INTO `Drive Disc leveling` (
+                `ID`, `L_HP`, `L_ATK`, `L_DEF`, `L_%HP`, `L_%ATK`, `L_%DEF`, 
+                `L_AP`, `L_PEN`, `L_Crit Rate`, `L_Crit DMG`, `Added substat`
+            ) VALUES (
+                {leveling.id}, {leveling.L_HP}, {leveling.L_ATK}, {leveling.L_DEF}, 
+                {leveling.L_HP_per}, {leveling.L_ATK_per}, {leveling.L_DEF_per}, 
+                {leveling.L_AP}, {leveling.L_PEN}, {leveling.L_CritRate}, 
+                {leveling.L_CritDMG}, '{leveling.addedSubstat}'
+            )
+        """
+        
+
+    for db in (local_db, prod_db):
+        with db.cursor() as cursor:
+            logger.info(f"Executing query: {sql}")
+            cursor.execute(sql, params)
         db.commit()
+    return {"message": "Drive Disc leveling record added/updated locally and backed up remotely"}
 
-
-    return {"message": "Drive Disc leveling record added or updated successfully"}
 
 
 # API endpoint to fetch one artifact leveling
