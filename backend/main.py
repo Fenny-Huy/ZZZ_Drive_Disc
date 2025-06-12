@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pymysql
 from typing import List, Optional
 import logging
+from .config import settings
 
 
 
@@ -14,11 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 
-# Database connection settings
-DB_HOST = "localhost"
-DB_USER = "root"
-DB_PASSWORD = "Fennik123@"
-DB_NAME = "zzztest"
+
 
 # FastAPI app initialization
 app = FastAPI()
@@ -31,12 +28,27 @@ app.add_middleware(
 )
 
 # Database Dependency
-def get_db_connection():
+def get_local_db():
     connection = pymysql.connect(
-        host=DB_HOST,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        database=DB_NAME
+        host=settings.local_db_host,
+        user=settings.local_db_user,
+        password=settings.local_db_password,
+        database=settings.local_db_name,
+        port=settings.local_db_port,
+    )
+    try:
+        yield connection
+    finally:
+        connection.close()
+
+
+def get_remote_db():
+    connection = pymysql.connect(
+        host=settings.remote_db_host,
+        user=settings.remote_db_user,
+        password=settings.remote_db_password,
+        database=settings.remote_db_name,
+        port=settings.remote_db_port,
     )
     try:
         yield connection
@@ -81,7 +93,7 @@ class ArtifactLeveling(BaseModel):
 
 # API endpoint to fetch all artifacts
 @app.get("/genshinartifacts/", response_model=List[Artifact])
-def get_artifacts(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_artifacts(db: pymysql.connections.Connection = Depends(get_local_db)):
     with db.cursor() as cursor:
         cursor.execute("SELECT * FROM `Drive Disc`")
         rows = cursor.fetchall()
@@ -113,7 +125,7 @@ def get_artifacts(db: pymysql.connections.Connection = Depends(get_db_connection
 
 # API endpoint to create a new artifact
 @app.post("/genshinartifacts/")
-def create_artifact(artifact: Artifact, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def create_artifact(artifact: Artifact, db: pymysql.connections.Connection = Depends(get_local_db)):
     # Construct the SQL query dynamically
     query = f"""
         INSERT INTO `Drive Disc` (
@@ -156,7 +168,7 @@ def search_artifacts(
     crit_dmg: Optional[int] = Query(None),
     where_got_it: Optional[str] = Query(None),
     score: Optional[str] = Query(None),
-    db: pymysql.connections.Connection = Depends(get_db_connection)
+    db: pymysql.connections.Connection = Depends(get_local_db)
 ):
     query = "SELECT * FROM `Drive Disc` WHERE 1=1"
     if set:
@@ -226,7 +238,7 @@ def search_artifacts(
 
 # API endpoint to update an artifact
 @app.put("/genshinartifacts/{artifact_id}/")
-def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connections.Connection = Depends(get_local_db)):
     query = f"""
         UPDATE `Drive Disc` SET
             `Set` = "{artifact.set}",
@@ -262,7 +274,7 @@ def update_artifact(artifact_id: int, artifact: Artifact, db: pymysql.connection
 
 # API endpoint for insert or update an artifact leveling
 @app.post("/artifactleveling/")
-def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.connections.Connection = Depends(get_local_db)):
     query_check = "SELECT * FROM `Drive Disc leveling` WHERE ID = %s"
     with db.cursor() as cursor:
         cursor.execute(query_check, (leveling.id,))
@@ -303,7 +315,7 @@ def add_or_update_artifact_leveling(leveling: ArtifactLeveling, db: pymysql.conn
 
 # API endpoint to fetch one artifact leveling
 @app.get("/artifactleveling/{artifact_id}")
-def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection = Depends(get_local_db)):
     query = "SELECT * FROM `Drive Disc leveling` WHERE ID = %s"
     with db.cursor() as cursor:
         cursor.execute(query, (artifact_id,))
@@ -327,7 +339,7 @@ def get_artifact_leveling(artifact_id: int, db: pymysql.connections.Connection =
     return artifact_leveling
 
 @app.get("/artifactlevelingids/")
-def get_artifact_leveling_ids(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_artifact_leveling_ids(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = "SELECT `ID` FROM `Drive Disc leveling`"
     with db.cursor() as cursor:
         cursor.execute(query)
@@ -338,7 +350,7 @@ def get_artifact_leveling_ids(db: pymysql.connections.Connection = Depends(get_d
 
 # API endpoint to fetch an artifact
 @app.get("/artifact/{artifact_id}")
-def get_artifact(artifact_id: int, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_artifact(artifact_id: int, db: pymysql.connections.Connection = Depends(get_local_db)):
     query = "SELECT * FROM `Drive Disc` WHERE ID = %s"
     with db.cursor() as cursor:
         cursor.execute(query, (artifact_id,))
@@ -371,7 +383,7 @@ def get_artifact(artifact_id: int, db: pymysql.connections.Connection = Depends(
 
 # API endpoint to fetch all artifact leveling list
 @app.get("/artifactlevelinglist/")
-def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     SELECT al.`ID`, al.`L_HP`, al.`L_ATK`, al.`L_DEF`, al.`L_%HP`, al.`L_%ATK`, al.`L_%DEF`, al.`L_AP`, al.`L_PEN`, al.`L_Crit Rate`, al.`L_Crit DMG`, al.`Added substat`,
            ai.`Set`, ai.`Slot`, ai.`Main Stat`, ai.`Number of substat`, ai.`%ATK`, ai.`%HP`, ai.`%DEF`, ai.`ATK`, ai.`HP`, ai.`DEF`, ai.`PEN`, ai.`AP`, ai.`Crit Rate`, ai.`Crit DMG`, ai.`Where got it`, ai.`Score`
@@ -422,7 +434,7 @@ def get_artifact_leveling_list(db: pymysql.connections.Connection = Depends(get_
 # API endpoint for statistics of mainstat and types
 
 @app.get("/statistics/mainstat")
-def get_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     try:
         with db.cursor() as cursor:
             # Fetch percentages of each type
@@ -451,7 +463,7 @@ def get_statistics(db: pymysql.connections.Connection = Depends(get_db_connectio
     
 
 @app.get("/statistics/mainstat/{setname}")
-def get_statistics_by_set(setname: str, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_statistics_by_set(setname: str, db: pymysql.connections.Connection = Depends(get_local_db)):
     try:
         with db.cursor() as cursor:
             # Fetch percentages of each type for the specific set
@@ -482,7 +494,7 @@ def get_statistics_by_set(setname: str, db: pymysql.connections.Connection = Dep
     
 
 @app.get("/mainstatsets", response_model=List[str])
-def get_all_sets(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_all_sets(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = "SELECT `Set` FROM `Drive Disc` group by `Set` order by `Set`"
     with db.cursor() as cursor:
         cursor.execute(query)
@@ -492,7 +504,7 @@ def get_all_sets(db: pymysql.connections.Connection = Depends(get_db_connection)
 
 
 @app.get("/levelingsets", response_model=List[str])
-def get_all_sets(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_all_sets(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = "SELECT `Set` FROM `Drive Disc leveling` l join `Drive Disc` i on l.ID = i.ID group by `Set` order by `Set`"
     with db.cursor() as cursor:
         cursor.execute(query)
@@ -504,7 +516,7 @@ def get_all_sets(db: pymysql.connections.Connection = Depends(get_db_connection)
 #API endpoint for statistics of substats
 
 @app.get("/statistics/substats")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     SELECT `Slot`, `Main Stat`, Count(`Slot`) AS TypeCount, SUM(`%ATK`) AS `%ATK`, SUM(`%HP`) AS `%HP`, SUM(`%DEF`) AS `%DEF`, SUM(`ATK`) AS `ATK`, SUM(`HP`) AS `HP`, SUM(`DEF`) AS `DEF`, SUM(`PEN`) AS `PEN`, SUM(`AP`) AS `AP`, SUM(`Crit Rate`) AS `Crit_Rate`, SUM(`Crit DMG`) AS `Crit_DMG`, SUM(`%ATK`+`%HP`+`%DEF`+`ATK`+`HP`+`DEF`+`PEN`+`AP`+`Crit Rate`+`Crit DMG`) AS `SubstatCount`
     FROM `Drive Disc`
@@ -537,7 +549,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/statistics/substats/{setname}")
-def get_substats_statistics_by_set(setname: str, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics_by_set(setname: str, db: pymysql.connections.Connection = Depends(get_local_db)):
     query = f"""
     SELECT `Slot`, `Main Stat`, Count(`Slot`) AS TypeCount, SUM(`%ATK`) AS `%ATK`, SUM(`%HP`) AS `%HP`, SUM(`%DEF`) AS `%DEF`, SUM(`ATK`) AS `ATK`, SUM(`HP`) AS `HP`, SUM(`DEF`) AS `DEF`, SUM(`PEN`) AS `PEN`, SUM(`AP`) AS `AP`, SUM(`Crit Rate`) AS `Crit_Rate`, SUM(`Crit DMG`) AS `Crit_DMG`, SUM(`%ATK`+`%HP`+`%DEF`+`ATK`+`HP`+`DEF`+`PEN`+`AP`+`Crit Rate`+`Crit DMG`) AS `SubstatCount`
     FROM `Drive Disc`
@@ -571,7 +583,7 @@ def get_substats_statistics_by_set(setname: str, db: pymysql.connections.Connect
 
 
 @app.get("/statistics/leveling")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     SELECT 
         i.`Slot`, 
@@ -671,7 +683,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/statistics/leveling/{setname}")
-def get_leveling_statistics_by_set(setname: str, db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_leveling_statistics_by_set(setname: str, db: pymysql.connections.Connection = Depends(get_local_db)):
     query = f"""
     SELECT 
         i.`Slot`, 
@@ -773,7 +785,7 @@ def get_leveling_statistics_by_set(setname: str, db: pymysql.connections.Connect
 
 #set, where got it statistics
 @app.get("/set/set_where")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Set`, `Where got it`, count(*) as totalcount from `Drive Disc`
     group by `Set`, `Where got it`
@@ -795,7 +807,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/set/set")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Set`, count(*) as totalcount from `Drive Disc`
     group by `Set`
@@ -816,7 +828,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/set/where")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Where got it`, count(*) as totalcount from `Drive Disc`
     group by `Where got it`
@@ -841,7 +853,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/score")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Score`, count(*) as totalcount from `Drive Disc`
     group by `Score`
@@ -862,7 +874,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/score/set")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Score`, `Set`, count(*) as totalcount from `Drive Disc`
     group by `Score`, `Set`
@@ -884,7 +896,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/score/where")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Score`, `Where got it`, count(*) as totalcount from `Drive Disc`
     group by `Score`, `Where got it`
@@ -907,7 +919,7 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_
 
 
 @app.get("/score/set_where")
-def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_db_connection)):
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
     query = """
     select `Score`, `Set`, `Where got it`, count(*) as totalcount from `Drive Disc`
     group by `Score`,`Set`, `Where got it`
