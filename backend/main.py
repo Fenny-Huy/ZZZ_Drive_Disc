@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pymysql
 from typing import List, Optional
 import logging
-from .config import settings
+from config import settings
 
 
 
@@ -42,7 +42,7 @@ def get_local_db():
         connection.close()
 
 
-def get_remote_db():
+def get_prod_db():
     connection = pymysql.connect(
         host=settings.remote_db_host,
         user=settings.remote_db_user,
