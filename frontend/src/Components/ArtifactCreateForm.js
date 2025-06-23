@@ -3,7 +3,7 @@ import React from 'react';
 import Select from "react-select"; // Import React-Select
 import styles from "../Styles/Components/ArtifactCreateForm.module.css";
 
-const ArtifactCreateForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, filteredSubstats, scores, sources, artifactSets, handleSelectChange, handleInputChange, isSubmitDisabled }) => {
+const ArtifactCreateForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, filteredSubstats, scores, sources, artifactSets, handleSelectChange, handleInputChange, isSubmitDisabled, isLoading }) => {
   return (
     <div className='artifact-create-form'>
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -97,8 +97,8 @@ const ArtifactCreateForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
             </select>
           </div>
           
-          <button type="submit" disabled={isSubmitDisabled()} className={styles.submitButton}>
-            Submit
+          <button type="submit" disabled={isSubmitDisabled() || isLoading} className={styles.submitButton}>
+            {isLoading ? "Loading..." : "Submit"}
           </button>
       </form>
     </div>

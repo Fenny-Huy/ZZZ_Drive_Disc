@@ -20,6 +20,7 @@ const ArtifactCreate = () => {
 
 
       const [formData, setFormData] = useState(initialFormData);
+      const [isLoading, setIsLoading] = useState(false);
     
       const artifactTypes = artifactConfig.artifactTypes;
     
@@ -78,6 +79,11 @@ const ArtifactCreate = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Prevent multiple submissions
+        if (isLoading) return;
+        
+        setIsLoading(true);
     
         const payload = {
           id: 1,
@@ -106,6 +112,8 @@ const ArtifactCreate = () => {
         } catch (error) {
           console.error("Error creating artifact:", error);
           alert("Failed to create artifact. Check console for details.");
+        } finally {
+          setIsLoading(false);
         }
       };
 
@@ -114,7 +122,7 @@ const ArtifactCreate = () => {
         
           <div className={styles.artifact_create_container}>
             <h1>Create Drive Disc</h1>
-            <ArtifactCreateForm formData={formData} handleSubmit={handleSubmit} artifactTypes={artifactTypes} mainStatsOptions={mainStatsOptions} filteredSubstats={filteredSubstats} scores={scores} sources={sources} artifactSets={artifactSets} handleSelectChange={handleSelectChange} handleInputChange={handleInputChange} isSubmitDisabled={isSubmitDisabled} />
+            <ArtifactCreateForm formData={formData} handleSubmit={handleSubmit} artifactTypes={artifactTypes} mainStatsOptions={mainStatsOptions} filteredSubstats={filteredSubstats} scores={scores} sources={sources} artifactSets={artifactSets} handleSelectChange={handleSelectChange} handleInputChange={handleInputChange} isSubmitDisabled={isSubmitDisabled} isLoading={isLoading}/>
           </div>
 
         </div>

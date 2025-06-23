@@ -47,7 +47,8 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
       <div className={styles.inputGroup}>
         <label className={styles.label}>Main Stat:</label>
         <Select
-          options={Object.values(mainStatsOptions).flat()}
+          options={Array.from(new Set(Object.values(mainStatsOptions).flat().map(stat => stat.value)))
+            .map(value => ({ value, label: value }))}
           value={formData.mainStat}
           onChange={(selected) => handleSelectChange(selected, "mainStat")}
           placeholder="Select or type to search"
