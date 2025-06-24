@@ -23,6 +23,7 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
   const [initialSubstats, setInitialSubstats] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const substats = [];
@@ -84,6 +85,11 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
   };
 
   const handleSave = async () => {
+    // Prevent multiple submissions
+    if (isLoading) return;
+    
+    setIsLoading(true);
+    
     const payload = {
       id: artifact.id,
       ...formData,
@@ -95,6 +101,8 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
       onClose();
     } catch (error) {
       console.error('Error adding or updating artifact leveling:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -152,10 +160,10 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
             </div>
           ))}
           <div className={styles.actions}>
-            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled}>
-              Save
+            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled || isLoading}>
+              {isLoading ? "Loading..." : "Save"}
             </button>
-            <button type="button" className={styles.button} onClick={onClose}>
+            <button type="button" className={styles.button} onClick={onClose} disabled={isLoading}>
               Cancel
             </button>
           </div>

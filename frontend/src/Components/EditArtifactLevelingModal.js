@@ -20,6 +20,7 @@ const EditArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpda
   });
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (artifactLeveling) {
@@ -54,6 +55,11 @@ const EditArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpda
   };
 
   const handleSave = async () => {
+    // Prevent multiple submissions
+    if (isLoading) return;
+    
+    setIsLoading(true);
+
     const payload = {
       id: artifact.id,
       ...formData,
@@ -65,6 +71,8 @@ const EditArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpda
       onClose();
     } catch (error) {
       console.error('Error updating artifact leveling:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -118,10 +126,10 @@ const EditArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpda
             </div>
           ))}
           <div className={styles.modal_actions}>
-            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled}>
-              Save
+            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled || isLoading}>
+              {isLoading ? "Loading..." : "Save"}
             </button>
-            <button type="button" className={styles.button} onClick={onClose}>
+            <button type="button" className={styles.button} onClick={onClose} disabled={isLoading}>
               Cancel
             </button>
           </div>

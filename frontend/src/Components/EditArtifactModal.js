@@ -5,6 +5,7 @@ import styles from '../Styles/Components/EditArtifactModal.module.css'; // Impor
 import { apiConfig, artifactConfig } from '../config/config';
 
 const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     artifactSet: { value: artifact.set, label: artifact.set },
     type: { value: artifact.type, label: artifact.type },
@@ -72,6 +73,11 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
   };
 
   const handleSave = async () => {
+    // Prevent multiple submissions
+    if (isLoading) return;
+    
+    setIsLoading(true);
+
     const payload = {
       id: artifact.id,
       set: formData.artifactSet.value,
@@ -98,6 +104,8 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
       onClose();
     } catch (error) {
       console.error('Error updating artifact:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -215,10 +223,10 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
           </div>
 
           <div className={styles.modal_actions}>
-            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled}>
-              Save
+            <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled || isLoading}>
+              {isLoading ? "Loading..." : "Save"}
             </button>
-            <button type="button" className={styles.button} onClick={onClose}>
+            <button type="button" className={styles.button} onClick={onClose} disabled={isLoading}>
               Cancel
             </button>
           </div>
