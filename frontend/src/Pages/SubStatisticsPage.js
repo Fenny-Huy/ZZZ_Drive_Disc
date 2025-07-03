@@ -28,7 +28,12 @@ const SubStatisticsPage = () => {
   const [scoreSourceData, setScoreSourceData] = useState([]);
   const [scoreSetSourceData, setScoreSetSourceData] = useState([]);
 
-
+  // Leveling investment states
+  const [levelingInvestmentData, setLevelingInvestmentData] = useState([]);
+  const [isTypeSelected, setIsTypeSelected] = useState(false);
+  const [isSetLevelingSelected, setIsSetLevelingSelected] = useState(false);
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedLevelingSet, setSelectedLevelingSet] = useState('');
 
 
   useEffect(() => {
@@ -74,6 +79,10 @@ const SubStatisticsPage = () => {
     setIsSetSelected(false);
     setIsSourceSelected(false);
     setIsSpecificSelected(false);
+    setIsTypeSelected(false);
+    setIsSetLevelingSelected(false);
+    setSelectedType('');
+    setSelectedLevelingSet('');
   }, [selectedCategory]);
 
 
@@ -129,7 +138,17 @@ const SubStatisticsPage = () => {
   }, []);
   
         
-
+  useEffect(() => {
+    const fetchLevelingInvestmentData = async () => {
+      try {
+        const response = await axios.get(`${apiConfig.apiUrl}/statistics/levelinginvestment`);
+        setLevelingInvestmentData(response.data);
+      } catch (error) {
+        console.error('Error fetching leveling investment data:', error);
+      }
+    };
+    fetchLevelingInvestmentData();
+  }, []);
 
   const prepareChartData = (data, labelKey, valueKey) => {
       // Sort data in descending order based on the value
@@ -688,6 +707,188 @@ const SubStatisticsPage = () => {
 
   };
 
+
+  const renderLevelingInvestmentContent = () => {
+    const getUniqueTypes = () => {
+      const types = [...new Set(levelingInvestmentData.map(item => item.type))];
+      return types;
+    };
+
+    const getUniqueSets = () => {
+      const sets = [...new Set(levelingInvestmentData.map(item => item.set))];
+      return sets.sort();
+    };
+
+    const getTypeData = (type) => {
+      const filteredData = levelingInvestmentData.filter(item => item.type === type);
+      const total = filteredData.reduce((sum, item) => sum + item.TotalRoll, 0);
+      return filteredData.map(item => ({
+        substat: item.set,
+        label: item.set,
+        percentage: (item.TotalRoll / total) * 100,
+        count: item.TotalRoll,
+        artifactCount: item.ArtifactCount
+      }));
+    };
+
+    const getAllTypeData = () => {
+      // Group all data by set, summing up total rolls across all types
+      const groupedData = levelingInvestmentData.reduce((acc, item) => {
+        const existing = acc.find(i => i.set === item.set);
+        if (existing) {
+          existing.TotalRoll += item.TotalRoll;
+          existing.ArtifactCount += item.ArtifactCount;
+        } else {
+          acc.push({
+            set: item.set,
+            TotalRoll: item.TotalRoll,
+            ArtifactCount: item.ArtifactCount
+          });
+        }
+        return acc;
+      }, []);
+
+      const total = groupedData.reduce((sum, item) => sum + item.TotalRoll, 0);
+      return groupedData.map(item => ({
+        substat: item.set,
+        label: item.set,
+        percentage: (item.TotalRoll / total) * 100,
+        count: item.TotalRoll,
+        artifactCount: item.ArtifactCount
+      }));
+    };
+
+    const getSetData = (set) => {
+      const filteredData = levelingInvestmentData.filter(item => item.set === set);
+      const total = filteredData.reduce((sum, item) => sum + item.TotalRoll, 0);
+      return filteredData.map(item => ({
+        substat: item.type,
+        label: item.type,
+        percentage: (item.TotalRoll / total) * 100,
+        count: item.TotalRoll,
+        artifactCount: item.ArtifactCount
+      }));
+    };
+
+    const renderTypeButtons = () => {
+      const types = getUniqueTypes();
+      return (
+        <div className={styles.button_container}>
+          <button
+            key="All"
+            className={`${styles.button} ${selectedType === 'All' ? styles.active : ''}`}
+            onClick={() => setSelectedType(selectedType === 'All' ? '' : 'All')}
+          >
+            All
+          </button>
+          {types.map(type => (
+            <button
+              key={type}
+              className={`${styles.button} ${selectedType === type ? styles.active : ''}`}
+              onClick={() => setSelectedType(selectedType === type ? '' : type)}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+      );
+    };
+
+    const renderSetDropdown = () => {
+      const sets = getUniqueSets();
+      const setOptions = sets.map(set => ({ value: set, label: set }));
+      
+      return (
+        <div className={styles.select_container}>
+          <Select
+            options={setOptions}
+            value={selectedLevelingSet ? { value: selectedLevelingSet, label: selectedLevelingSet } : null}
+            onChange={(selected) => setSelectedLevelingSet(selected ? selected.value : '')}
+            placeholder="Select a set..."
+            isClearable
+            className={styles.select}
+          />
+        </div>
+      );
+    };
+
+    let chartData = [];
+    let tableData = [];
+    let title = '';
+
+    if (isTypeSelected && selectedType) {
+      if (selectedType === 'All') {
+        const allTypeData = getAllTypeData();
+        chartData = allTypeData;
+        tableData = allTypeData;
+        title = 'All Types - Total Rolls by Set';
+      } else {
+        const typeData = getTypeData(selectedType);
+        chartData = typeData;
+        tableData = typeData;
+        title = `${selectedType} - Total Rolls by Set`;
+      }
+    } else if (isSetLevelingSelected && selectedLevelingSet) {
+      const setData = getSetData(selectedLevelingSet);
+      chartData = setData;
+      tableData = setData;
+      title = `${selectedLevelingSet} - Total Rolls by Type`;
+    }
+
+    return (
+      <>
+        <div className={styles.button_container}>
+          <button
+            className={`${styles.button} ${isTypeSelected ? styles.active : ''}`}
+            onClick={() => {
+              setIsTypeSelected(!isTypeSelected);
+              setIsSetLevelingSelected(false);
+              setSelectedType('');
+              setSelectedLevelingSet('');
+            }}
+          >
+            Type
+          </button>
+          <button
+            className={`${styles.button} ${isSetLevelingSelected ? styles.active : ''}`}
+            onClick={() => {
+              setIsSetLevelingSelected(!isSetLevelingSelected);
+              setIsTypeSelected(false);
+              setSelectedType('');
+              setSelectedLevelingSet('');
+            }}
+          >
+            Set
+          </button>
+        </div>
+        
+        {isTypeSelected && renderTypeButtons()}
+        {isSetLevelingSelected && renderSetDropdown()}
+        
+        {((isTypeSelected && selectedType)) && (
+          <ChartTable
+            chartType="bar"
+            chartData={prepareChartData(chartData, 'label', 'percentage')}
+            tableData={tableData}
+            chartTitle={title}
+            tableTitle={title}
+            tableFirstField="Label"
+          />
+        )}
+
+        {((isSetLevelingSelected && selectedLevelingSet)) && (
+          <ChartTable
+            chartType="pie"
+            chartData={prepareChartData(chartData, 'label', 'percentage')}
+            tableData={tableData}
+            chartTitle={title}
+            tableTitle={title}
+            tableFirstField="Label"
+          />
+        )}
+      </>
+    );
+  };
   
   
   const handleSetSelection = () => {
@@ -737,6 +938,8 @@ const SubStatisticsPage = () => {
             {renderScoreContent()}
         </>
         );
+    } else if (selectedCategory === 'Leveling Invest') {
+        return renderLevelingInvestmentContent();
     }
 
   };
@@ -747,6 +950,7 @@ const SubStatisticsPage = () => {
       <div className={styles.button_container}>
         <button className={`${styles.button} ${selectedCategory === 'Set/Source' ? styles.active : ''}`} onClick={() => setSelectedCategory('Set/Source')}>Set/Source</button>
         <button className={`${styles.button} ${selectedCategory === 'Score' ? styles.active : ''}`} onClick={() => setSelectedCategory('Score')}>Score</button>
+        <button className={`${styles.button} ${selectedCategory === 'Leveling Invest' ? styles.active : ''}`} onClick={() => setSelectedCategory('Leveling Invest')}>Leveling Invest</button>
       </div>
       {renderContent()}
     </div>

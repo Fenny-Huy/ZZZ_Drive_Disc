@@ -950,3 +950,42 @@ def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_loc
             for row in rows
         ]
     return artifacts_with_subs
+
+
+
+
+
+# API endpoint for leveling investment statistics
+@app.get("/statistics/levelinginvestment")
+def get_substats_statistics(db: pymysql.connections.Connection = Depends(get_local_db)):
+    query = """
+    SELECT 
+        i.`Slot`,
+        i.`Set`,
+        COUNT(*) AS TypeCount,
+        SUM(`L_HP` + `L_ATK` + `L_DEF` + `L_%HP` + `L_%ATK` + `L_%DEF` + `L_AP` + `L_PEN` + `L_Crit Rate` + `L_Crit DMG`) AS `TotalRolls`
+    FROM 
+        `Drive Disc leveling` l
+    INNER JOIN 
+        `Drive Disc` i
+    ON 
+        l.ID = i.ID
+    GROUP BY 
+        `Slot`,
+        `Set`
+	ORDER BY `TotalRolls` desc;
+
+    """
+    with db.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        artifacts_with_subs = [
+            {
+                    "type": row[0],
+                    "set": row[1],
+                    "ArtifactCount": row[2],
+                    "TotalRoll": row[3],                
+            }
+            for row in rows
+        ]
+    return artifacts_with_subs
