@@ -75,16 +75,14 @@ const ArtifactCreate = () => {
           !artifactSet ||
           substats.length !== parseInt(numberOfSubstats, 10)
         );
-      };
-    
-      const handleSubmit = async (e) => {
+      };      const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         // Prevent multiple submissions
         if (isLoading) return;
         
         setIsLoading(true);
-    
+
         const payload = {
           id: 1,
           set: formData.artifactSet.value,
@@ -104,7 +102,7 @@ const ArtifactCreate = () => {
           where_got_it: formData.source,
           score: formData.score,
         };
-    
+
         try {
           const response = await axios.post(`${apiConfig.apiUrl}/genshinartifacts/`, payload);
           alert(response.data.message);
@@ -118,13 +116,30 @@ const ArtifactCreate = () => {
       };
 
       return (
-        <div className="artifact-create">
-        
-          <div className={styles.artifact_create_container}>
-            <h1>Create Drive Disc</h1>
-            <ArtifactCreateForm formData={formData} handleSubmit={handleSubmit} artifactTypes={artifactTypes} mainStatsOptions={mainStatsOptions} filteredSubstats={filteredSubstats} scores={scores} sources={sources} artifactSets={artifactSets} handleSelectChange={handleSelectChange} handleInputChange={handleInputChange} isSubmitDisabled={isSubmitDisabled} isLoading={isLoading}/>
+        <div className={styles.artifact_create_container}>
+          <div className={styles.page_header}>
+            <h1 className={styles.page_title}>Create New Drive Disc</h1>
+            <p className={styles.page_subtitle}>
+              Add a new drive disc to your collection with detailed stats and substats
+            </p>
           </div>
-
+          
+          <div className={styles.form_container}>
+            <ArtifactCreateForm 
+              formData={formData} 
+              handleSubmit={handleSubmit} 
+              artifactTypes={artifactTypes} 
+              mainStatsOptions={mainStatsOptions} 
+              filteredSubstats={filteredSubstats} 
+              scores={scores} 
+              sources={sources} 
+              artifactSets={artifactSets} 
+              handleSelectChange={handleSelectChange} 
+              handleInputChange={handleInputChange} 
+              isSubmitDisabled={isSubmitDisabled} 
+              isLoading={isLoading}
+            />
+          </div>
         </div>
       );
 

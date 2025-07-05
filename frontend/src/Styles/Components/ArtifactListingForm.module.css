@@ -1,27 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 .artifact_row {
-    border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.artifact_row:hover {
+  background: rgba(102, 126, 234, 0.02);
+}
+
+.artifact_row:nth-child(even) {
+  background: rgba(248, 250, 252, 0.5);
+}
+
+.artifact_row:nth-child(even):hover {
+  background: rgba(102, 126, 234, 0.03);
+}
+
+.artifact_row td {
+  padding: 12px;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.center_checkbox {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.checkbox_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox_icon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.checkbox_icon.checked {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: #667eea;
+  color: white;
+}
+
+.actions_cell {
+  padding: 8px !important;
+}
+
+.action_buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.edit_button, .add_button, .change_button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  min-width: 60px;
+  justify-content: center;
+}
+
+.edit_button {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.edit_button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.add_button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.add_button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.change_button {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.change_button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.button_icon {
+  font-size: 0.9rem;
+}
+
+.notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .artifact_row td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
   }
   
-  .artifact_row td {
-    padding: 8px;
+  .action_buttons {
+    gap: 4px;
+    flex-wrap: nowrap;
   }
-
-
-
+  
+  .edit_button, .add_button, .change_button {
+    padding: 4px 6px;
+    font-size: 0.7rem;
+    min-width: 45px;
+  }
+  
+  .button_icon {
+    font-size: 0.8rem;
+  }
+  
   .notification {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
   }
+}
 
-
-  .center_checkbox {
-    text-align: center; /* Center horizontally */
-    vertical-align: middle; /* Center vertically */
+@media (max-width: 480px) {
+  .artifact_row td {
+    padding: 8px 6px;
+    font-size: 0.8rem;
   }
+  
+  .action_buttons {
+    gap: 2px;
+    flex-wrap: nowrap;
+  }
+  
+  .edit_button, .add_button, .change_button {
+    padding: 3px 4px;
+    font-size: 0.65rem;
+    min-width: 35px;
+  }
+  
+  .button_icon {
+    font-size: 0.7rem;
+  }
+  
+  .checkbox_icon {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}

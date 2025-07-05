@@ -1,47 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 .form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Inter', sans-serif;
 }
 
 .inputGroup {
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label::before {
+  content: '•';
+  color: #667eea;
+  font-weight: bold;
 }
 
 .select {
-    padding: 8px;
-    font-size: 16px;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  background: white;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  color: #374151;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.select:disabled {
+  background-color: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* React Select Styling */
+.inputGroup :global(.react-select) :global(.react-select__control) {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 4px 8px;
+  font-family: 'Inter', sans-serif;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  min-height: 48px;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__control:hover) {
+  border-color: #d1d5db;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__control--is-focused) {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.inputGroup :global(.react-select) :global(.react-select__placeholder) {
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__single-value) {
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__menu) {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__option) {
+  font-size: 0.95rem;
+  padding: 12px 16px;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__option--is-focused) {
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.inputGroup :global(.react-select) :global(.react-select__option--is-selected) {
+  background-color: #667eea;
+}
+
+.checkboxContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
 }
 
 .checkboxLabel {
-    display: block;
-    margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  margin: 0;
+}
+
+.checkboxLabel:hover {
+  background: rgba(102, 126, 234, 0.05);
+  border-color: #667eea;
+}
+
+.checkboxLabel:has(.checkbox:checked) {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  color: #667eea;
 }
 
 .checkbox {
-    margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  accent-color: #667eea;
+  margin: 0;
 }
 
 .submitButton {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+}
+
+.submitButton:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .submitButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background: #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.submitButton:disabled::before {
+  display: none;
+}
+
+/* Loading state */
+.submitButton:disabled:has-text("Loading...") {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  opacity: 0.8;
+}
+
+/* Field groups for better organization */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.fieldGroupTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form {
+    gap: 20px;
+  }
+  
+  .checkboxContainer {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  .checkboxLabel {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+  
+  .submitButton {
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkboxContainer {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  
+  .label {
+    font-size: 0.9rem;
+  }
+  
+  .select {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Progress Bar Styles */
+.progressSection {
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  border-radius: 16px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.progressTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.progressText {
+  font-size: 0.9rem;
+  color: #667eea;
+  font-weight: 500;
+}
+
+.progressBar {
+  height: 8px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progressDots {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressDot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(102, 126, 234, 0.1);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.progressDot.completed {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: #667eea;
+  color: white;
+  transform: scale(1.1);
+}
+
+.checkmark {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Substat Icon Styles */
+.substatIcon {
+  font-size: 1.2rem;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.substatName {
+  flex: 1;
+}
+
+/* Substat Feedback Styles */
+.substatFeedback {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-left: 4px solid;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.substatFeedback.info {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-left-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.substatFeedback.success {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-left-color: #22c55e;
+  color: #15803d;
+}
+
+.substatFeedback.warning {
+  background-color: rgba(251, 191, 36, 0.1);
+  border-left-color: #fbbf24;
+  color: #d97706;
+}
+
+.substatFeedback.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-left-color: #ef4444;
+  color: #dc2626;
 }

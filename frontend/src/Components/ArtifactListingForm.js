@@ -38,7 +38,11 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
   const isArtifactInLeveling = artifactLevelingIds.includes(artifact.id);
 
   const renderCheckbox = (value) => (
-    <input type="checkbox" checked={value === 1} readOnly />
+    <div className={styles.checkbox_container}>
+      <span className={`${styles.checkbox_icon} ${value === 1 ? styles.checked : ''}`}>
+        {value === 1 ? '✓' : ''}
+      </span>
+    </div>
   );
 
   const handleUpdateSuccess = (message) => {
@@ -79,15 +83,26 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
         <td className={styles.center_checkbox}>{renderCheckbox(artifact.crit_dmg)}</td>
         <td>{artifact.where_got_it}</td>
         <td>{artifact.score}</td>
-        <td>
-        {isArtifactInLeveling ? (
-          <button onClick={openLevelingModal}>Change Leveling</button>
-        ) : (
-          <>
-            <button onClick={() => setIsEditModalOpen(true)}>Edit</button>
-            <button onClick={openLevelingModal}>Add Leveling</button>
-          </>
-        )}
+        <td className={styles.actions_cell}>
+          <div className={styles.action_buttons}>
+            {isArtifactInLeveling ? (
+              <button className={styles.change_button} onClick={openLevelingModal}>
+                <span className={styles.button_icon}>🔄</span>
+                Change
+              </button>
+            ) : (
+              <>
+                <button className={styles.edit_button} onClick={() => setIsEditModalOpen(true)}>
+                  <span className={styles.button_icon}>✏️</span>
+                  Edit
+                </button>
+                <button className={styles.add_button} onClick={openLevelingModal}>
+                  <span className={styles.button_icon}>➕</span>
+                  Level
+                </button>
+              </>
+            )}
+          </div>
         </td>
       </tr>
       {isEditModalOpen && (

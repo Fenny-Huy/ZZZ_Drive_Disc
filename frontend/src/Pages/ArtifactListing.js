@@ -1,4 +1,3 @@
-// src/Pages/ArtifactList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ArtifactListingForm from '../Components/ArtifactListingForm';
@@ -6,22 +5,26 @@ import ReactPaginate from 'react-paginate';
 import { apiConfig } from '../config/config';
 import styles from '../Styles/Pages/ArtifactListing.module.css';
 
-
+// Items per page options - modify this array to change available options
+const ITEMS_PER_PAGE_OPTIONS = [12, 18, 24, 36, 50];
 
 const ArtifactListing = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [artifacts, setArtifacts] = useState([]);
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 18;
+  const [itemsPerPage, setItemsPerPage] = useState(18);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  // Invoke when user click to request another page.
-  
   const handleEditModalChange = (isOpen) => {
     setIsEditModalOpen(isOpen);
+  };
+
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    setItemsPerPage(newItemsPerPage);
+    setItemOffset(0);
+    setCurrentPage(0);
   };
 
 
@@ -47,62 +50,109 @@ const ArtifactListing = () => {
 
 
   const handlePageClick = (event) => {
-    const newOffset = event.selected * itemsPerPage % artifacts.length;
-    console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+    const newOffset = (event.selected * itemsPerPage) % artifacts.length;
     setItemOffset(newOffset);
+    setCurrentPage(event.selected);
   };
   
 
   return (
-    <div>
-      <h1>Artifact List</h1>
-      <table className={styles.artifact_listing_table}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Set</th>
-            <th>Slot</th>
-            <th>Main Stat</th>
-            <th className={styles.center_checkbox}>Numb</th>
-            <th className={styles.center_checkbox}>%ATK</th>
-            <th className={styles.center_checkbox}>%HP</th>
-            <th className={styles.center_checkbox}>%DEF</th>
-            <th className={styles.center_checkbox}>ATK</th>
-            <th className={styles.center_checkbox}>HP</th>
-            <th className={styles.center_checkbox}>DEF</th>
-            <th className={styles.center_checkbox}>PEN</th>
-            <th className={styles.center_checkbox}>A.Proficiency</th>
-            <th className={styles.center_checkbox}>C.Rate</th>
-            <th className={styles.center_checkbox}>C.DMG</th>
-            <th>Source</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((artifact, index) => (
-            <ArtifactListingForm key={index} artifact={artifact} onEditModalChange={handleEditModalChange} />
-          ))}
-        </tbody>
-      </table>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
+    <div className={styles.artifact_listing_container}>
+      <div className={styles.page_header}>
+        <h1 className={styles.page_title}>Drive Discs Collection</h1>
+        <p className={styles.page_subtitle}>
+          Manage and view your complete drive discs inventory
+        </p>
+        <div className={styles.stats_bar}>
+          <div className={styles.stat_item}>
+            <span className={styles.stat_number}>{artifacts.length}</span>
+            <span className={styles.stat_label}>Total Drive Discs</span>
+          </div>
+          <div className={styles.stat_item}>
+            <span className={styles.stat_number}>{currentItems.length}</span>
+            <span className={styles.stat_label}>Showing</span>
+          </div>
+          <div className={styles.stat_item}>
+            <span className={styles.stat_number}>{pageCount}</span>
+            <span className={styles.stat_label}>Pages</span>
+          </div>
+        </div>
         
-      />
+        <div className={styles.controls_bar}>
+          <div className={styles.items_per_page}>
+            <label className={styles.control_label}>Items per page:</label>
+            <select 
+              value={itemsPerPage} 
+              onChange={(e) => handleItemsPerPageChange(parseInt(e.target.value))}
+              className={styles.control_select}
+            >
+              {ITEMS_PER_PAGE_OPTIONS.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div className={styles.table_container}>
+        <div className={styles.table_wrapper}>
+          <table className={styles.artifact_listing_table}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Set</th>
+                <th>Type</th>
+                <th>Main Stat</th>
+                <th className={styles.center_checkbox}>Subs</th>
+                <th className={styles.center_checkbox}>⚔️ %ATK</th>
+                <th className={styles.center_checkbox}>❤️ %HP</th>
+                <th className={styles.center_checkbox}>🛡️ %DEF</th>
+                <th className={styles.center_checkbox}>⚡ ATK</th>
+                <th className={styles.center_checkbox}>💚 HP</th>
+                <th className={styles.center_checkbox}>🔰 DEF</th>
+                <th className={styles.center_checkbox}>🔋 PEN</th>
+                <th className={styles.center_checkbox}>🔮 AP</th>
+                <th className={styles.center_checkbox}>🎯 Crit Rate</th>
+                <th className={styles.center_checkbox}>💥 Crit DMG</th>
+                <th>Source</th>
+                <th>Score</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.map((artifact, index) => (
+                <ArtifactListingForm key={artifact.id} artifact={artifact} onEditModalChange={handleEditModalChange} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        {pageCount > 1 && (
+          <div className={styles.pagination_container}>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="Next →"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={1}
+              pageCount={pageCount}
+              previousLabel="← Previous"
+              pageClassName={styles.page_item}
+              pageLinkClassName={styles.page_link}
+              previousClassName={styles.page_item}
+              previousLinkClassName={styles.page_link}
+              nextClassName={styles.page_item}
+              nextLinkClassName={styles.page_link}
+              breakClassName={styles.page_item}
+              breakLinkClassName={styles.page_link}
+              containerClassName={styles.pagination}
+              activeClassName={styles.active}
+              disabledClassName={styles.disabled}
+              forcePage={currentPage}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
