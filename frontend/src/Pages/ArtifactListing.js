@@ -9,7 +9,7 @@ import styles from '../Styles/Pages/ArtifactListing.module.css';
 const ITEMS_PER_PAGE_OPTIONS = [12, 18, 24, 36, 50];
 
 const ArtifactListing = () => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [artifacts, setArtifacts] = useState([]);
@@ -17,8 +17,8 @@ const ArtifactListing = () => {
   const [itemsPerPage, setItemsPerPage] = useState(18);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const handleEditModalChange = (isOpen) => {
-    setIsEditModalOpen(isOpen);
+  const handleDataRefresh = () => {
+    setRefreshTrigger(prev => prev + 1);
   };
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
@@ -38,7 +38,7 @@ const ArtifactListing = () => {
       }
     };
     fetchArtifacts();
-  }, [isEditModalOpen]);
+  }, [refreshTrigger]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -121,7 +121,7 @@ const ArtifactListing = () => {
             </thead>
             <tbody>
               {currentItems.map((artifact, index) => (
-                <ArtifactListingForm key={artifact.id} artifact={artifact} onEditModalChange={handleEditModalChange} />
+                <ArtifactListingForm key={artifact.id} artifact={artifact} onDataRefresh={handleDataRefresh} />
               ))}
             </tbody>
           </table>

@@ -57,11 +57,31 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const numericValue = Math.max(0, parseInt(value, 10) || 0); // Prevent negative numbers
+    const numericValue = Math.max(0, Math.min(5, parseInt(value, 10) || 0)); // Prevent negative numbers and cap at 5
     setFormData((prev) => ({
       ...prev,
       [name]: numericValue,
     }));
+  };
+
+  const handleIncrement = (fieldName) => {
+    const currentValue = formData[fieldName] || 0;
+    if (currentValue < 5) {
+      setFormData((prev) => ({
+        ...prev,
+        [fieldName]: currentValue + 1,
+      }));
+    }
+  };
+
+  const handleDecrement = (fieldName) => {
+    const currentValue = formData[fieldName] || 0;
+    if (currentValue > 0) {
+      setFormData((prev) => ({
+        ...prev,
+        [fieldName]: currentValue - 1,
+      }));
+    }
   };
 
   const handleSelectChange = (e) => {
@@ -179,16 +199,35 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
             {(initialSubstats.concat(formData.addedSubstat && formData.addedSubstat !== "None" ? formData.addedSubstat : []).filter(Boolean)).map((substat) => (
               <div className={styles.inputGroup} key={substat}>
                 <label className={styles.label}>{substat}:</label>
-                <input
-                  type="number"
-                  name={getFormDataKey(substat)}
-                  value={formData[getFormDataKey(substat)]}
-                  onChange={handleInputChange}
-                  className={styles.input}
-                  min="0"
-                  max="5"
-                  placeholder="0"
-                />
+                <div className={styles.input_with_buttons}>
+                  <button
+                    type="button"
+                    className={styles.increment_button}
+                    onClick={() => handleDecrement(getFormDataKey(substat))}
+                    disabled={formData[getFormDataKey(substat)] <= 0}
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    name={getFormDataKey(substat)}
+                    value={formData[getFormDataKey(substat)]}
+                    onChange={handleInputChange}
+                    className={styles.input}
+                    min="0"
+                    max="5"
+                    placeholder="0"
+                    readOnly
+                  />
+                  <button
+                    type="button"
+                    className={styles.increment_button}
+                    onClick={() => handleIncrement(getFormDataKey(substat))}
+                    disabled={formData[getFormDataKey(substat)] >= 5}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             ))}
           </div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { apiConfig } from '../config/config';
 import styles from '../Styles/Components/ArtifactListingForm.module.css';
 
-const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
+const ArtifactListingForm = ({ artifact, onDataRefresh }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isLevelingModalOpen, setIsLevelingModalOpen] = useState(false);
   const [artifactData, setArtifactData] = useState(null);
@@ -16,11 +16,6 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
 
   const [artifactLevelingIds, setArtifactLevelingIds] = useState([]);
   
-  useEffect(() => {
-
-    onEditModalChange(isEditModalOpen);
-
-  }, [isEditModalOpen, onEditModalChange]);
 
   useEffect(() => {
     const fetchArtifactLevelingIds = async () => {
@@ -48,7 +43,11 @@ const ArtifactListingForm = ({ artifact, onEditModalChange }) => {
   const handleUpdateSuccess = (message) => {
     setNotification(true);
     setNotificationMessage(message);
-    setTimeout(() => setNotification(false), 2000); // Hide notification after 3 seconds
+    setTimeout(() => setNotification(false), 2000);
+    // Trigger data refresh in parent component
+    if (onDataRefresh) {
+      onDataRefresh();
+    }
   };
 
   const openLevelingModal = async () => {

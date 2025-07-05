@@ -4,9 +4,23 @@ import Select from "react-select"; // Import React-Select
 import styles from '../Styles/Components/ArtifactSearchForm.module.css';
 import { artifactConfig } from '../config/config';
 
-const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, scores, sources, artifactSets, handleSelectChange, handleInputChange }) => {
+const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, scores, sources, artifactSets, handleSelectChange, handleInputChange, isLoading }) => {
   // Define all substats
   const allSubstats = artifactConfig.allSubstats;
+
+  // Substat icons mapping
+  const substatIcons = {
+    '%ATK': '⚔️',
+    '%HP': '❤️',
+    '%DEF': '🛡️',
+    'ATK': '⚡',
+    'HP': '💚',
+    'DEF': '🔰',
+    'PEN': '🔋',
+    'AP': '🔮',
+    'Crit Rate': '🎯',
+    'Crit DMG': '💥'
+  };
 
   const isSubmitDisabled = !(
     formData.artifactSet ||
@@ -73,7 +87,7 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
 
       <div className={styles.inputGroup}>
         <label className={styles.label}>Substats:</label>
-        <div>
+        <div className={styles.substats_grid}>
           {allSubstats.map((substat) => (
             <label key={substat} className={styles.checkboxLabel}>
               <input
@@ -84,7 +98,10 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
                 onChange={handleInputChange}
                 className={styles.checkbox}
               />
-              {substat}
+              <span className={styles.checkbox_text}>
+                <span className={styles.substat_icon}>{substatIcons[substat]}</span>
+                {substat}
+              </span>
             </label>
           ))}
         </div>
@@ -114,8 +131,18 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         </select>
       </div>
 
-      <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled}>
-        Search
+      <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled || isLoading}>
+        {isLoading ? (
+          <>
+            <div className={styles.button_spinner}></div>
+            Searching...
+          </>
+        ) : (
+          <>
+            <span className={styles.button_icon}>🔍</span>
+            Search Artifacts
+          </>
+        )}
       </button>
     </form>
   );
