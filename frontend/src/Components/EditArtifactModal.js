@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import styles from '../Styles/Components/EditArtifactModal.module.css'; // Import the CSS file
@@ -26,6 +27,20 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
     score: artifact.score,
     source: artifact.where_got_it,
   });
+
+  // Substat icons mapping
+  const substatIcons = {
+    '%ATK': '⚔️',
+    '%HP': '❤️',
+    '%DEF': '🛡️',
+    'ATK': '⚡',
+    'HP': '💚',
+    'DEF': '🔰',
+    'PEN': '🔋',
+    'AP': '🔮',
+    'Crit Rate': '🎯',
+    'Crit DMG': '💥'
+  };
 
   const artifactTypes = artifactConfig.artifactTypes;
   const mainStatsOptions = artifactConfig.mainStatsOptions;
@@ -123,7 +138,7 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
   // Filter substats based on the selected main stat
   const filteredSubstats = allSubstats.filter((substat) => substat !== formData.mainStat?.value);
 
-  return (
+  return createPortal(
     <div className={styles.modal}>
       <div className={styles.modal_content}>
         <h2>Edit Artifact</h2>
@@ -181,7 +196,7 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
 
           <div className={styles.inputGroup}>
             <label className={styles.label}>Substats:</label>
-            <div>
+            <div className={styles.checkboxContainer}>
               {filteredSubstats.map((substat) => (
                 <label key={substat} className={styles.checkboxLabel}>
                   <input
@@ -192,7 +207,8 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
                     onChange={handleInputChange}
                     className={styles.checkbox}
                   />
-                  {substat}
+                  <span className={styles.substatIcon}>{substatIcons[substat] || '⭐'}</span>
+                  <span className={styles.substatName}>{substat}</span>
                 </label>
               ))}
             </div>
@@ -232,7 +248,8 @@ const EditArtifactModal = ({ artifact, onClose, onUpdateSuccess }) => {
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

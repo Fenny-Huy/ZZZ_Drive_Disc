@@ -1,5 +1,6 @@
 // src/Components/AddArtifactLevelingModal.js
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import axios from 'axios';
 import styles from '../Styles/Components/AddArtifactLevelingModal.module.css'; // Import the CSS file
 import { apiConfig, artifactConfig } from '../config/config';
@@ -84,6 +85,27 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
     setIsSaveDisabled(totalValue > maxTotalValue);
   };
 
+  const getValidationMessage = () => {
+    const totalValue = Object.keys(formData).reduce((sum, key) => {
+      if (key.startsWith('L_')) {
+        return sum + formData[key];
+      }
+      return sum;
+    }, 0);
+
+    const maxTotalValue = artifact.number_of_substats === 3 ? 4 : 5;
+    
+    if (totalValue === 0) {
+      return { type: 'info', message: 'Enter the leveling values for your substats' };
+    } else if (totalValue > maxTotalValue) {
+      return { type: 'error', message: `Total levels exceed maximum (${totalValue}/${maxTotalValue})` };
+    } else if (totalValue === maxTotalValue) {
+      return { type: 'success', message: `Perfect! All ${maxTotalValue} levels allocated` };
+    } else {
+      return { type: 'warning', message: `${maxTotalValue - totalValue} levels remaining to allocate` };
+    }
+  };
+
   const handleSave = async () => {
     // Prevent multiple submissions
     if (isLoading) return;
@@ -123,14 +145,21 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
     }
   };
 
-  return (
+  return createPortal(
     <div className={styles.leveling_modal}>
       <div className={styles.leveling_modal_content}>
         <h2>{isUpdating ? 'Update' : 'Add'} Artifact Leveling</h2>
+
+        <div className={styles.artifact_info}>
+          <span className={styles.artifact_badge}>{artifact.set}</span>
+          <span className={styles.artifact_badge}>{artifact.type}</span>
+          <span className={styles.artifact_badge}>{artifact.main_stat}</span>
+        </div>
+
         <form className={styles.form}>
           {artifact.number_of_substats === 3 && (!formData.addedSubstat || formData.addedSubstat === "None") && (
             <div className={styles.inputGroup}>
-              <label className = {styles.label}>Added Substat:</label>
+              <label className={styles.label}>Added Substat:</label>
               <select
                 name="addedSubstat"
                 value={formData.addedSubstat}
@@ -146,19 +175,30 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
               </select>
             </div>
           )}
-          {(initialSubstats.concat(formData.addedSubstat && formData.addedSubstat !== "None" ? formData.addedSubstat : []).filter(Boolean)).map((substat) => (
-            <div className= {styles.inputGroup} key={substat}>
-              <label className={styles.label}>{substat}:</label>
-              <input
-                type="number"
-                name={getFormDataKey(substat)}
-                value={formData[getFormDataKey(substat)]}
-                onChange={handleInputChange}
-                className={styles.input}
-                min="0"
-              />
-            </div>
-          ))}
+          <div className={styles.substat_grid}>
+            {(initialSubstats.concat(formData.addedSubstat && formData.addedSubstat !== "None" ? formData.addedSubstat : []).filter(Boolean)).map((substat) => (
+              <div className={styles.inputGroup} key={substat}>
+                <label className={styles.label}>{substat}:</label>
+                <input
+                  type="number"
+                  name={getFormDataKey(substat)}
+                  value={formData[getFormDataKey(substat)]}
+                  onChange={handleInputChange}
+                  className={styles.input}
+                  min="0"
+                  max="5"
+                  placeholder="0"
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Validation Message */}
+          <div className={`${styles.validation_message} ${styles[getValidationMessage().type]}`}>
+            {getValidationMessage().message}
+          </div>
+
+
           <div className={styles.actions}>
             <button type="button" className={styles.button} onClick={handleSave} disabled={isSaveDisabled || isLoading}>
               {isLoading ? "Loading..." : "Save"}
@@ -169,7 +209,8 @@ const AddArtifactLevelingModal = ({ artifact, artifactLeveling, onClose, onUpdat
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
