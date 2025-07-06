@@ -1,28 +1,434 @@
+/* ArtifactLevelingListTable.module.css */
+.tableContainer {
+  width: 100%;
+  background: white;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}
 
+.tableHeader {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(103, 126, 234, 0.1);
+}
+
+.tableControls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.itemsPerPageContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.itemsPerPageLabel {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.itemsPerPageSelect {
+  padding: 8px 12px;
+  border: 2px solid rgba(103, 126, 234, 0.3);
+  border-radius: 8px;
+  background: white;
+  font-weight: 500;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.itemsPerPageSelect:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tableWrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: rgba(103, 126, 234, 0.1);
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.artifactLevelingTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 1200px;
+}
+
+.artifactLevelingTable th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 16px 12px;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Header-specific alignment */
+.idColumn { text-align: center; }
+.levelColumn { text-align: center; }
+.actionColumn { text-align: center; }
+
+.artifactLevelingTable td {
+  padding: 12px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(103, 126, 234, 0.1);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.artifactRow:hover {
+  background: rgba(103, 126, 234, 0.05);
+}
+
+/* Column-specific widths and alignment */
+.idColumn { width: 60px; }
+.setColumn { width: 150px; }
+.typeColumn { width: 90px; }
+.mainStatColumn { width: 90px; }
+.substatColumn { width: 200px; }
+.addedColumn { width: 90px; }
+.levelColumn { width: 60px; }
+.sourceColumn { width: 100px; }
+.scoreColumn { width: 80px; }
+.actionColumn { width: 100px; }
+
+/* Column-specific text alignment */
+.idCell { text-align: center; }
+.setCell { text-align: left; }
+.typeCell { text-align: left; }
+.mainStatCell { text-align: left; }
+.substatCell { text-align: left; }
+.addedCell { text-align: left; }
+.levelCell { text-align: center; }
+.sourceCell { text-align: left; }
+.scoreCell { text-align: left; }
+.actionCell { text-align: center; }
+
+/* Cell styling */
+.idCell {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.setCell {
+  text-align: center;
+}
+
+.setChip {
+  display: inline-block;
+  padding: 4px 8px;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #8b4513;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.typeCell {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.mainStatCell {
+  text-align: center;
+}
+
+.mainStatChip {
+  display: inline-block;
+  padding: 4px 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.substatCell {
+  text-align: center;
+}
+
+.substatChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  max-width: 200px;
+}
+
+.substatChip {
+  display: inline-block;
+  padding: 2px 6px;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #2c3e50;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.addedCell {
+  text-align: center;
+}
+
+.addedChip {
+  display: inline-block;
+  padding: 4px 8px;
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  color: #2c3e50;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.noneChip {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.levelCell {
+  text-align: center;
+}
+
+.substatValue {
+  font-weight: 600;
+  color: #667eea;
+  padding: 2px 6px;
+  background: rgba(103, 126, 234, 0.1);
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.unavailableSubstat {
+  color: #6c757d;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.sourceCell {
+  font-size: 0.8rem;
+}
+
+.scoreCell {
+  text-align: center;
+}
+
+.scoreValue {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  background: rgba(103, 126, 234, 0.1);
+  border-radius: 6px;
+}
+
+.actionCell {
+  text-align: center;
+}
+
+.editButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0 auto;
+}
+
+.editButton:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(103, 126, 234, 0.4);
+}
+
+.editButton:active {
+  transform: translateY(0);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.emptyState h3 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.emptyState p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-top: 1px solid rgba(103, 126, 234, 0.1);
+  border-radius: 0 0 20px 20px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pageItem {
+  margin: 0;
+}
+
+.pageLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(103, 126, 234, 0.3);
+  border-radius: 8px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.pageLink:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+.pageItem.active .pageLink {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(103, 126, 234, 0.4);
+}
+
+.pageItem:first-child .pageLink,
+.pageItem:last-child .pageLink {
+  width: auto;
+  padding: 0 16px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tableContainer {
+    padding: 16px;
+  }
   
-  .unavailable_substat {
-    color: red;
-    font-weight: bold;
-  }
-
-
-
-  .artifact_listing_table {
-    width: 100%;
-    border-collapse: collapse;
+  .tableHeader {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
   }
   
-  .artifact_listing_table th,
-  .artifact_listing_table td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+  .tableControls {
+    justify-content: center;
   }
   
-  .artifact_listing_table th {
-    background-color: #f2f2f2;
+  .artifactLevelingTable {
+    min-width: 800px;
   }
-
-  .center_checkbox {
-    text-align: center; /* Center horizontally */
-    vertical-align: middle; /* Center vertically */
+  
+  .artifactLevelingTable th,
+  .artifactLevelingTable td {
+    padding: 8px 6px;
+    font-size: 0.8rem;
   }
+  
+  .substatChips {
+    max-width: 150px;
+  }
+  
+  .substatChip {
+    font-size: 0.65rem;
+    padding: 1px 4px;
+  }
+  
+  .setChip,
+  .mainStatChip,
+  .addedChip {
+    max-width: 80px;
+    font-size: 0.7rem;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .pageLink {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+  
+  .pageItem:first-child .pageLink,
+  .pageItem:last-child .pageLink {
+    padding: 0 12px;
+  }
+}

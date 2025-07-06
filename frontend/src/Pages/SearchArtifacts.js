@@ -164,9 +164,9 @@ const SearchArtifacts = () => {
   return (
     <div className={styles.search_artifacts_container}>
       <div className={styles.page_header}>
-        <h1 className={styles.page_title}>Search Artifacts</h1>
+        <h1 className={styles.page_title}>Search Drive Discs</h1>
         <p className={styles.page_subtitle}>
-          Find artifacts by set, type, stats, and more
+          Find drive discs by set, slot, stats, and more
         </p>
       </div>
       
@@ -213,7 +213,7 @@ const SearchArtifacts = () => {
           {isLoading ? (
             <div className={styles.loading_container}>
               <div className={styles.loading_spinner}></div>
-              <p className={styles.loading_text}>Searching artifacts...</p>
+              <p className={styles.loading_text}>Searching drive discs...</p>
             </div>
           ) : artifacts.length > 0 ? (
             <div className={styles.table_container}>

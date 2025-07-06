@@ -5,6 +5,21 @@ import styles from '../Styles/Components/ArtifactLevelingListTable.module.css'; 
 import ReactPaginate from 'react-paginate';
 
 const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
+  // Substat icons mapping
+  const substatIcons = {
+    '%ATK': '⚔️',
+    '%HP': '❤️',
+    '%DEF': '🛡️',
+    'ATK': '⚡',
+    'HP': '💊',
+    'DEF': '🏰',
+    'PEN': '🔋',
+    'AP': '🧪',
+    'Crit Rate': '🎯',
+    'Crit DMG': '💥'
+  };
+
+
   const getSubstatKey = (substat) => {
     switch (substat) {
       case '%HP':
@@ -25,10 +40,9 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
+
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 11;
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Invoke when user click to request another page.
 
@@ -40,9 +54,13 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
 
 
   const handlePageClick = (event) => {
-    const newOffset = event.selected * itemsPerPage % artifacts.length;
-    console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+    const newOffset = (event.selected * itemsPerPage) % artifacts.length;
     setItemOffset(newOffset);
+  };
+
+  const handleItemsPerPageChange = (event) => {
+    setItemsPerPage(parseInt(event.target.value));
+    setItemOffset(0); // Reset to first page
   };
 
   const renderSubstatCell = (artifact, substat) => {
@@ -62,103 +80,153 @@ const ArtifactLevelingListTable = ({ artifacts, onEdit }) => {
     ].filter(Boolean);
 
     if (initialSubstats.includes(substat)) {
-      return artifact[substatKey];
+      const value = artifact[substatKey] || 0;
+      return value;
     } else {
-      return <span className={styles.unavailable_substat}>X</span>;
+      return <span className={styles.unavailableSubstat}>—</span>;
     }
   };
 
-  return (
-    <>
+  const formatInitialSubstats = (artifact) => {
+    const substats = [
+      artifact.atk_percent && '%ATK',
+      artifact.hp_percent && '%HP',
+      artifact.def_percent && '%DEF',
+      artifact.atk && 'ATK',
+      artifact.hp && 'HP',
+      artifact.defense && 'DEF',
+      artifact.pen && 'PEN',
+      artifact.ap && 'AP',
+      artifact.crit_rate && 'Crit Rate',
+      artifact.crit_dmg && 'Crit DMG',
+    ].filter(Boolean);
 
-    
-    <table className={styles.artifact_listing_table}>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Set</th>
-          <th>Type</th>
-          <th>Main Stat</th>
-          <th>Initial Substats</th>
-          <th>Added</th>
-          <th className={styles.center_checkbox}>HP</th>
-          <th className={styles.center_checkbox}>ATK</th>
-          <th className={styles.center_checkbox}>DEF</th>
-          <th className={styles.center_checkbox}>%HP</th>
-          <th className={styles.center_checkbox}>%ATK</th>
-          <th className={styles.center_checkbox}>%DEF</th>
-          <th className={styles.center_checkbox}>AP</th>
-          <th className={styles.center_checkbox}>PEN</th>
-          <th className={styles.center_checkbox}>C.Rate</th>
-          <th className={styles.center_checkbox}>C.DMG</th>
-          <th>Source</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        {currentItems.map((artifact) => (
-          <tr key={artifact.id}>
-            <td>{artifact.id}</td>
-            <td>{artifact.set}</td>
-            <td>{artifact.type}</td>
-            <td>{artifact.main_stat}</td>
-            <td>
-              {[
-                artifact.atk_percent && '%ATK',
-                artifact.hp_percent && '%HP',
-                artifact.def_percent && '%DEF',
-                artifact.atk && 'ATK',
-                artifact.hp && 'HP',
-                artifact.defense && 'DEF',
-                artifact.pen && 'PEN',
-                artifact.ap && 'AP',
-                artifact.crit_rate && 'Crit Rate',
-                artifact.crit_dmg && 'Crit DMG',
-              ]
-                .filter(Boolean)
-                .join(', ')}
-            </td>
-            <td>{artifact.addedSubstat}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'HP')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'ATK')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'DEF')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, '%HP')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, '%ATK')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, '%DEF')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'AP')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'PEN')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'Crit Rate')}</td>
-            <td className={styles.center_checkbox}>{renderSubstatCell(artifact, 'Crit DMG')}</td>
-            <td>{artifact.where_got_it}</td>
-            <td>{artifact.score}</td>
-            <td>
-              <button onClick={() => onEdit(artifact)}>Edit</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        
-      />
-    
-    </>
+    return substats.map(substat => `${substatIcons[substat]} ${substat}`).join(', ');
+  };
+
+  if (artifacts.length === 0) {
+    return (
+      <div className={styles.emptyState}>
+        <div className={styles.emptyIcon}>📋</div>
+        <h3>No Artifacts Found</h3>
+        <p>No artifacts with leveling data are available.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.tableContainer}>
+      <div className={styles.tableHeader}>
+        <div className={styles.tableControls}>
+          <div className={styles.itemsPerPageContainer}>
+            <label htmlFor="itemsPerPage" className={styles.itemsPerPageLabel}>
+              Items per page:
+            </label>
+            <select
+              id="itemsPerPage"
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+              className={styles.itemsPerPageSelect}
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={15}>15</option>
+              <option value={20}>20</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.tableWrapper}>
+        <table className={styles.artifactLevelingTable}>
+          <thead>
+            <tr>
+              <th className={styles.idColumn}>🆔 ID</th>
+              <th className={styles.setColumn}>🎯 Set</th>
+              <th className={styles.typeColumn}>⭐ Type</th>
+              <th className={styles.mainStatColumn}>🏆 Main Stat</th>
+              <th className={styles.substatColumn}>📊 Initial Substats</th>
+              <th className={styles.addedColumn}>➕ Added</th>
+              <th className={styles.levelColumn}>💊 HP</th>
+              <th className={styles.levelColumn}>⚡ ATK</th>
+              <th className={styles.levelColumn}>🏰 DEF</th>
+              <th className={styles.levelColumn}>❤️ %HP</th>
+              <th className={styles.levelColumn}>⚔️ %ATK</th>
+              <th className={styles.levelColumn}>🛡️ %DEF</th>
+              <th className={styles.levelColumn}>🧪 AP</th>
+              <th className={styles.levelColumn}>🔋 PEN</th>
+              <th className={styles.levelColumn}>🎯 C.Rate</th>
+              <th className={styles.levelColumn}>💥 C.DMG</th>
+              <th className={styles.sourceColumn}>📍 Source</th>
+              <th className={styles.scoreColumn}>⭐ Score</th>
+              <th className={styles.actionColumn}>⚙️ Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((artifact) => (
+              <tr key={artifact.id} className={styles.artifactRow}>
+                <td className={styles.idCell}>{artifact.id}</td>
+                <td className={styles.setCell}>{artifact.set}</td>
+                <td className={styles.typeCell}>{artifact.type}</td>
+                <td className={styles.mainStatCell}>{artifact.main_stat}</td>
+                <td className={styles.substatCell}>
+                  {formatInitialSubstats(artifact)}
+                </td>
+                <td className={styles.addedCell}>
+                  {artifact.addedSubstat !== 'None' ? (
+                    `${substatIcons[artifact.addedSubstat]} ${artifact.addedSubstat}`
+                  ) : (
+                    '—'
+                  )}
+                </td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'HP')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'ATK')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'DEF')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, '%HP')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, '%ATK')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, '%DEF')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'AP')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'PEN')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'Crit Rate')}</td>
+                <td className={styles.levelCell}>{renderSubstatCell(artifact, 'Crit DMG')}</td>
+                <td className={styles.sourceCell}>{artifact.where_got_it}</td>
+                <td className={styles.scoreCell}>{artifact.score}</td>
+                <td className={styles.actionCell}>
+                  <button 
+                    className={styles.editButton}
+                    onClick={() => onEdit(artifact)}
+                    title="Edit Artifact Leveling"
+                  >
+                    ✏️ Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className={styles.paginationContainer}>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Next ›"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="‹ Previous"
+          pageClassName={styles.pageItem}
+          pageLinkClassName={styles.pageLink}
+          previousClassName={styles.pageItem}
+          previousLinkClassName={styles.pageLink}
+          nextClassName={styles.pageItem}
+          nextLinkClassName={styles.pageLink}
+          breakClassName={styles.pageItem}
+          breakLinkClassName={styles.pageLink}
+          containerClassName={styles.pagination}
+          activeClassName={styles.active}
+        />
+      </div>
+    </div>
   );
 };
 
