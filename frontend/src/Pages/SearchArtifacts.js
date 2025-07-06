@@ -33,6 +33,24 @@ const SearchArtifacts = () => {
     setRefreshTrigger(prev => prev + 1);
   };
 
+  const handleReset = () => {
+    setFormData({
+      artifactSet: null,
+      type: null,
+      mainStat: null,
+      substats: [],
+      numberOfSubstats: "",
+      score: null,
+      source: null
+    });
+    setArtifacts([]);
+    setCurrentItems([]);
+    setHasSearched(false);
+    setItemOffset(0);
+    setCurrentPage(0);
+    sessionStorage.removeItem('lastSearchData');
+  };
+
   // Pagination effect
   useEffect(() => {
     const endOffset = itemOffset + ITEMS_PER_PAGE;
@@ -166,6 +184,7 @@ const SearchArtifacts = () => {
             handleSelectChange={handleSelectChange}
             handleInputChange={handleInputChange}
             isLoading={isLoading}
+            onReset={handleReset}
           />
         </div>
       </div>

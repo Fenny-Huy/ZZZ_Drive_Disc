@@ -4,7 +4,7 @@ import Select from "react-select"; // Import React-Select
 import styles from '../Styles/Components/ArtifactSearchForm.module.css';
 import { artifactConfig } from '../config/config';
 
-const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, scores, sources, artifactSets, handleSelectChange, handleInputChange, isLoading }) => {
+const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOptions, scores, sources, artifactSets, handleSelectChange, handleInputChange, isLoading, onReset }) => {
   // Define all substats
   const allSubstats = artifactConfig.allSubstats;
 
@@ -23,6 +23,16 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
   };
 
   const isSubmitDisabled = !(
+    formData.artifactSet ||
+    formData.type ||
+    formData.mainStat ||
+    formData.numberOfSubstats ||
+    formData.substats.length > 0 ||
+    formData.score ||
+    formData.source
+  );
+
+  const hasFilters = !!(
     formData.artifactSet ||
     formData.type ||
     formData.mainStat ||
@@ -131,19 +141,33 @@ const ArtifactSearchForm = ({ formData, handleSubmit, artifactTypes, mainStatsOp
         </select>
       </div>
 
-      <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled || isLoading}>
-        {isLoading ? (
-          <>
-            <div className={styles.button_spinner}></div>
-            Searching...
-          </>
-        ) : (
-          <>
-            <span className={styles.button_icon}>🔍</span>
-            Search Artifacts
-          </>
+      <div className={styles.form_actions}>
+        <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled || isLoading}>
+          {isLoading ? (
+            <>
+              <div className={styles.button_spinner}></div>
+              Searching...
+            </>
+          ) : (
+            <>
+              <span className={styles.button_icon}>🔍</span>
+              Search Drive Discs
+            </>
+          )}
+        </button>
+        
+        {hasFilters && (
+          <button 
+            type="button" 
+            className={styles.resetButton} 
+            onClick={onReset}
+            disabled={isLoading}
+          >
+            <span className={styles.button_icon}>🗑️</span>
+            Clear Filters
+          </button>
         )}
-      </button>
+      </div>
     </form>
   );
 };
