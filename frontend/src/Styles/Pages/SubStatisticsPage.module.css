@@ -1,66 +1,211 @@
 
 .statistics_page {
-    padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.statistics_page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.statistics_page h1 {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 
 .button_container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
 }
 
 .button_container button {
-    margin: 5px 10px; /* Adjust margins for better spacing */
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #f0f0f0;
-    transition: background-color 0.3s;
-}
-
-.button_container button.active {
-    background-color: #007bff;
-    color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .button_container button:hover {
-    background-color: #007bff;
-    color: white;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+.button_container button.active {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
 
 .select_container {
-    display: flex;
-    justify-content: space-between; /* Adjust spacing between the Select components */
-    width: 550px; /* Adjust the width as needed */
-    margin: 0; /* Center the dropdown */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
 
+.select_container .select {
+  flex: 1;
+  max-width: 280px;
+}
+
+.select_container .select:last-child {
+  margin-right: 0;
+}
+
+/* React Select Styling */
+.select_container :global(.select__control) {
+  min-height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.select_container :global(.select__control:hover) {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.select_container :global(.select__control--is-focused) {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.select_container :global(.select__value-container) {
+  padding: 8px 16px;
+}
+
+.select_container :global(.select__placeholder),
+.select_container :global(.select__single-value) {
+  color: white;
+  font-weight: 500;
+}
+
+.select_container :global(.select__input) {
+  color: white;
+}
+
+.select_container :global(.select__indicator-separator) {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.select_container :global(.select__dropdown-indicator) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.select_container :global(.select__menu) {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.select_container :global(.select__option) {
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+}
+
+.select_container :global(.select__option:hover) {
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.select_container :global(.select__option--is-selected) {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .statistics_page {
+    padding: 20px 15px;
+  }
+  
+  .statistics_page h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .button_container {
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .button_container button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .select_container {
+    max-width: 100%;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics_page h1 {
+    font-size: 1.8rem;
+  }
+  
+  .button_container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button_container button {
+    width: 200px;
+  }
+  
+  .select_container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
   .select_container .select {
-    flex: 1; /* Allow the Select components to grow and fill the container */
-    margin-right: 10px; /* Add some space between the Select components */
+    width: 100%;
+    max-width: none;
   }
-  
-  .select_container .select:last-child {
-    margin-right: 0; /* Remove the margin from the last Select component */
-  }
-  
-  .select__control {
-    min-height: 30px; /* Adjust the height as needed */
-  }
-  
-  .select__value_container {
-    padding: 0 8px; /* Adjust the padding as needed */
-  }
-  
-  .select__input {
-    margin: 0; /* Remove default margin */
-  }
-  
-  .select__indicators {
-    height: 30px; /* Adjust the height as needed */
-  }
+}
 
 

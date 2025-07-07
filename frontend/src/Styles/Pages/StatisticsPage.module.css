@@ -1,38 +1,290 @@
 
-.statistics_page {
-    padding: 20px;
+/* StatisticsPage.module.css */
+.statisticsPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
 }
 
-.button_container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+.pageHeader {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.button_container button {
-    margin: 5px 10px; /* Adjust margins for better spacing */
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #f0f0f0;
-    transition: background-color 0.3s;
+.pageTitle {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.button_container button.active {
-    background-color: #007bff;
-    color: white;
+.pageSubtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.button_container button:hover {
-    background-color: #007bff;
-    color: white;
+.controlsContainer {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.categoryButtons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
 
-.select_container {
-    width: 300px; /* Adjust the width as needed */
-    margin: 0; /* Center the dropdown */
+.categoryButton {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #495057;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.categoryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.categoryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.categoryButton:hover::before {
+  left: 100%;
+}
+
+.categoryButton.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.categoryButton.active::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.filterLabel {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.selectContainer {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+.subButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.subButton {
+  padding: 10px 20px;
+  border: 2px solid rgba(103, 126, 234, 0.3);
+  border-radius: 25px;
+  background: white;
+  color: #667eea;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subButton:hover {
+  border-color: #667eea;
+  background: rgba(103, 126, 234, 0.05);
+  transform: translateY(-1px);
+}
+
+.subButton.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(103, 126, 234, 0.3);
+}
+
+.contentContainer {
+  max-width: 85vw;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.subContentContainer {
+  padding: 0;
+}
+
+.loadingState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #667eea;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(103, 126, 234, 0.2);
+  border-radius: 50%;
+  border-top-color: #667eea;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
- 
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.emptyState p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Custom Select Styling */
+.selectContainer :global(.select__control) {
+  border: 2px solid rgba(103, 126, 234, 0.2);
+  border-radius: 12px;
+  padding: 4px 8px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.selectContainer :global(.select__control:hover) {
+  border-color: rgba(103, 126, 234, 0.4);
+}
+
+.selectContainer :global(.select__control--is-focused) {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(103, 126, 234, 0.1);
+}
+
+.selectContainer :global(.select__placeholder) {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.selectContainer :global(.select__single-value) {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.selectContainer :global(.select__menu) {
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(103, 126, 234, 0.1);
+}
+
+.selectContainer :global(.select__option) {
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+}
+
+.selectContainer :global(.select__option:hover) {
+  background: rgba(103, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.selectContainer :global(.select__option--is-selected) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .statisticsPage {
+    padding: 16px;
+  }
+  
+  .pageTitle {
+    font-size: 2.5rem;
+  }
+  
+  .controlsContainer {
+    padding: 24px 20px;
+  }
+  
+  .categoryButtons {
+    gap: 12px;
+  }
+  
+  .categoryButton {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .subButtonsContainer {
+    gap: 8px;
+  }
+  
+  .subButton {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .contentContainer {
+    padding: 24px 20px;
+  }
+}
