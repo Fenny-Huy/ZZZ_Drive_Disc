@@ -157,22 +157,22 @@
 
 /* Column Width Control - You can adjust these values */
 .artifact_listing_table th:nth-child(1) { width: 50px; }   /* ID */
-.artifact_listing_table th:nth-child(2) { width: 180px; }  /* Set */
-.artifact_listing_table th:nth-child(3) { width: 90px; }  /* Type */
+.artifact_listing_table th:nth-child(2) { width: 170px; }  /* Set */
+.artifact_listing_table th:nth-child(3) { width: 80px; }  /* Type */
 .artifact_listing_table th:nth-child(4) { width: 90px; }  /* Main Stat */
 .artifact_listing_table th:nth-child(5) { width: 60px; }   /* Subs */
-.artifact_listing_table th:nth-child(6) { width: 80px; }   /* %ATK */
-.artifact_listing_table th:nth-child(7) { width: 80px; }   /* %HP */
-.artifact_listing_table th:nth-child(8) { width: 80px; }   /* %DEF */
-.artifact_listing_table th:nth-child(9) { width: 80px; }   /* ATK */
-.artifact_listing_table th:nth-child(10) { width: 80px; }  /* HP */
-.artifact_listing_table th:nth-child(11) { width: 80px; }  /* DEF */
-.artifact_listing_table th:nth-child(12) { width: 80px; }  /* ER */
-.artifact_listing_table th:nth-child(13) { width: 80px; }  /* EM */
+.artifact_listing_table th:nth-child(6) { width: 70px; }   /* %ATK */
+.artifact_listing_table th:nth-child(7) { width: 70px; }   /* %HP */
+.artifact_listing_table th:nth-child(8) { width: 70px; }   /* %DEF */
+.artifact_listing_table th:nth-child(9) { width: 70px; }   /* ATK */
+.artifact_listing_table th:nth-child(10) { width: 70px; }  /* HP */
+.artifact_listing_table th:nth-child(11) { width: 70px; }  /* DEF */
+.artifact_listing_table th:nth-child(12) { width: 70px; }  /* ER */
+.artifact_listing_table th:nth-child(13) { width: 70px; }  /* EM */
 .artifact_listing_table th:nth-child(14) { width: 100px; } /* Crit Rate */
 .artifact_listing_table th:nth-child(15) { width: 100px; } /* Crit DMG */
 .artifact_listing_table th:nth-child(16) { width: 120px; } /* Source */
-.artifact_listing_table th:nth-child(17) { width: 100px; }  /* Score */
+.artifact_listing_table th:nth-child(17) { width: 130px; }  /* Score */
 .artifact_listing_table th:nth-child(18) { width: 120px; } /* Actions */
 
 .artifact_listing_table th {
