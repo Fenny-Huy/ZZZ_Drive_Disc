@@ -66,7 +66,9 @@ const apiConfig = {
         "Shadow Harmony",
         "Phaethon's Melody",
         "King of the Summit",
-        "Yunkui Tales"
+        "Yunkui Tales",
+        "Moonlight Lullaby",
+        "Dawn's Bloom"
     ],
   };
 
