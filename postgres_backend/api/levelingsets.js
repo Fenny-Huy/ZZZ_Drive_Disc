@@ -9,8 +9,8 @@ levelingsetsRouter.get("/", async (req, res) => {
   try {
     const query = `
       SELECT \"Set\" 
-      FROM \"Artifact_leveling\" l 
-      JOIN \"Artifact_itself\" i ON l.\"ID\" = i.\"ID\" 
+      FROM \"Drive_Disc_leveling\" l 
+      JOIN \"Drive_Disc\" i ON l.\"ID\" = i.\"ID\" 
       GROUP BY \"Set\" 
       ORDER BY \"Set\";
     `;

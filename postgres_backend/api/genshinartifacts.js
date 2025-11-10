@@ -8,12 +8,12 @@ genshinArtifactsRouter.use(express.json());
 
 genshinArtifactsRouter.get("/", async (req, res) => {
   try {
-    const artifacts = await localDb`SELECT * FROM "Artifact_itself"`;
+    const artifacts = await localDb`SELECT * FROM "Drive_Disc"`;
 
     const formattedArtifacts = artifacts.map(row => ({
       id: row.ID,
       set: row.Set,
-      type: row.Type,
+      type: row.Slot,
       main_stat: row.Main_Stat,
       number_of_substats: row.Number_of_substat,
       atk_percent: row.Percent_ATK,
@@ -22,8 +22,8 @@ genshinArtifactsRouter.get("/", async (req, res) => {
       atk: row.ATK,
       hp: row.HP,
       defense: row.DEF,
-      er: row.ER,
-      em: row.EM,
+      pen: row.PEN,
+      ap: row.AP,
       crit_rate: row.Crit_Rate,
       crit_dmg: row.Crit_DMG,
       where_got_it: row.Where_got_it,
@@ -50,8 +50,8 @@ genshinArtifactsRouter.post("/", async (req, res) => {
       atk,
       hp,
       defense,
-      er,
-      em,
+      pen,
+      ap,
       crit_rate,
       crit_dmg,
       where_got_it,
@@ -61,13 +61,13 @@ genshinArtifactsRouter.post("/", async (req, res) => {
     let newArtifact;
     for (const db of [localDb, cloudDb]) {
       newArtifact = await db`
-        INSERT INTO "Artifact_itself" (
-          "Set", "Type", "Main_Stat", "Number_of_substat", "Percent_ATK",
-          "Percent_HP", "Percent_DEF", "ATK", "HP", "DEF", "ER", "EM",
+        INSERT INTO "Drive_Disc" (
+          "Set", "Slot", "Main_Stat", "Number_of_substat", "Percent_ATK",
+          "Percent_HP", "Percent_DEF", "ATK", "HP", "DEF", "PEN", "AP",
           "Crit_Rate", "Crit_DMG", "Where_got_it", "Score"
         ) VALUES (
           ${set}, ${type}, ${main_stat}, ${number_of_substats}, ${atk_percent},
-          ${hp_percent}, ${def_percent}, ${atk}, ${hp}, ${defense}, ${er}, ${em},
+          ${hp_percent}, ${def_percent}, ${atk}, ${hp}, ${defense}, ${pen}, ${ap},
           ${crit_rate}, ${crit_dmg}, ${where_got_it}, ${score}
         ) RETURNING *;
       `;
@@ -94,8 +94,8 @@ genshinArtifactsRouter.put("/:artifact_id", async (req, res) => {
       atk,
       hp,
       defense,
-      er,
-      em,
+      pen,
+      ap,
       crit_rate,
       crit_dmg,
       where_got_it,
@@ -105,9 +105,9 @@ genshinArtifactsRouter.put("/:artifact_id", async (req, res) => {
     let updatedArtifact;
     for (const db of [localDb, cloudDb]) {
       updatedArtifact = await db`
-        UPDATE "Artifact_itself" SET
+        UPDATE "Drive_Disc" SET
           "Set" = ${set},
-          "Type" = ${type},
+          "Slot" = ${type},
           "Main_Stat" = ${main_stat},
           "Number_of_substat" = ${number_of_substats},
           "Percent_ATK" = ${atk_percent},
@@ -116,8 +116,8 @@ genshinArtifactsRouter.put("/:artifact_id", async (req, res) => {
           "ATK" = ${atk},
           "HP" = ${hp},
           "DEF" = ${defense},
-          "ER" = ${er},
-          "EM" = ${em},
+          "PEN" = ${pen},
+          "AP" = ${ap},
           "Crit_Rate" = ${crit_rate},
           "Crit_DMG" = ${crit_dmg},
           "Where_got_it" = ${where_got_it},

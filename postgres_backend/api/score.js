@@ -11,7 +11,7 @@ scoreRouter.get("/", async (req, res) => {
   try {
     const query = `
       SELECT "Score", COUNT(*) AS totalcount
-      FROM "Artifact_itself"
+      FROM "Drive_Disc"
       GROUP BY "Score"
       ORDER BY totalcount DESC;
     `;
@@ -32,7 +32,7 @@ scoreRouter.get("/set", async (req, res) => {
   try {
     const query = `
       SELECT "Score", "Set", COUNT(*) AS totalcount
-      FROM "Artifact_itself"
+      FROM "Drive_Disc"
       GROUP BY "Score", "Set"
       ORDER BY totalcount DESC;
     `;
@@ -54,7 +54,7 @@ scoreRouter.get("/where", async (req, res) => {
   try {
     const query = `
       SELECT "Score", "Where_got_it", COUNT(*) AS totalcount
-      FROM "Artifact_itself"
+      FROM "Drive_Disc"
       GROUP BY "Score", "Where_got_it"
       ORDER BY totalcount DESC;
     `;
@@ -76,7 +76,7 @@ scoreRouter.get("/set_where", async (req, res) => {
   try {
     const query = `
       SELECT "Score", "Set", "Where_got_it", COUNT(*) AS totalcount
-      FROM "Artifact_itself"
+      FROM "Drive_Disc"
       GROUP BY "Score", "Set", "Where_got_it"
       ORDER BY totalcount DESC;
     `;

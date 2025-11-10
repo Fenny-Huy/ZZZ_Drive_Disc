@@ -10,7 +10,7 @@ artifactRouter.get("/:artifact_id", async (req, res) => {
   try {
     const { artifact_id } = req.params;
 
-    const query = `SELECT * FROM "Artifact_itself" WHERE "ID" = $1`;
+    const query = `SELECT * FROM "Drive_Disc" WHERE "ID" = $1`;
     const rows = await localDb.unsafe(query, [artifact_id]);
 
     if (rows.length === 0) {
@@ -30,8 +30,8 @@ artifactRouter.get("/:artifact_id", async (req, res) => {
       atk: row.ATK,
       hp: row.HP,
       defense: row.DEF,
-      er: row.ER,
-      em: row.EM,
+      pen: row.PEN,
+      ap: row.AP,
       crit_rate: row.Crit_Rate,
       crit_dmg: row.Crit_DMG,
       where_got_it: row.Where_got_it,

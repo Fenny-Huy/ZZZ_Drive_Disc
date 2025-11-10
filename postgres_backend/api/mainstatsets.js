@@ -7,7 +7,7 @@ mainstatsetsRouter.use(cors());
 
 mainstatsetsRouter.get("/", async (req, res) => {
   try {
-    const query = "SELECT \"Set\" FROM \"Artifact_itself\" GROUP BY \"Set\" ORDER BY \"Set\";";
+    const query = "SELECT \"Set\" FROM \"Drive_Disc\" GROUP BY \"Set\" ORDER BY \"Set\";";
     const rows = await localDb.unsafe(query);
     const sets = rows.map(row => row.Set);
     res.status(200).json(sets);

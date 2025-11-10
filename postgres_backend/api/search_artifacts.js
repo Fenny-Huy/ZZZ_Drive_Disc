@@ -8,7 +8,7 @@ searchArtifactsRouter.use(express.json());
 
 searchArtifactsRouter.get("/", async (req, res) => {
   try {
-    let query = `SELECT * FROM "Artifact_itself" WHERE 1=1`;
+    let query = `SELECT * FROM "Drive_Disc" WHERE 1=1`;
     const params = [];
 
     const queryParams = req.query;
@@ -18,7 +18,7 @@ searchArtifactsRouter.get("/", async (req, res) => {
       params.push(queryParams.set);
     }
     if (queryParams.type) {
-      query += ` AND "Type" = $${params.length + 1}`;
+      query += ` AND "Slot" = $${params.length + 1}`;
       params.push(queryParams.type);
     }
     if (queryParams.main_stat) {
@@ -53,13 +53,13 @@ searchArtifactsRouter.get("/", async (req, res) => {
       query += ` AND "DEF" = $${params.length + 1}`;
       params.push(queryParams.defense);
     }
-    if (queryParams.er) {
-      query += ` AND "ER" = $${params.length + 1}`;
-      params.push(queryParams.er);
+    if (queryParams.pen) {
+      query += ` AND "PEN" = $${params.length + 1}`;
+      params.push(queryParams.pen);
     }
-    if (queryParams.em) {
-      query += ` AND "EM" = $${params.length + 1}`;
-      params.push(queryParams.em);
+    if (queryParams.ap) {
+      query += ` AND "AP" = $${params.length + 1}`;
+      params.push(queryParams.ap);
     }
     if (queryParams.crit_rate) {
       query += ` AND "Crit_Rate" = $${params.length + 1}`;
@@ -92,8 +92,8 @@ searchArtifactsRouter.get("/", async (req, res) => {
       atk: row.ATK,
       hp: row.HP,
       defense: row.DEF,
-      er: row.ER,
-      em: row.EM,
+      pen: row.PEN,
+      ap: row.AP,
       crit_rate: row.Crit_Rate,
       crit_dmg: row.Crit_DMG,
       where_got_it: row.Where_got_it,

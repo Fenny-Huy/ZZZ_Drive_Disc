@@ -8,7 +8,7 @@ artifactLevelingIdsRouter.use(express.json());
 
 artifactLevelingIdsRouter.get("/", async (req, res) => {
   try {
-    const query = `SELECT "ID" FROM "Artifact_leveling"`;
+    const query = `SELECT "ID" FROM "Drive_Disc_leveling"`;
     const rows = await localDb.unsafe(query);
 
     const ids = rows.map(row => row.ID);

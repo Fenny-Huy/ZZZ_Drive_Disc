@@ -16,9 +16,9 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Genshin Artifacts API',
+      title: 'ZZZ Drive Disc API',
       version: '1.0.0',
-      description: 'API for fetching Genshin Artifacts',
+      description: 'API for fetching ZZZ Drive Disc',
     },
   },
   apis: ['./docs/*.js'], // Adjusted to include all files in the docs folder
