@@ -1,7 +1,7 @@
 const postgres = require('postgres');
 const dotenv = require("dotenv");
 const fs = require("fs");
-dotenv.config();
+dotenv.config({override: true});
 
 // Cloud database connection (Supabase)
 const cloudConnectionString = process.env.DATABASE_URL;
