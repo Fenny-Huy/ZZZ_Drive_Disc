@@ -83,7 +83,7 @@ searchArtifactsRouter.get("/", async (req, res) => {
     const artifacts = rows.map(row => ({
       id: row.ID,
       set: row.Set,
-      type: row.Type,
+      type: row.Slot,
       main_stat: row.Main_Stat,
       number_of_substats: row.Number_of_substat,
       atk_percent: row.Percent_ATK,
