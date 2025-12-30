@@ -44,7 +44,7 @@ const customStyles: StylesConfig<Option, false> = {
   }),
 };
 
-type LevelingKey = "lHP" | "lATK" | "lDEF" | "lPercentHP" | "lPercentATK" | "lPercentDEF" | "lEM" | "lER" | "lCritRate" | "lCritDMG";
+type LevelingKey = "lHP" | "lATK" | "lDEF" | "lPercentHP" | "lPercentATK" | "lPercentDEF" | "lAP" | "lPEN" | "lCritRate" | "lCritDMG";
 
 export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormProps) {
   const [mounted, setMounted] = useState(false);
@@ -63,8 +63,8 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
     lPercentHP: string;
     lPercentATK: string;
     lPercentDEF: string;
-    lEM: string;
-    lER: string;
+    lAP: string;
+    lPEN: string;
     lCritRate: string;
     lCritDMG: string;
   }>({
@@ -80,8 +80,8 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
     lPercentHP: "",
     lPercentATK: "",
     lPercentDEF: "",
-    lEM: "",
-    lER: "",
+    lAP: "",
+    lPEN: "",
     lCritRate: "",
     lCritDMG: "",
   });
@@ -117,8 +117,8 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
       case "%HP": return "lPercentHP";
       case "%ATK": return "lPercentATK";
       case "%DEF": return "lPercentDEF";
-      case "EM": return "lEM";
-      case "ER": return "lER";
+      case "AP": return "lAP";
+      case "PEN": return "lPEN";
       case "Crit Rate": return "lCritRate";
       case "Crit DMG": return "lCritDMG";
       default: return "lHP";
@@ -153,8 +153,8 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
       lPercentHP: "",
       lPercentATK: "",
       lPercentDEF: "",
-      lEM: "",
-      lER: "",
+      lAP: "",
+      lPEN: "",
       lCritRate: "",
       lCritDMG: "",
     });
@@ -181,8 +181,8 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
       lPercentHP: formData.lPercentHP ? parseInt(formData.lPercentHP) : null,
       lPercentATK: formData.lPercentATK ? parseInt(formData.lPercentATK) : null,
       lPercentDEF: formData.lPercentDEF ? parseInt(formData.lPercentDEF) : null,
-      lEM: formData.lEM ? parseInt(formData.lEM) : null,
-      lER: formData.lER ? parseInt(formData.lER) : null,
+      lAP: formData.lAP ? parseInt(formData.lAP) : null,
+      lPEN: formData.lPEN ? parseInt(formData.lPEN) : null,
       lCritRate: formData.lCritRate ? parseInt(formData.lCritRate) : null,
       lCritDMG: formData.lCritDMG ? parseInt(formData.lCritDMG) : null,
     };
@@ -202,8 +202,8 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
     !formData.lPercentHP &&
     !formData.lPercentATK &&
     !formData.lPercentDEF &&
-    !formData.lEM &&
-    !formData.lER &&
+    !formData.lAP &&
+    !formData.lPEN &&
     !formData.lCritRate &&
     !formData.lCritDMG &&
     selectedSubstats.length === 0;

@@ -6,8 +6,8 @@ export const keysConfig = [
   ["sub_ATK", "roll_ATK", "added_ATK", 'ATK'],
   ["sub_HP", "roll_HP", "added_HP", 'HP'],
   ["sub_DEF", "roll_DEF", "added_DEF", 'DEF'],
-  ["sub_ER", "roll_ER", "added_ER", 'ER'],
-  ["sub_EM", "roll_EM", "added_EM", 'EM'],
+  ["sub_PEN", "roll_PEN", "added_PEN", 'PEN'],
+  ["sub_AP", "roll_AP", "added_AP", 'AP'],
   ["sub_Crit_Rate", "roll_Crit_Rate", "added_Crit_Rate", 'Crit Rate'],
   ["sub_Crit_DMG", "roll_Crit_DMG", "added_Crit_DMG", 'Crit DMG'],
   [null, null, "added_None", "None"]
@@ -280,8 +280,8 @@ const SUBSTAT_KEY_TO_LABEL: Record<string, string> = {
   sub_ATK: "ATK",
   sub_HP: "HP",
   sub_DEF: "DEF",
-  sub_ER: "ER",
-  sub_EM: "EM",
+  sub_PEN: "PEN",
+  sub_AP: "AP",
   sub_Crit_Rate: "Crit Rate",
   sub_Crit_DMG: "Crit DMG",
 };

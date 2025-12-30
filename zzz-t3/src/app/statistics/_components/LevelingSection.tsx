@@ -131,7 +131,7 @@ export const LevelingSection: React.FC<LevelingSectionProps> = ({ levelingData, 
           }`}
           onClick={() => setSelectedLevelingChart('Overall')}
         >
-          🌐 Overall
+          Overall
         </button>
         <button 
           className={`rounded-lg px-6 py-2 text-sm font-medium transition-all ${
@@ -141,7 +141,7 @@ export const LevelingSection: React.FC<LevelingSectionProps> = ({ levelingData, 
           }`}
           onClick={() => setSelectedLevelingChart('Specific')}
         >
-          🎯 Specific
+          Specific
         </button>
       </div>
 

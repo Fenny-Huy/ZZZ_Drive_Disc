@@ -57,8 +57,8 @@ export default function LevelingSearchPage() {
       case "ATK": return artifact.atk === 1;
       case "HP": return artifact.hp === 1;
       case "DEF": return artifact.def === 1;
-      case "ER": return artifact.er === 1;
-      case "EM": return artifact.em === 1;
+      case "PEN": return artifact.pen === 1;
+      case "AP": return artifact.ap === 1;
       case "Crit Rate": return artifact.critRate === 1;
       case "Crit DMG": return artifact.critDMG === 1;
       default: return false;
@@ -107,8 +107,8 @@ export default function LevelingSearchPage() {
                     <th className="p-3 text-center">%HP</th>
                     <th className="p-3 text-center">%ATK</th>
                     <th className="p-3 text-center">%DEF</th>
-                    <th className="p-3 text-center">EM</th>
-                    <th className="p-3 text-center">ER</th>
+                    <th className="p-3 text-center">AP</th>
+                    <th className="p-3 text-center">PEN</th>
                     <th className="p-3 text-center">C.Rate</th>
                     <th className="p-3 text-center">C.DMG</th>
                     <th className="p-3">Score</th>
@@ -145,8 +145,8 @@ export default function LevelingSearchPage() {
                         <td className="p-3 text-center">{renderLevelValue(leveling.lPercentHP, isSubstatPresent(artifact, "%HP") || leveling.addedSubstat === "%HP")}</td>
                         <td className="p-3 text-center">{renderLevelValue(leveling.lPercentATK, isSubstatPresent(artifact, "%ATK") || leveling.addedSubstat === "%ATK")}</td>
                         <td className="p-3 text-center">{renderLevelValue(leveling.lPercentDEF, isSubstatPresent(artifact, "%DEF") || leveling.addedSubstat === "%DEF")}</td>
-                        <td className="p-3 text-center">{renderLevelValue(leveling.lEM, isSubstatPresent(artifact, "EM") || leveling.addedSubstat === "EM")}</td>
-                        <td className="p-3 text-center">{renderLevelValue(leveling.lER, isSubstatPresent(artifact, "ER") || leveling.addedSubstat === "ER")}</td>
+                        <td className="p-3 text-center">{renderLevelValue(leveling.lAP, isSubstatPresent(artifact, "AP") || leveling.addedSubstat === "AP")}</td>
+                        <td className="p-3 text-center">{renderLevelValue(leveling.lPEN, isSubstatPresent(artifact, "PEN") || leveling.addedSubstat === "PEN")}</td>
                         <td className="p-3 text-center">{renderLevelValue(leveling.lCritRate, isSubstatPresent(artifact, "Crit Rate") || leveling.addedSubstat === "Crit Rate")}</td>
                         <td className="p-3 text-center">{renderLevelValue(leveling.lCritDMG, isSubstatPresent(artifact, "Crit DMG") || leveling.addedSubstat === "Crit DMG")}</td>
 

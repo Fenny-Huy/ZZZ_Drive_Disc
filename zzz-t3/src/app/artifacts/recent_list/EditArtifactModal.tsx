@@ -70,8 +70,8 @@ export function EditArtifactModal({
     if (artifact.atk) substats.push("ATK");
     if (artifact.hp) substats.push("HP");
     if (artifact.def) substats.push("DEF");
-    if (artifact.er) substats.push("ER");
-    if (artifact.em) substats.push("EM");
+    if (artifact.pen) substats.push("PEN");
+    if (artifact.ap) substats.push("AP");
     if (artifact.critRate) substats.push("Crit Rate");
     if (artifact.critDMG) substats.push("Crit DMG");
     return substats;

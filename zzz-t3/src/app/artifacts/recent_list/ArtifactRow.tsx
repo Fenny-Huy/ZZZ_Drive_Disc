@@ -23,8 +23,8 @@ export function ArtifactRow({ artifact, onRefresh }: ArtifactRowProps) {
     (artifact.leveling.lPercentHP ?? 0) +
     (artifact.leveling.lPercentATK ?? 0) +
     (artifact.leveling.lPercentDEF ?? 0) +
-    (artifact.leveling.lEM ?? 0) +
-    (artifact.leveling.lER ?? 0) +
+    (artifact.leveling.lAP ?? 0) +
+    (artifact.leveling.lPEN ?? 0) +
     (artifact.leveling.lCritRate ?? 0) +
     (artifact.leveling.lCritDMG ?? 0) > 0
   );
@@ -50,8 +50,8 @@ export function ArtifactRow({ artifact, onRefresh }: ArtifactRowProps) {
         <td className="p-3">{renderCheckbox(artifact.atk)}</td>
         <td className="p-3">{renderCheckbox(artifact.hp)}</td>
         <td className="p-3">{renderCheckbox(artifact.def)}</td>
-        <td className="p-3">{renderCheckbox(artifact.er)}</td>
-        <td className="p-3">{renderCheckbox(artifact.em)}</td>
+        <td className="p-3">{renderCheckbox(artifact.pen)}</td>
+        <td className="p-3">{renderCheckbox(artifact.ap)}</td>
         <td className="p-3">{renderCheckbox(artifact.critRate)}</td>
         <td className="p-3">{renderCheckbox(artifact.critDMG)}</td>
         <td className="p-3 text-gray-400">{artifact.whereGotIt}</td>

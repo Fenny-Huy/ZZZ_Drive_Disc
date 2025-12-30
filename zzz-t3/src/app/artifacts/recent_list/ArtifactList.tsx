@@ -44,8 +44,8 @@ export function ArtifactList() {
                 <th className="p-3 text-center">ATK</th>
                 <th className="p-3 text-center">HP</th>
                 <th className="p-3 text-center">DEF</th>
-                <th className="p-3 text-center">ER</th>
-                <th className="p-3 text-center">EM</th>
+                <th className="p-3 text-center">PEN</th>
+                <th className="p-3 text-center">AP</th>
                 <th className="p-3 text-center">Crit Rate</th>
                 <th className="p-3 text-center">Crit DMG</th>
                 <th className="p-3">Source</th>

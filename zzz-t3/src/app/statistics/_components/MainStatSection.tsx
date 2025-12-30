@@ -23,9 +23,9 @@ export const MainStatSection: React.FC<MainStatSectionProps> = ({
 
   const tabs = [
     { id: 'Types', label: 'Types' },
-    { id: 'Sand', label: 'Sand' },
-    { id: 'Goblet', label: 'Goblet' },
-    { id: 'Circlet', label: 'Circlet' },
+    { id: '4', label: '4' },
+    { id: '5', label: '5' },
+    { id: '6', label: '6' },
   ];
 
   return (

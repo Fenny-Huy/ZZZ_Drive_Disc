@@ -21,8 +21,8 @@ interface LevelingFormData {
   lPercentHP: number;
   lPercentATK: number;
   lPercentDEF: number;
-  lEM: number;
-  lER: number;
+  lAP: number;
+  lPEN: number;
   lCritRate: number;
   lCritDMG: number;
   addedSubstat: string;
@@ -49,8 +49,8 @@ export function LevelArtifactModal({
     lPercentHP: artifact.leveling?.lPercentHP ?? 0,
     lPercentATK: artifact.leveling?.lPercentATK ?? 0,
     lPercentDEF: artifact.leveling?.lPercentDEF ?? 0,
-    lEM: artifact.leveling?.lEM ?? 0,
-    lER: artifact.leveling?.lER ?? 0,
+    lAP: artifact.leveling?.lAP ?? 0,
+    lPEN: artifact.leveling?.lPEN ?? 0,
     lCritRate: artifact.leveling?.lCritRate ?? 0,
     lCritDMG: artifact.leveling?.lCritDMG ?? 0,
     addedSubstat: artifact.leveling?.addedSubstat ?? "None",
@@ -67,8 +67,8 @@ export function LevelArtifactModal({
     if (artifact.atk) substats.push("ATK");
     if (artifact.hp) substats.push("HP");
     if (artifact.def) substats.push("DEF");
-    if (artifact.er) substats.push("ER");
-    if (artifact.em) substats.push("EM");
+    if (artifact.pen) substats.push("PEN");
+    if (artifact.ap) substats.push("AP");
     if (artifact.critRate) substats.push("Crit Rate");
     if (artifact.critDMG) substats.push("Crit DMG");
     setInitialSubstats(substats);
@@ -105,8 +105,8 @@ export function LevelArtifactModal({
       case "ATK": return "lATK";
       case "HP": return "lHP";
       case "DEF": return "lDEF";
-      case "ER": return "lER";
-      case "EM": return "lEM";
+      case "PEN": return "lPEN";
+      case "AP": return "lAP";
       default: return "lHP"; // Should not happen
     }
   };
