@@ -101,8 +101,8 @@ export const statisticsRouter = createTRPCRouter({
           sub_ATK: sql<number>`sum(${artifactItself.atk})`.mapWith(Number),
           sub_HP: sql<number>`sum(${artifactItself.hp})`.mapWith(Number),
           sub_DEF: sql<number>`sum(${artifactItself.def})`.mapWith(Number),
-          sub_ER: sql<number>`sum(${artifactItself.er})`.mapWith(Number),
-          sub_EM: sql<number>`sum(${artifactItself.em})`.mapWith(Number),
+          sub_PEN: sql<number>`sum(${artifactItself.pen})`.mapWith(Number),
+          sub_AP: sql<number>`sum(${artifactItself.ap})`.mapWith(Number),
           sub_Crit_Rate: sql<number>`sum(${artifactItself.critRate})`.mapWith(Number),
           sub_Crit_DMG: sql<number>`sum(${artifactItself.critDMG})`.mapWith(Number),
           
@@ -110,7 +110,7 @@ export const statisticsRouter = createTRPCRouter({
           substatCount: sql<number>`sum(
             ${artifactItself.percentATK} + ${artifactItself.percentHP} + ${artifactItself.percentDEF} + 
             ${artifactItself.atk} + ${artifactItself.hp} + ${artifactItself.def} + 
-            ${artifactItself.er} + ${artifactItself.em} + 
+            ${artifactItself.pen} + ${artifactItself.ap} + 
             ${artifactItself.critRate} + ${artifactItself.critDMG}
           )`.mapWith(Number),
         })
@@ -146,15 +146,15 @@ export const statisticsRouter = createTRPCRouter({
           sub_ATK: sql<number>`sum(${artifactItself.atk})`.mapWith(Number),
           sub_HP: sql<number>`sum(${artifactItself.hp})`.mapWith(Number),
           sub_DEF: sql<number>`sum(${artifactItself.def})`.mapWith(Number),
-          sub_ER: sql<number>`sum(${artifactItself.er})`.mapWith(Number),
-          sub_EM: sql<number>`sum(${artifactItself.em})`.mapWith(Number),
+          sub_PEN: sql<number>`sum(${artifactItself.pen})`.mapWith(Number),
+          sub_AP: sql<number>`sum(${artifactItself.ap})`.mapWith(Number),
           sub_Crit_Rate: sql<number>`sum(${artifactItself.critRate})`.mapWith(Number),
           sub_Crit_DMG: sql<number>`sum(${artifactItself.critDMG})`.mapWith(Number),
           
           substatCount: sql<number>`sum(
             ${artifactItself.percentATK} + ${artifactItself.percentHP} + ${artifactItself.percentDEF} + 
             ${artifactItself.atk} + ${artifactItself.hp} + ${artifactItself.def} + 
-            ${artifactItself.er} + ${artifactItself.em} + 
+            ${artifactItself.pen} + ${artifactItself.ap} + 
             ${artifactItself.critRate} + ${artifactItself.critDMG}
           )`.mapWith(Number),
 
@@ -165,15 +165,15 @@ export const statisticsRouter = createTRPCRouter({
           roll_HP_per: sql<number>`sum(${artifactLeveling.lPercentHP})`.mapWith(Number),
           roll_ATK_per: sql<number>`sum(${artifactLeveling.lPercentATK})`.mapWith(Number),
           roll_DEF_per: sql<number>`sum(${artifactLeveling.lPercentDEF})`.mapWith(Number),
-          roll_EM: sql<number>`sum(${artifactLeveling.lEM})`.mapWith(Number),
-          roll_ER: sql<number>`sum(${artifactLeveling.lER})`.mapWith(Number),
+          roll_AP: sql<number>`sum(${artifactLeveling.lAP})`.mapWith(Number),
+          roll_PEN: sql<number>`sum(${artifactLeveling.lPEN})`.mapWith(Number),
           roll_Crit_Rate: sql<number>`sum(${artifactLeveling.lCritRate})`.mapWith(Number),
           roll_Crit_DMG: sql<number>`sum(${artifactLeveling.lCritDMG})`.mapWith(Number),
 
           TotalRoll: sql<number>`sum(
             ${artifactLeveling.lHP} + ${artifactLeveling.lATK} + ${artifactLeveling.lDEF} + 
             ${artifactLeveling.lPercentHP} + ${artifactLeveling.lPercentATK} + ${artifactLeveling.lPercentDEF} + 
-            ${artifactLeveling.lEM} + ${artifactLeveling.lER} + 
+            ${artifactLeveling.lAP} + ${artifactLeveling.lPEN} + 
             ${artifactLeveling.lCritRate} + ${artifactLeveling.lCritDMG}
           )`.mapWith(Number),
 
@@ -184,8 +184,8 @@ export const statisticsRouter = createTRPCRouter({
           added_ATK_per: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = '%ATK' then 1 else 0 end)`.mapWith(Number),
           added_DEF_per: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = '%DEF' then 1 else 0 end)`.mapWith(Number),
           added_HP_per: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = '%HP' then 1 else 0 end)`.mapWith(Number),
-          added_ER: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'ER' then 1 else 0 end)`.mapWith(Number),
-          added_EM: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'EM' then 1 else 0 end)`.mapWith(Number),
+          added_PEN: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'PEN' then 1 else 0 end)`.mapWith(Number),
+          added_AP: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'AP' then 1 else 0 end)`.mapWith(Number),
           added_Crit_Rate: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'Crit Rate' then 1 else 0 end)`.mapWith(Number),
           added_Crit_DMG: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'Crit DMG' then 1 else 0 end)`.mapWith(Number),
           added_None: sql<number>`sum(case when ${artifactLeveling.addedSubstat} = 'None' then 1 else 0 end)`.mapWith(Number),

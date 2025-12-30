@@ -23,8 +23,8 @@ export const levelingRouter = createTRPCRouter({
         lPercentHP: z.number().nullable().optional(),
         lPercentATK: z.number().nullable().optional(),
         lPercentDEF: z.number().nullable().optional(),
-        lEM: z.number().nullable().optional(),
-        lER: z.number().nullable().optional(),
+        lAP: z.number().nullable().optional(),
+        lPEN: z.number().nullable().optional(),
         lCritRate: z.number().nullable().optional(),
         lCritDMG: z.number().nullable().optional(),
 
@@ -89,17 +89,17 @@ export const levelingRouter = createTRPCRouter({
           );
           if (condition) filters.push(condition);
         }
-        if (input.substats.includes("ER")) {
+        if (input.substats.includes("PEN")) {
           const condition = or(
-            eq(artifactItself.er, 1),
-            eq(artifactLeveling.addedSubstat, "ER"),
+            eq(artifactItself.pen, 1),
+            eq(artifactLeveling.addedSubstat, "PEN"),
           );
           if (condition) filters.push(condition);
         }
-        if (input.substats.includes("EM")) {
+        if (input.substats.includes("AP")) {
           const condition = or(
-            eq(artifactItself.em, 1),
-            eq(artifactLeveling.addedSubstat, "EM"),
+            eq(artifactItself.ap, 1),
+            eq(artifactLeveling.addedSubstat, "AP"),
           );
           if (condition) filters.push(condition);
         }
@@ -132,10 +132,10 @@ export const levelingRouter = createTRPCRouter({
         filters.push(eq(artifactLeveling.lPercentATK, input.lPercentATK));
       if (input.lPercentDEF !== null && input.lPercentDEF !== undefined)
         filters.push(eq(artifactLeveling.lPercentDEF, input.lPercentDEF));
-      if (input.lEM !== null && input.lEM !== undefined)
-        filters.push(eq(artifactLeveling.lEM, input.lEM));
-      if (input.lER !== null && input.lER !== undefined)
-        filters.push(eq(artifactLeveling.lER, input.lER));
+      if (input.lAP !== null && input.lAP !== undefined)
+        filters.push(eq(artifactLeveling.lAP, input.lAP));
+      if (input.lPEN !== null && input.lPEN !== undefined)
+        filters.push(eq(artifactLeveling.lPEN, input.lPEN));
       if (input.lCritRate !== null && input.lCritRate !== undefined)
         filters.push(eq(artifactLeveling.lCritRate, input.lCritRate));
       if (input.lCritDMG !== null && input.lCritDMG !== undefined)
@@ -176,8 +176,8 @@ export const levelingRouter = createTRPCRouter({
         lPercentHP: z.number().default(0),
         lPercentATK: z.number().default(0),
         lPercentDEF: z.number().default(0),
-        lEM: z.number().default(0),
-        lER: z.number().default(0),
+        lAP: z.number().default(0),
+        lPEN: z.number().default(0),
         lCritRate: z.number().default(0),
         lCritDMG: z.number().default(0),
         addedSubstat: z.string().default("None"),
@@ -207,8 +207,8 @@ export const levelingRouter = createTRPCRouter({
           lPercentHP: input.lPercentHP,
           lPercentATK: input.lPercentATK,
           lPercentDEF: input.lPercentDEF,
-          lEM: input.lEM,
-          lER: input.lER,
+          lAP: input.lAP,
+          lPEN: input.lPEN,
           lCritRate: input.lCritRate,
           lCritDMG: input.lCritDMG,
           addedSubstat: input.addedSubstat,
@@ -223,8 +223,8 @@ export const levelingRouter = createTRPCRouter({
             lPercentHP: input.lPercentHP,
             lPercentATK: input.lPercentATK,
             lPercentDEF: input.lPercentDEF,
-            lEM: input.lEM,
-            lER: input.lER,
+            lAP: input.lAP,
+            lPEN: input.lPEN,
             lCritRate: input.lCritRate,
             lCritDMG: input.lCritDMG,
             addedSubstat: input.addedSubstat,

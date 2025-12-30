@@ -8,11 +8,11 @@ import { type AdapterAccount } from "next-auth/adapters";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `genshin_t3_${name}`);
+export const createTable = pgTableCreator((name) => `zzz_t3_${name}`);
 
 // Artifact tables
 export const artifactItself = createTable(
-  "artifact_itself",
+  "drive_disc",
   (d) => ({
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
     userId: d
@@ -29,8 +29,8 @@ export const artifactItself = createTable(
     atk: d.integer().default(0),
     hp: d.integer().default(0),
     def: d.integer().default(0),
-    er: d.integer().default(0),
-    em: d.integer().default(0),
+    pen: d.integer().default(0),
+    ap: d.integer().default(0),
     critRate: d.integer().default(0),
     critDMG: d.integer().default(0),
     whereGotIt: d.varchar({ length: 50 }),
@@ -41,13 +41,13 @@ export const artifactItself = createTable(
       .notNull(),
   }),
   (t) => [
-    index("artifact_user_id_idx").on(t.userId),
-    index("artifact_set_idx").on(t.set),
+    index("drive_disc_user_id_idx").on(t.userId),
+    index("drive_disc_set_idx").on(t.set),
   ],
 );
 
 export const artifactLeveling = createTable(
-  "artifact_leveling",
+  "drive_disc_leveling",
   (d) => ({
     id: d
       .integer()
@@ -59,8 +59,8 @@ export const artifactLeveling = createTable(
     lPercentHP: d.integer().default(0),
     lPercentATK: d.integer().default(0),
     lPercentDEF: d.integer().default(0),
-    lEM: d.integer().default(0),
-    lER: d.integer().default(0),
+    lAP: d.integer().default(0),
+    lPEN: d.integer().default(0),
     lCritRate: d.integer().default(0),
     lCritDMG: d.integer().default(0),
     addedSubstat: d.varchar({ length: 20 }).default("None"),
@@ -73,7 +73,7 @@ export const artifactLeveling = createTable(
       .$defaultFn(() => new Date())
       .notNull(),
   }),
-  (t) => [index("artifact_leveling_id_idx").on(t.id)],
+  (t) => [index("drive_disc_leveling_id_idx").on(t.id)],
 );
 
 // Relations

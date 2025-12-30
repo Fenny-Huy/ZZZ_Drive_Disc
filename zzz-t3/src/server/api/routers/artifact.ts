@@ -65,8 +65,8 @@ export const artifactRouter = createTRPCRouter({
           atk: input.substats.includes("ATK") ? 1 : 0,
           hp: input.substats.includes("HP") ? 1 : 0,
           def: input.substats.includes("DEF") ? 1 : 0,
-          er: input.substats.includes("ER") ? 1 : 0,
-          em: input.substats.includes("EM") ? 1 : 0,
+          pen: input.substats.includes("PEN") ? 1 : 0,
+          ap: input.substats.includes("AP") ? 1 : 0,
           critRate: input.substats.includes("Crit Rate") ? 1 : 0,
           critDMG: input.substats.includes("Crit DMG") ? 1 : 0,
         })
@@ -110,8 +110,8 @@ export const artifactRouter = createTRPCRouter({
           atk: input.substats.includes("ATK") ? 1 : 0,
           hp: input.substats.includes("HP") ? 1 : 0,
           def: input.substats.includes("DEF") ? 1 : 0,
-          er: input.substats.includes("ER") ? 1 : 0,
-          em: input.substats.includes("EM") ? 1 : 0,
+          pen: input.substats.includes("PEN") ? 1 : 0,
+          ap: input.substats.includes("AP") ? 1 : 0,
           critRate: input.substats.includes("Crit Rate") ? 1 : 0,
           critDMG: input.substats.includes("Crit DMG") ? 1 : 0,
         })
@@ -163,10 +163,10 @@ export const artifactRouter = createTRPCRouter({
           filters.push(eq(artifactItself.hp, 1));
         if (input.substats.includes("DEF"))
           filters.push(eq(artifactItself.def, 1));
-        if (input.substats.includes("ER"))
-          filters.push(eq(artifactItself.er, 1));
-        if (input.substats.includes("EM"))
-          filters.push(eq(artifactItself.em, 1));
+        if (input.substats.includes("PEN"))
+          filters.push(eq(artifactItself.pen, 1));
+        if (input.substats.includes("AP"))
+          filters.push(eq(artifactItself.ap, 1));
         if (input.substats.includes("Crit Rate"))
           filters.push(eq(artifactItself.critRate, 1));
         if (input.substats.includes("Crit DMG"))

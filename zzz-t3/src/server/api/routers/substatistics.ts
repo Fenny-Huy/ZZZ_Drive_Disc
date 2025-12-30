@@ -112,8 +112,8 @@ export const substatisticsRouter = createTRPCRouter({
           ${artifactLeveling.lPercentHP} + 
           ${artifactLeveling.lPercentATK} + 
           ${artifactLeveling.lPercentDEF} + 
-          ${artifactLeveling.lEM} + 
-          ${artifactLeveling.lER} + 
+          ${artifactLeveling.lAP} + 
+          ${artifactLeveling.lPEN} + 
           ${artifactLeveling.lCritRate} + 
           ${artifactLeveling.lCritDMG}
         )`.mapWith(Number),
@@ -129,8 +129,8 @@ export const substatisticsRouter = createTRPCRouter({
           ${artifactLeveling.lPercentHP} + 
           ${artifactLeveling.lPercentATK} + 
           ${artifactLeveling.lPercentDEF} + 
-          ${artifactLeveling.lEM} + 
-          ${artifactLeveling.lER} + 
+          ${artifactLeveling.lAP} + 
+          ${artifactLeveling.lPEN} + 
           ${artifactLeveling.lCritRate} + 
           ${artifactLeveling.lCritDMG}
         )`));
