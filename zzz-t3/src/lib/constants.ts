@@ -72,6 +72,8 @@ export const artifactConfig = {
       "King of the Summit",
       "Yunkui Tales",
       "Moonlight Lullaby",
-      "Dawn's Bloom"
+      "Dawn's Bloom",
+      "White Water Ballad",
+      "Shining Aria"
     ],
 };
