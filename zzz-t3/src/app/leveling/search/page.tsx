@@ -70,7 +70,7 @@ export default function LevelingSearchPage() {
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-white">Search Leveling</h1>
         <p className="mt-2 text-gray-400">
-          Find artifact leveling records by stats and rolls
+          Find drive disc leveling records by stats and rolls
         </p>
       </div>
 
@@ -98,7 +98,7 @@ export default function LevelingSearchPage() {
                 <thead className="bg-slate-800 text-xs uppercase text-gray-400">
                   <tr>
                     <th className="p-3">Set</th>
-                    <th className="p-3">Type</th>
+                    <th className="p-3">Slot</th>
                     <th className="p-3">Main Stat</th>
                     <th className="p-3 text-center">Added</th>
                     <th className="p-3 text-center">HP</th>

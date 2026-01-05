@@ -221,14 +221,14 @@ export default function ArtifactCreateForm() {
         {/* Artifact Set */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-200">
-            Artifact Set
+            Drive Disc Set
           </label>
           <Select
             instanceId="artifact-set-select"
             options={toOptions(artifactConfig.artifactSets)}
             value={toOption(formData.set)}
             onChange={(val) => handleSelectChange("set", val)}
-            placeholder="Select Artifact Set..."
+            placeholder="Select Drive Disc Set..."
             styles={customStyles}
             isClearable
           />
@@ -237,14 +237,14 @@ export default function ArtifactCreateForm() {
         {/* Type */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-200">
-            Artifact Type
+            Drive Disc Slot
           </label>
           <Select
             instanceId="artifact-type-select"
             options={artifactConfig.artifactTypes}
             value={toOption(formData.type)}
             onChange={(val) => handleSelectChange("type", val)}
-            placeholder="Select Type..."
+            placeholder="Select Slot..."
             styles={customStyles}
             isClearable
           />

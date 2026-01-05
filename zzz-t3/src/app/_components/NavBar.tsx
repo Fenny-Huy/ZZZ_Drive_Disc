@@ -8,7 +8,7 @@ export async function NavBar() {
     <nav className="bg-slate-900 p-4 text-white shadow-md">
       <div className="w-full px-8 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold text-yellow-500">
-          Genshin Artifacts
+          ZZZ Drive Discs
         </Link>
         <div className="flex items-center gap-6">
           {session ? (
@@ -17,19 +17,19 @@ export async function NavBar() {
                 href="/artifacts/recent_list"
                 className="rounded-lg bg-yellow-600 px-4 py-2 font-semibold text-white shadow-md transition-all hover:bg-yellow-500 hover:shadow-yellow-500/20 active:scale-95"
               >
-                My Artifacts
+                My Drive Discs
               </Link>              
               <Link
                 href="/artifacts/search"
                 className="rounded-lg bg-yellow-600 px-4 py-2 font-semibold text-white shadow-md transition-all hover:bg-yellow-500 hover:shadow-yellow-500/20 active:scale-95"
               >
-                Search Artifacts
+                Search Drive Discs
               </Link>              
               <Link
                 href="/artifacts/create"
                 className="rounded-lg bg-yellow-600 px-4 py-2 font-semibold text-white shadow-md transition-all hover:bg-yellow-500 hover:shadow-yellow-500/20 active:scale-95"
               >
-                Add Artifact
+                Add Drive Disc
               </Link>
               <Link
                 href="/leveling/search"

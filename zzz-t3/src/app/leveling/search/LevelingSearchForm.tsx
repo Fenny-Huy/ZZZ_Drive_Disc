@@ -226,7 +226,7 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
         {/* Artifact Set */}
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-300">
-            Artifact Set
+            Drive Disc Set
           </label>
           <Select
             instanceId="artifact-set-select"
@@ -245,7 +245,7 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
         {/* Type */}
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-300">
-            Type
+            Slot
           </label>
           <Select
             instanceId="type-select"
@@ -253,7 +253,7 @@ export function LevelingSearchForm({ onSearch, isLoading }: LevelingSearchFormPr
             value={formData.type}
             onChange={(option) => handleSelectChange(option, "type")}
             styles={customStyles}
-            placeholder="Select Type..."
+            placeholder="Select Slot..."
             isClearable
           />
         </div>

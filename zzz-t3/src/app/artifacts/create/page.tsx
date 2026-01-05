@@ -14,10 +14,10 @@ export default async function ArtifactCreatePage() {
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Create New <span className="text-yellow-500">Artifact</span>
+            Create New <span className="text-yellow-500">Drive Disc</span>
           </h1>
           <p className="mt-4 text-lg text-gray-300">
-            Add a new artifact to your collection with detailed stats and substats
+            Add a new drive disc to your collection with detailed stats and substats
           </p>
         </div>
         

@@ -5,8 +5,8 @@ export default function ArtifactsPage() {
     <main className="min-h-screen pb-20 pt-8">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white">Recent Artifacts</h1>
-          <p className="text-gray-400">View your 10 most recently added artifacts</p>
+          <h1 className="text-3xl font-bold text-white">Recent Drive Discs</h1>
+          <p className="text-gray-400">View your 10 most recently added drive discs</p>
         </div>
         <ArtifactList />
       </div>

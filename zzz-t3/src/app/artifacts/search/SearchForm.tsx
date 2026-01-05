@@ -153,7 +153,7 @@ export function SearchForm({ onSearch, isLoading }: SearchFormProps) {
         {/* Artifact Set */}
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-300">
-            Artifact Set
+            Drive Disc Set
           </label>
           <Select
             options={artifactConfig.artifactSets.map((set) => ({
@@ -171,14 +171,14 @@ export function SearchForm({ onSearch, isLoading }: SearchFormProps) {
         {/* Type */}
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-300">
-            Type
+            Slot
           </label>
           <Select
             options={artifactConfig.artifactTypes}
             value={formData.type}
             onChange={(val) => handleSelectChange(val, "type")}
             styles={customStyles}
-            placeholder="Select Type..."
+            placeholder="Select Slot..."
             isClearable
           />
         </div>

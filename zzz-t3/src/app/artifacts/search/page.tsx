@@ -40,9 +40,9 @@ export default function SearchPage() {
   return (
     <div className="container mx-auto min-h-screen p-8 pt-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white">Search Artifacts</h1>
+        <h1 className="text-4xl font-bold text-white">Search Drive Discs</h1>
         <p className="mt-2 text-gray-400">
-          Find artifacts by set, type, stats, and more
+          Find drive discs by set, slot, stats, and more
         </p>
       </div>
 
@@ -70,7 +70,7 @@ export default function SearchPage() {
                 <thead className="bg-slate-800 text-xs uppercase text-gray-400">
                   <tr>
                     <th className="p-3">Set</th>
-                    <th className="p-3">Type</th>
+                    <th className="p-3">Slot</th>
                     <th className="p-3">Main Stat</th>
                     <th className="p-3 text-center">Subs</th>
                     <th className="p-3 text-center">%ATK</th>
@@ -112,7 +112,7 @@ export default function SearchPage() {
                         colSpan={17}
                         className="p-8 text-center text-gray-400"
                       >
-                        No artifacts found matching your criteria.
+                        No drive discs found matching your criteria.
                       </td>
                     </tr>
                   )}

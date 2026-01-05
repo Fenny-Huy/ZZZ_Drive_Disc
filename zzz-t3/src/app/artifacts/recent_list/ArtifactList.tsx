@@ -13,7 +13,7 @@ export function ArtifactList() {
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center text-white">
-        Loading artifacts...
+        Loading drive discs...
       </div>
     );
   }
@@ -24,7 +24,7 @@ export function ArtifactList() {
       <div className="flex items-center justify-between rounded-xl bg-slate-900 p-6 shadow-lg border border-slate-800">
         <div>
           <div className="text-2xl font-bold text-white">{data?.totalCount ?? 0}</div>
-          <div className="text-sm text-gray-400">Total Artifacts</div>
+          <div className="text-sm text-gray-400">Total Drive Discs</div>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ export function ArtifactList() {
               {data?.artifacts.length === 0 && (
                 <tr>
                   <td colSpan={17} className="p-8 text-center text-gray-400">
-                    No artifacts found. Start by adding some!
+                    No drive discs found. Start by adding some!
                   </td>
                 </tr>
               )}
