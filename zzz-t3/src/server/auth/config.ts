@@ -50,6 +50,11 @@ export const authConfig = {
       allowDangerousEmailAccountLinking: true,
     }),
   ],
+  cookies: {
+    sessionToken: {
+      name: "next-auth.session-token.zzz-t3",
+    },
+  },
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
