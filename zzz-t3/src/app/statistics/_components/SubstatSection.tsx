@@ -103,14 +103,14 @@ export const SubstatSection: React.FC<SubstatSectionProps> = ({
             chartType="bar"
             chartData={prepareChartData(substatDistribution, 'substat', 'percentage')}
             tableData={substatDistribution}
-            chartTitle={`${selectedType} - ${selectedMainStat} Substat Distribution`}
-            tableTitle={`${selectedType} - ${selectedMainStat} Substat Counts`}
+            chartTitle={`Slot ${selectedType} - ${selectedMainStat} Substat Distribution`}
+            tableTitle={`Slot ${selectedType} - ${selectedMainStat} Substat Counts`}
             tableFirstField="Substat"
             isLoading={isLoading}
           />
         ) : (
           <div className="flex h-64 items-center justify-center rounded-xl bg-slate-800/50 text-gray-400 border border-slate-700/50">
-            <p>Select a Type and Main Stat to view specific statistics</p>
+            <p>Select a Slot and Main Stat to view specific statistics</p>
           </div>
         )}
       </div>

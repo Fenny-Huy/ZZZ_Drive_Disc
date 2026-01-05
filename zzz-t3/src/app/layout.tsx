@@ -8,8 +8,8 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { NavBar } from "./_components/NavBar";
 
 export const metadata: Metadata = {
-  title: "Genshin Artifact Manager",
-  description: "Manage your Genshin Impact artifacts",
+  title: "ZZZ Drive Disc Manager",
+  description: "Manage your ZZZ Drive Discs",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

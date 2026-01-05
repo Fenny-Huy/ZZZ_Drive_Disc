@@ -23,7 +23,7 @@ export default async function SubStatisticsPage() {
               Analytics
             </h1>
             <p className="text-lg text-gray-400">
-              Detailed breakdown of artifact sets, sources, and scores.
+              Detailed breakdown of drive disc sets, sources, and scores.
             </p>
           </div>
 

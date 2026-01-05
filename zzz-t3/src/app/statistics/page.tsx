@@ -114,7 +114,7 @@ export default function StatisticsPage() {
       <div className="container mx-auto max-w-7xl space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-white">Artifact Statistics</h1>
+          <h1 className="text-4xl font-bold text-white">Drive Discs Statistics</h1>
           <p className="text-lg text-gray-400">Explore comprehensive data insights and patterns</p>
         </div>
 
@@ -145,7 +145,7 @@ export default function StatisticsPage() {
           {/* Set Filter */}
           <div className="w-full lg:w-80">
             <label className="mb-2 block text-sm font-medium text-gray-400">
-              Filter by Artifact Set
+              Filter by Drive Disc Set
             </label>
             <Select
               instanceId="set-select"
