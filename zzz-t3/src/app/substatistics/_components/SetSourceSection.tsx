@@ -136,30 +136,35 @@ const SetSourceSection: React.FC<SetSourceSectionProps> = ({
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800 w-fit">
-        <button 
-          className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${isSetSelected ? 'bg-slate-700 text-white shadow-md' : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'}`} 
-          onClick={handleSetSelection}
-        >
-          Set
-        </button>
-        <button 
-          className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${isSourceSelected ? 'bg-slate-700 text-white shadow-md' : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'}`} 
-          onClick={handleSourceSelection}
-        >
-          Source
-        </button>
-        <button 
-          className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${isSpecificSelected ? 'bg-slate-700 text-white shadow-md' : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'}`} 
-          onClick={handleSpecificSelection}
-        >
-          Specific
-        </button>
+      <div className="space-y-2">
+        <p className="text-sm text-gray-400">
+          Choose filters:
+        </p>
+        <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800 w-fit">
+          <button 
+            className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${isSetSelected ? 'bg-slate-700 text-white shadow-md' : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'}`} 
+            onClick={handleSetSelection}
+          >
+            Set
+          </button>
+          <button 
+            className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${isSourceSelected ? 'bg-slate-700 text-white shadow-md' : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'}`} 
+            onClick={handleSourceSelection}
+          >
+            Source
+          </button>
+          <button 
+            className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${isSpecificSelected ? 'bg-slate-700 text-white shadow-md' : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'}`} 
+            onClick={handleSpecificSelection}
+          >
+            Specific
+          </button>
+        </div>
       </div>
 
       {renderDropdown()}
 
-      {(isSetSelected || isSourceSelected) && (
+      {(isSetSelected || isSourceSelected) ? (
         <ChartTable
           chartType="pie"
           chartData={prepareChartData(chartdata, 'label', 'percentage')}
@@ -168,6 +173,13 @@ const SetSourceSection: React.FC<SetSourceSectionProps> = ({
           tableTitle={title}
           tableFirstField="Label"
         />
+      ) : (
+        <div className="flex h-64 flex-col items-center justify-center gap-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
+          <div className="text-center">
+            <p className="text-lg font-medium text-gray-300">Select filters above</p>
+            <p className="text-sm text-gray-400 mt-2">Click Set, Source, or Specific to view distribution analytics</p>
+          </div>
+        </div>
       )}
     </div>
   );

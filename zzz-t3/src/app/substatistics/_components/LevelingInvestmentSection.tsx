@@ -102,37 +102,42 @@ const LevelingInvestmentSection: React.FC<LevelingInvestmentSectionProps> = ({
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800 w-fit">
-        <button
-          className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
-            isTypeSelected
-              ? 'bg-slate-700 text-white shadow-md'
-              : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
-          }`}
-          onClick={() => {
-            setIsTypeSelected(!isTypeSelected);
-            setIsSetLevelingSelected(false);
-            setSelectedType('');
-            setSelectedLevelingSet('');
-          }}
-        >
-          Type
-        </button>
-        <button
-          className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
-            isSetLevelingSelected
-              ? 'bg-slate-700 text-white shadow-md'
-              : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
-          }`}
-          onClick={() => {
-            setIsSetLevelingSelected(!isSetLevelingSelected);
-            setIsTypeSelected(false);
-            setSelectedType('');
-            setSelectedLevelingSet('');
-          }}
-        >
-          Set
-        </button>
+      <div className="space-y-2">
+        <p className="text-sm text-gray-400">
+          Choose analysis type:
+        </p>
+        <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800 w-fit">
+          <button
+            className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${
+              isTypeSelected
+                ? 'bg-slate-700 text-white shadow-md'
+                : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
+            }`}
+            onClick={() => {
+              setIsTypeSelected(!isTypeSelected);
+              setIsSetLevelingSelected(false);
+              setSelectedType('');
+              setSelectedLevelingSet('');
+            }}
+          >
+            Slot
+          </button>
+          <button
+            className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${
+              isSetLevelingSelected
+                ? 'bg-slate-700 text-white shadow-md'
+                : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
+            }`}
+            onClick={() => {
+              setIsSetLevelingSelected(!isSetLevelingSelected);
+              setIsTypeSelected(false);
+              setSelectedType('');
+              setSelectedLevelingSet('');
+            }}
+          >
+            Set
+          </button>
+        </div>
       </div>
       
       {isTypeSelected && renderTypeButtons()}
