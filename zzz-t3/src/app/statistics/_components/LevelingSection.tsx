@@ -57,41 +57,53 @@ const LevelingSpecificSection: React.FC<{ levelingData: LevelingDataItem[] }> = 
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800">
-        {uniqueTypes.map(type => (
-          <button
-            key={type}
-            className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
-              selectedType === type
-                ? 'bg-slate-700 text-white shadow-md'
-                : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
-            }`}
-            onClick={() => handleTypeSelection(type)}
-          >
-            {type}
-          </button>
-        ))}
-      </div>
-      
-      {selectedType && (
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-gray-300 flex items-center gap-2">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/20 text-xs font-bold text-blue-300 border border-blue-500/30">1</span>
+          Select Drive Disc Slot:
+        </p>
         <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800">
-          {uniqueMainStats.map(mainStat => (
+          {uniqueTypes.map(type => (
             <button
-              key={mainStat}
-              className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
-                selectedMainStat === mainStat
+              key={type}
+              className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${
+                selectedType === type
                   ? 'bg-slate-700 text-white shadow-md'
                   : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
               }`}
-              onClick={() => handleMainStatSelection(mainStat)}
+              onClick={() => handleTypeSelection(type)}
             >
-              {mainStat}
+              {type}
             </button>
           ))}
         </div>
+      </div>
+      
+      {selectedType && (
+        <div className="space-y-2">
+          <p className="text-sm font-medium text-gray-300 flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/20 text-xs font-bold text-blue-300 border border-blue-500/30">2</span>
+            Select Main Stat for Slot {selectedType}:
+          </p>
+          <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800">
+            {uniqueMainStats.map(mainStat => (
+              <button
+                key={mainStat}
+                className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:scale-105 ${
+                  selectedMainStat === mainStat
+                    ? 'bg-slate-700 text-white shadow-md'
+                    : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
+                }`}
+                onClick={() => handleMainStatSelection(mainStat)}
+              >
+                {mainStat}
+              </button>
+            ))}
+          </div>
+        </div>
       )}
 
-      {selectedType && selectedMainStat && (
+      {selectedType && selectedMainStat ? (
         <LevelingChartTable
           chartType="pie"
           levelingChartData={prepareLevelingChartData(
@@ -103,6 +115,13 @@ const LevelingSpecificSection: React.FC<{ levelingData: LevelingDataItem[] }> = 
           addedChartData={prepareChartData(addedSubstatData, 'substat', 'percentage')}
           addedTableData={addedSubstatData}
         />
+      ) : (
+        <div className="flex h-64 flex-col items-center justify-center gap-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
+          <div className="text-center">
+            <p className="text-lg font-medium text-gray-300">Select a Slot and Main Stat</p>
+            <p className="text-sm text-gray-400 mt-2">Click buttons above to filter leveling statistics</p>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -122,27 +141,36 @@ export const LevelingSection: React.FC<LevelingSectionProps> = ({ levelingData, 
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800 w-fit">
-        <button 
-          className={`rounded-lg px-6 py-2 text-sm font-medium transition-all ${
-            selectedLevelingChart === 'Overall' 
-              ? 'bg-slate-700 text-white shadow-md' 
-              : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
-          }`}
-          onClick={() => setSelectedLevelingChart('Overall')}
-        >
-          Overall
-        </button>
-        <button 
-          className={`rounded-lg px-6 py-2 text-sm font-medium transition-all ${
-            selectedLevelingChart === 'Specific' 
-              ? 'bg-slate-700 text-white shadow-md' 
-              : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
-          }`}
-          onClick={() => setSelectedLevelingChart('Specific')}
-        >
-          Specific
-        </button>
+      <div className="space-y-2">
+        <p className="text-sm text-gray-400 flex items-center gap-2">
+          Choose view type:
+        </p>
+        <div className="flex gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800 w-fit">
+          <button 
+            className={`group rounded-lg px-6 py-2 text-sm font-medium transition-all ${
+              selectedLevelingChart === 'Overall' 
+                ? 'bg-slate-700 text-white shadow-md' 
+                : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
+            }`}
+            onClick={() => setSelectedLevelingChart('Overall')}
+          >
+            <span className="flex items-center gap-2">
+              Overall
+            </span>
+          </button>
+          <button 
+            className={`group rounded-lg px-6 py-2 text-sm font-medium transition-all ${
+              selectedLevelingChart === 'Specific' 
+                ? 'bg-slate-700 text-white shadow-md' 
+                : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
+            }`}
+            onClick={() => setSelectedLevelingChart('Specific')}
+          >
+            <span className="flex items-center gap-2">
+              Specific
+            </span>
+          </button>
+        </div>
       </div>
 
       {selectedLevelingChart === 'Overall' && (

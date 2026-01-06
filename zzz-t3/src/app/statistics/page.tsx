@@ -42,6 +42,8 @@ const customStyles = {
 export default function StatisticsPage() {
   const [selectedCategory, setSelectedCategory] = useState('Main Stat');
   const [selectedSet, setSelectedSet] = useState<string | null>(null);
+  const [showGuide, setShowGuide] = useState(false);
+
   
   // Main Stat State
   const [selectedMainStatChart, setSelectedMainStatChart] = useState('Types');
@@ -113,9 +115,55 @@ export default function StatisticsPage() {
     <div className="min-h-screen p-8 pt-8">
       <div className="container mx-auto max-w-7xl space-y-8">
         {/* Header */}
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-white">Drive Discs Statistics</h1>
-          <p className="text-lg text-gray-400">Explore comprehensive data insights and patterns</p>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold text-white">Drive Disc Statistics</h1>
+              <p className="text-lg text-gray-400">Explore comprehensive data insights and patterns</p>
+            </div>
+            <button
+              onClick={() => setShowGuide(!showGuide)}
+              className="flex items-center gap-2 rounded-lg bg-blue-600/20 px-4 py-2 text-sm font-medium text-blue-400 transition-all hover:bg-blue-600/30 hover:text-blue-300 border border-blue-600/30"
+            >
+              
+              <span>{showGuide ? 'Hide Guide' : 'Show Guide'}</span>
+            </button>
+          </div>
+
+          {/* Guide Section */}
+          {showGuide && (
+            <div className="rounded-xl bg-gradient-to-br from-blue-900/30 to-purple-900/30 p-6 border border-blue-800/50 backdrop-blur-sm">
+              <h3 className="mb-4 text-xl font-semibold text-white flex items-center gap-2">
+                
+                How to Use Statistics
+              </h3>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="rounded-lg bg-slate-800/50 p-4 border border-slate-700">
+                  <h4 className="mb-2 font-semibold text-yellow-400">Main Stat</h4>
+                  <p className="text-sm text-gray-300">
+                    View distribution of Drive Discs Slot and their main stats. Click tabs to switch between different views.
+                  </p>
+                </div>
+                <div className="rounded-lg bg-slate-800/50 p-4 border border-slate-700">
+                  <h4 className="mb-2 font-semibold text-yellow-400">Substats</h4>
+                  <p className="text-sm text-gray-300">
+                    Analyze substat distributions. Use <strong>Overall</strong> for general stats or <strong>Specific</strong> to filter by slot and main stat.
+                  </p>
+                </div>
+                <div className="rounded-lg bg-slate-800/50 p-4 border border-slate-700">
+                  <h4 className="mb-2 font-semibold text-yellow-400">Leveling</h4>
+                  <p className="text-sm text-gray-300">
+                    Track which substats appear and get upgraded during leveling. Choose <strong>Overall</strong> or drill down with <strong>Specific</strong>.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 rounded-lg bg-green-900/20 p-3 border border-green-700/30">
+                <p className="text-sm text-green-300">
+                  💡 <strong>Tip:</strong> Use the "Filter by Drive Disc Set" dropdown to focus on specific drive disc sets, or leave it empty to see data across all sets.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Controls */}
@@ -144,8 +192,9 @@ export default function StatisticsPage() {
 
           {/* Set Filter */}
           <div className="w-full lg:w-80">
-            <label className="mb-2 block text-sm font-medium text-gray-400">
+            <label className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-400">
               Filter by Drive Disc Set
+              <span className="text-xs text-gray-500">(Optional)</span>
             </label>
             <Select
               instanceId="set-select"

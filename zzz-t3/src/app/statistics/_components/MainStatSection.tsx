@@ -31,20 +31,26 @@ export const MainStatSection: React.FC<MainStatSectionProps> = ({
   return (
     <div className="space-y-8">
       {/* Sub-navigation Tabs */}
-      <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setSelectedChart(tab.id)}
-            className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
-              selectedChart === tab.id
-                ? 'bg-slate-700 text-white shadow-md'
-                : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div className="space-y-2">
+        <p className="text-sm text-gray-400 flex items-center gap-2">
+          
+          Select what to analyze:
+        </p>
+        <div className="flex flex-wrap gap-2 rounded-xl bg-slate-900 p-2 border border-slate-800">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setSelectedChart(tab.id)}
+              className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-all hover:scale-105 ${
+                selectedChart === tab.id
+                  ? 'bg-slate-700 text-white shadow-md'
+                  : 'text-gray-400 hover:bg-slate-800 hover:text-gray-200'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <ChartTable
