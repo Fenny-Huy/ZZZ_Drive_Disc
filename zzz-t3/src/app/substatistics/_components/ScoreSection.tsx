@@ -28,16 +28,10 @@ const ScoreSection: React.FC<ScoreSectionProps> = ({
   const calculations = calculateScoreData(4);
 
   const handleSetSelection = () => {
-    if (isSpecificSelected) {
-      setIsSourceSelected(false);
-    }
     setIsSetSelected(!isSetSelected);
   };
 
   const handleSourceSelection = () => {
-    if (isSpecificSelected) {
-      setIsSetSelected(false);
-    }
     setIsSourceSelected(!isSourceSelected);
   };
 
@@ -78,24 +72,6 @@ const ScoreSection: React.FC<ScoreSectionProps> = ({
       };
 
       if (isSetSelected && !isSourceSelected) {
-        const sources = [...new Set(scoreSourceData.map(item => item.where))].map(source => ({
-          value: source,
-          label: source,
-        }));
-        return (
-          <div className="w-full max-w-md mb-4">
-            <Select
-              value={sources.find(option => option.value === selectedSource)}
-              onChange={(selectedOption) => setSelectedSource(selectedOption ? selectedOption.value : '')}
-              options={sources}
-              placeholder="Select or type to search Source"
-              isClearable
-              classNamePrefix="select"
-              styles={customStyles}
-            />
-          </div>
-        );
-      } else if (isSourceSelected && !isSetSelected) {
         const sets = [...new Set(scoreSetData.map(item => item.set))].map(set => ({
           value: set,
           label: set,
@@ -107,6 +83,24 @@ const ScoreSection: React.FC<ScoreSectionProps> = ({
               onChange={(selectedOption) => setSelectedSet(selectedOption ? selectedOption.value : '')}
               options={sets}
               placeholder="Select or type to search Set"
+              isClearable
+              classNamePrefix="select"
+              styles={customStyles}
+            />
+          </div>
+        );
+      } else if (isSourceSelected && !isSetSelected) {
+        const sources = [...new Set(scoreSourceData.map(item => item.where))].map(source => ({
+          value: source,
+          label: source,
+        }));
+        return (
+          <div className="w-full max-w-md mb-4">
+            <Select
+              value={sources.find(option => option.value === selectedSource)}
+              onChange={(selectedOption) => setSelectedSource(selectedOption ? selectedOption.value : '')}
+              options={sources}
+              placeholder="Select or type to search Source"
               isClearable
               classNamePrefix="select"
               styles={customStyles}
@@ -155,17 +149,17 @@ const ScoreSection: React.FC<ScoreSectionProps> = ({
   let title = '';
 
   if (isSpecificSelected) {
-    if (isSetSelected && selectedSource && !isSourceSelected) {
-      const separatedData = calculations.separateDataOfScoreSet(scoreSetSourceData, selectedSource);
-      chartdata = calculations.prepareScoreSetSpecificData(separatedData);
-      tabledata = calculations.prepareScoreSetSpecificData(separatedData);
-      title = `Score for Source: ${selectedSource}`;
-    } else if (isSourceSelected && selectedSet && !isSetSelected) {
+    if (isSetSelected && selectedSet && !isSourceSelected) {
       const separatedData = calculations.separateDataOfScoreSource(scoreSetSourceData, selectedSet);
       chartdata = calculations.prepareScoreSourceSpecificData(separatedData);
       tabledata = calculations.prepareScoreSourceSpecificData(separatedData);
       title = `Score for Set: ${selectedSet}`;
-    } else if (isSetSelected && selectedSource && isSourceSelected && selectedSet) {
+    } else if (isSourceSelected && selectedSource && !isSetSelected) {
+      const separatedData = calculations.separateDataOfScoreSet(scoreSetSourceData, selectedSource);
+      chartdata = calculations.prepareScoreSetSpecificData(separatedData);
+      tabledata = calculations.prepareScoreSetSpecificData(separatedData);
+      title = `Score for Source: ${selectedSource}`;
+    } else if (isSetSelected && selectedSet && isSourceSelected && selectedSource) {
       const filteredData = scoreSetSourceData.filter(item => item.where === selectedSource && item.set === selectedSet);
       chartdata = calculations.prepareScoreSetSpecificData(filteredData);
       tabledata = calculations.prepareScoreSetSpecificData(filteredData);
