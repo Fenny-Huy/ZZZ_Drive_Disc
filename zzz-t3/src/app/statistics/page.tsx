@@ -141,7 +141,7 @@ export default function StatisticsPage() {
                 <div className="rounded-lg bg-slate-800/50 p-4 border border-slate-700">
                   <h4 className="mb-2 font-semibold text-yellow-400">Main Stat</h4>
                   <p className="text-sm text-gray-300">
-                    View distribution of Drive Discs Slot and their main stats. Click tabs to switch between different views.
+                    View distribution of Drive Discs Slot and their main stats distribution. Click tabs to switch between different views.
                   </p>
                 </div>
                 <div className="rounded-lg bg-slate-800/50 p-4 border border-slate-700">
