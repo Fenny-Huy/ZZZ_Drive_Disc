@@ -8,10 +8,12 @@ import { prepareChartData } from '~/lib/chartUtils';
 
 interface LevelingInvestmentSectionProps {
   levelingInvestmentData: any[];
+  isLoading: boolean;
 }
 
 const LevelingInvestmentSection: React.FC<LevelingInvestmentSectionProps> = ({
   levelingInvestmentData,
+  isLoading,
 }) => {
   const [isTypeSelected, setIsTypeSelected] = useState(false);
   const [isSetLevelingSelected, setIsSetLevelingSelected] = useState(false);
@@ -143,26 +145,35 @@ const LevelingInvestmentSection: React.FC<LevelingInvestmentSectionProps> = ({
       {isTypeSelected && renderTypeButtons()}
       {isSetLevelingSelected && renderSetDropdown()}
       
-      {((isTypeSelected && selectedType)) && (
-        <ChartTable
-          chartType="bar"
-          chartData={prepareChartData(chartData, 'label', 'percentage')}
-          tableData={tableData}
-          chartTitle={title}
-          tableTitle={title}
-          tableFirstField="Label"
-        />
-      )}
+      {isLoading ? (
+        <div className="flex h-[400px] flex-col items-center justify-center rounded-xl bg-slate-800/50 text-gray-400">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-slate-600 border-t-yellow-500"></div>
+          <p>Loading investment analytics...</p>
+        </div>
+      ) : (
+        <>
+          {((isTypeSelected && selectedType)) && (
+            <ChartTable
+              chartType="bar"
+              chartData={prepareChartData(chartData, 'label', 'percentage')}
+              tableData={tableData}
+              chartTitle={title}
+              tableTitle={title}
+              tableFirstField="Label"
+            />
+          )}
 
-      {((isSetLevelingSelected && selectedLevelingSet)) && (
-        <ChartTable
-          chartType="pie"
-          chartData={prepareChartData(chartData, 'label', 'percentage')}
-          tableData={tableData}
-          chartTitle={title}
-          tableTitle={title}
-          tableFirstField="Label"
-        />
+          {((isSetLevelingSelected && selectedLevelingSet)) && (
+            <ChartTable
+              chartType="pie"
+              chartData={prepareChartData(chartData, 'label', 'percentage')}
+              tableData={tableData}
+              chartTitle={title}
+              tableTitle={title}
+              tableFirstField="Label"
+            />
+          )}
+        </>
       )}
     </div>
   );

@@ -11,6 +11,7 @@ interface ScoreSectionProps {
   scoreSetData: any[];
   scoreSourceData: any[];
   scoreSetSourceData: any[];
+  isLoading: boolean;
 }
 
 const ScoreSection: React.FC<ScoreSectionProps> = ({
@@ -18,6 +19,7 @@ const ScoreSection: React.FC<ScoreSectionProps> = ({
   scoreSetData,
   scoreSourceData,
   scoreSetSourceData,
+  isLoading,
 }) => {
   const [isSetSelected, setIsSetSelected] = useState(false);
   const [isSourceSelected, setIsSourceSelected] = useState(false);
@@ -223,7 +225,12 @@ const ScoreSection: React.FC<ScoreSectionProps> = ({
 
       {renderDropdown()}
 
-      {(isSetSelected || isSourceSelected) ? (
+      {isLoading ? (
+        <div className="flex h-[400px] flex-col items-center justify-center rounded-xl bg-slate-800/50 text-gray-400">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-slate-600 border-t-yellow-500"></div>
+          <p>Loading score analytics...</p>
+        </div>
+      ) : (isSetSelected || isSourceSelected) ? (
         <ChartTable
           chartType="pie"
           chartData={prepareChartData(chartdata, 'label', 'percentage')}
