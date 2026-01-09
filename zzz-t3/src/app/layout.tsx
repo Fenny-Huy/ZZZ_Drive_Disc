@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { NavBar } from "./_components/NavBar";
+import { Footer } from "./_components/Footer";
 
 export const metadata: Metadata = {
   title: "ZZZ Drive Disc Manager",
@@ -23,10 +24,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body className="bg-slate-950">
+      <body className="bg-slate-950 flex flex-col min-h-screen">
         <TRPCReactProvider>
           <NavBar />
-          {children}
+          <main className="flex-1">{children}</main>
+          <Footer />
         </TRPCReactProvider>
         <Analytics />
       </body>
