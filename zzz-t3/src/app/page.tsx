@@ -37,7 +37,7 @@ export default async function Home() {
                   href="/artifacts/create"
                   className="flex flex-col gap-3 md:gap-4 rounded-xl bg-slate-800 p-4 md:p-6 border border-slate-700 transition-all hover:bg-slate-700 hover:border-slate-600 hover:shadow-xl hover:-translate-y-1"
                 >
-                  <h3 className="text-xl md:text-2xl font-bold text-yellow-500">Add Artifact →</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-yellow-500">Add Drive Discs →</h3>
                   <div className="text-sm md:text-lg text-gray-300">
                     Record a new drive disc into your database.
                   </div>
