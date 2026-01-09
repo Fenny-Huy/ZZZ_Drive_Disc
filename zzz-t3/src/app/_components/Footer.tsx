@@ -5,8 +5,8 @@ export function Footer() {
 
   return (
     <footer className="mt-auto bg-slate-900 text-white shadow-md border-t border-slate-800">
-      <div className="w-full px-8 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="w-full px-4 md:px-8 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {/* About Section */}
           <div>
             <h3 className="text-lg font-semibold text-yellow-500 mb-3">
@@ -79,8 +79,8 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 pt-6 border-t border-slate-800 text-center">
-          <p className="text-sm text-slate-400">
+        <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-slate-800 text-center">
+          <p className="text-xs md:text-sm text-slate-400">
             © {currentYear} ZZZ Drive Disc Manager. All rights reserved.
           </p>
         </div>
